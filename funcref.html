@@ -367,8 +367,8 @@ are described in any book covering standard C.</P>
 function.</P>
 <DT><B>Description</B><DD>
 <P>Description of the function.</P>
-<DT><B>Limits</B><DD>
-<P>Limits.</P>
+<DT><B>Notes</B><DD>
+<P>Notes on the function.</P>
 <DT><B>Availability</B><DD>
 <P>The availability of the function.</P>
 <DT><B>See also</B><DD>
@@ -8014,10 +8014,8 @@ before a call to <CODE>set_brk</CODE>.</P>
 <DT><B>Notes</B><DD>
 <P>
 <UL>
-<LI>Since <CODE>
-<A HREF="#set_brk">set_brk</A></CODE> installs an exit handler,
-it is not strictly necessary to call this function as part of the cleanup when
-the program ends.</LI>
+<LI>The break vector is reset on program termination, so it's not strictly
+necessary to call this function as a part of your clean-up when exitting the program.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -8053,8 +8051,8 @@ the program ends.</LI>
 <DT><B>Notes</B><DD>
 <P>
 <UL>
-<LI>The original IRQ vector is restored on program termination even without
-calling this function.</LI>
+<LI>The interrupt vector is reset on program termination, so it's not strictly
+necessary to call this function as a part of your clean-up when exitting the program.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -8635,10 +8633,10 @@ function called from it.</LI>
 <LI>The <CODE>brk_pc</CODE> variable points to the <CODE>BRK</CODE> instruction. If you want
 the continue with the interrupted code, you have to adjust <CODE>brk_pc</CODE>,
 otherwise the <CODE>BRK</CODE> instruction will get executed over and over again.</LI>
-<LI>Since <CODE>set_brk</CODE> installs an exit handler, it is not strictly necessary
-to call <CODE>
-<A HREF="#reset_brk">reset_brk</A></CODE> as part of the cleanup when
-the program terminates.</LI>
+<LI>The break vector is reset on program termination, so it's not strictly
+necessary to call <CODE>
+<A HREF="#reset_brk">reset_brk</A></CODE> as a part of your
+clean-up when exitting the program.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -8689,10 +8687,10 @@ runtime overhead, but it it is safe to execute C code, even if other C code
 was interrupted. Be careful however not to call C library functions, and do not
 enable stack checks for the handler function or any other function called from
 it.</LI>
-<LI>The interrupt vector is reset on function termination, so it's not
-strictly necessary to call <CODE>
-<A HREF="#reset_irq">reset_irq</A></CODE> as part
-of the cleanup when the program terminates.</LI>
+<LI>The interrupt vector is reset on program termination, so it's not strictly
+necessary to call <CODE>
+<A HREF="#reset_irq">reset_irq</A></CODE> as a part of your
+clean-up when exitting the program.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
