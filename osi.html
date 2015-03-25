@@ -10,7 +10,7 @@
 
 <H2>
 <A HREF="mailto:stephan.muehlstrasser@web.de">Stephan M&uuml;hlstrasser</A>,<BR>
-<A HREF="mailto:greg.king5@verizon.net">Greg King</A></H2>2015-03-08
+<A HREF="mailto:greg.king5@verizon.net">Greg King</A></H2>2015-03-17
 <HR>
 <EM>An overview over the Ohio Scientific runtime system as it is implemented for the cc65 C
 compiler.</EM>
@@ -31,7 +31,7 @@ compiler.</EM>
 <H2><A NAME="toc5">5.</A> <A HREF="osi.html#s5">Linker configurations</A></H2>
 
 <UL>
-<LI><A NAME="toc5.1">5.1</A> <A HREF="osi.html#ss5.1">default config file (<CODE>osic1p.cfg</CODE>)</A>
+<LI><A NAME="toc5.1">5.1</A> <A HREF="osi.html#ss5.1">Default config file (<CODE>osic1p.cfg</CODE>)</A>
 <LI><A NAME="toc5.2">5.2</A> <A HREF="osi.html#ss5.2"><CODE>osic1p-asm.cfg</CODE></A>
 </UL>
 <P>
@@ -45,20 +45,23 @@ compiler.</EM>
 <H2><A NAME="toc7">7.</A> <A HREF="osi.html#s7">Loadable drivers</A></H2>
 
 <P>
-<H2><A NAME="toc8">8.</A> <A HREF="osi.html#s8">Limitations</A></H2>
+<H2><A NAME="toc8">8.</A> <A HREF="osi.html#s8">Support for different screen layouts</A></H2>
+
+<P>
+<H2><A NAME="toc9">9.</A> <A HREF="osi.html#s9">Limitations</A></H2>
 
 <UL>
-<LI><A NAME="toc8.1">8.1</A> <A HREF="osi.html#ss8.1">stdio implementation</A>
+<LI><A NAME="toc9.1">9.1</A> <A HREF="osi.html#ss9.1">stdio implementation</A>
 </UL>
 <P>
-<H2><A NAME="toc9">9.</A> <A HREF="osi.html#s9">Other hints</A></H2>
+<H2><A NAME="toc10">10.</A> <A HREF="osi.html#s10">Other hints</A></H2>
 
 <UL>
-<LI><A NAME="toc9.1">9.1</A> <A HREF="osi.html#ss9.1">Passing arguments to the program</A>
-<LI><A NAME="toc9.2">9.2</A> <A HREF="osi.html#ss9.2">Program return code</A>
+<LI><A NAME="toc10.1">10.1</A> <A HREF="osi.html#ss10.1">Passing arguments to the program</A>
+<LI><A NAME="toc10.2">10.2</A> <A HREF="osi.html#ss10.2">Program return code</A>
 </UL>
 <P>
-<H2><A NAME="toc10">10.</A> <A HREF="osi.html#s10">License</A></H2>
+<H2><A NAME="toc11">11.</A> <A HREF="osi.html#s11">License</A></H2>
 
 
 <HR>
@@ -78,7 +81,7 @@ information.</P>
 
 
 <P>Currently the target "osic1p" is implemented. This works for the Ohio Scientific
-Challenger 1P machine.</P>
+Challenger 1P machine and for the Briel Superboard /// replica.</P>
 
 <H2><A NAME="s3">3.</A> <A HREF="#toc3">Program file formats</A></H2>
 
@@ -176,7 +179,7 @@ Challenger 1P, which is implicitly used via <CODE>-t osic1p</CODE>. The
 osic1p package comes with additional secondary linker config files, which are
 used via <CODE>-t osic1p -C &lt;configfile&gt;</CODE>.</P>
 
-<H2><A NAME="ss5.1">5.1</A> <A HREF="#toc5.1">default config file (<CODE>osic1p.cfg</CODE>)</A>
+<H2><A NAME="ss5.1">5.1</A> <A HREF="#toc5.1">Default config file (<CODE>osic1p.cfg</CODE>)</A>
 </H2>
 
 
@@ -225,34 +228,65 @@ header file.</P>
 
 <P>There are no loadable drivers available.</P>
 
-<H2><A NAME="s8">8.</A> <A HREF="#toc8">Limitations</A></H2>
+<H2><A NAME="s8">8.</A> <A HREF="#toc8">Support for different screen layouts</A></H2>
+
+
+<P>By default the conio library uses a 24 columns by 24 lines screen layout
+for the Challenger 1P, like under BASIC. In addition to that there is support
+for other screen layouts with extra modules.</P>
+<P>There is a module <CODE>screen-c1p-24x24.o</CODE> in the OSI-specific
+cc65 runtime library that contains all conio functions that depend
+on the screen layout. No further configuration is needed for using the
+default screen layout of the Challenger 1P.</P>
+<P>For other screen layouts additional versions of the screen module are
+available. The linker finds these modules without further configuration
+if they are specified on the compiler or linker command line. The
+extra module then overrides the default module.</P>
+<P>Sample <CODE>cl65</CODE> command line to override the default screen
+module with the module <CODE>osic1p-screen-s3-32x28.o</CODE>:</P>
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+cl65 -o hello -t osic1p osic1p-screen-s3-32x28.o hello.c
+</PRE>
+</CODE></BLOCKQUOTE>
+</P>
+<P>Currently the following extra screen configuration modules are implemented:</P>
+<P>
+<UL>
+<LI><CODE>osic1p-screen-s3-32x28.o</CODE>: 32 columns by 28 lines mode
+for Briel Superboard ///</LI>
+</UL>
+</P>
+
+<H2><A NAME="s9">9.</A> <A HREF="#toc9">Limitations</A></H2>
 
 
 
-<H2><A NAME="ss8.1">8.1</A> <A HREF="#toc8.1">stdio implementation</A>
+<H2><A NAME="ss9.1">9.1</A> <A HREF="#toc9.1">stdio implementation</A>
 </H2>
 
 
 <P>There is no support for stdio at the moment.</P>
 
-<H2><A NAME="s9">9.</A> <A HREF="#toc9">Other hints</A></H2>
+<H2><A NAME="s10">10.</A> <A HREF="#toc10">Other hints</A></H2>
 
 
 
-<H2><A NAME="ss9.1">9.1</A> <A HREF="#toc9.1">Passing arguments to the program</A>
+<H2><A NAME="ss10.1">10.1</A> <A HREF="#toc10.1">Passing arguments to the program</A>
 </H2>
 
 
 <P>There is currently no support for passing arguments to a program.</P>
 
-<H2><A NAME="ss9.2">9.2</A> <A HREF="#toc9.2">Program return code</A>
+<H2><A NAME="ss10.2">10.2</A> <A HREF="#toc10.2">Program return code</A>
 </H2>
 
 
 <P>The program return code currently has no effect. When the main() function
 finishes, the boot prompt is shown again.</P>
 
-<H2><A NAME="s10">10.</A> <A HREF="#toc10">License</A></H2>
+<H2><A NAME="s11">11.</A> <A HREF="#toc11">License</A></H2>
 
 
 <P>This software is provided 'as-is', without any expressed or implied
