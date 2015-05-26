@@ -8,7 +8,7 @@
 <BODY>
 <H1>Defining a Custom cc65 Target</H1>
 
-<H2>Bruce Reidenbach</H2>2010-02-22
+<H2>Bruce Reidenbach</H2>2015-03-13
 <HR>
 <EM>This section provides step-by-step instructions on how to use the cc65
 toolset for a custom hardware platform (a target system not currently
@@ -599,14 +599,15 @@ with an assembly language subroutine.</P>
 to determine how to pass the C arguments to the assembly language
 routine.  The cc65 toolset allows the user to specify whether the data
 is passed to a subroutine via the stack or by the processor registers by
-using the <CODE>__fastcall__</CODE> function declaration (note that there
-are two underscore characters in front of and two behind the
-<CODE>fastcall</CODE> declaration).  When <CODE>__fastcall__</CODE> is
-specified, the rightmost argument in the function call is passed to the
+using the <CODE>__fastcall__</CODE> and <CODE>__cdecl__</CODE> function qualifiers (note that
+there are two underscore characters in front of and two behind each
+qualifier).  <CODE>__fastcall__</CODE> is the default.  When <CODE>__cdecl__</CODE> <EM>isn't</EM>
+specified, and the function isn't variadic (i.e., its prototype doesn't have
+an ellipsis), the rightmost argument in the function call is passed to the
 subroutine using the 6502 registers instead of the stack.  Note that if
 there is only one argument in the function call, the execution overhead
 required by the stack interface routines is completely avoided.</P>
-<P>Without <CODE>__fastcall__</CODE>, the argument is loaded in the A and X
+<P>With <CODE>__cdecl__</CODE>, the last argument is loaded into the A and X
 registers and then pushed onto the stack via a call to <CODE>pushax</CODE>.
 The first thing the subroutine does is retrieve the argument from the
 stack via a call to <CODE>ldax0sp</CODE>, which copies the values into the A
@@ -637,7 +638,7 @@ _foo:   jsr     ldax0sp    ;  Retrieve A and X from the stack
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-<P>If <CODE>__fastcall__</CODE> is specified, the argument is loaded into the A
+<P>If <CODE>__cdecl__</CODE> isn't specified, then the argument is loaded into the A
 and X registers as before, but the subroutine is then called
 immediately.  The subroutine does not need to retrieve the argument
 since the value is already available in the A and X registers.

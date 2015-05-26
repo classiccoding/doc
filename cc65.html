@@ -9,7 +9,7 @@
 <H1>cc65 Users Guide</H1>
 
 <H2>
-<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2000-09-03, 2001-10-02, 2005-08-01
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2015-05-26
 <HR>
 <EM>cc65 is a C compiler for 6502 targets. It supports several 6502 based home
 computers like the Commodore and Atari machines, but it is easily retargetable.</EM>
@@ -135,6 +135,7 @@ Short options:
 
 Long options:
   --add-source                  Include source as comment
+  --all-cdecl                   Make functions default to __cdecl__
   --bss-name seg                Set the name of the BSS segment
   --check-stack                 Generate stack overflow checks
   --code-name seg               Set the name of the CODE segment
@@ -178,6 +179,13 @@ Long options:
 <P>Here is a description of all the command line options:</P>
 <P>
 <DL>
+
+<DT><B><CODE>--all-cdecl</CODE></B><DD>
+<P>Tells the compiler that functions which aren't declared explicitly with
+either the <CODE>__cdecl__</CODE> or <CODE>__fastcall__</CODE> calling conventions should
+have the cdecl convention.  (Normally, functions that aren't variadic are
+fast-called.)</P>
+
 <P>
 <A NAME="option-bss-name"></A> </P>
 <DT><B><CODE>--bss-name seg</CODE></B><DD>
@@ -594,9 +602,11 @@ be passed as parameters by value. However, struct assignment *is*
 possible.
 
 </LI>
-<LI>    Part of the C library is available only with fastcall calling
-conventions (see below).  It means that you must not mix pointers to
-those functions with pointers to user-written, not-fastcall functions.
+<LI>    Most of the C library is available with only the fastcall calling
+convention (
+<A HREF="#extension-fastcall">see below</A>).  It means
+that you must not mix pointers to those functions with pointers to
+user-written, cdecl functions (the calling conventions are incompatible).
 
 </LI>
 <LI>    The <CODE>volatile</CODE> keyword doesn't have an effect. This is not as bad
@@ -643,10 +653,12 @@ switch is given.
 There is a whole section covering inline assembler statements,
 <A HREF="#inline-asm">see there</A>.
 
-
+<P>
+<A NAME="extension-fastcall"></A> </P>
 </LI>
-<LI>    There is a special calling convention named "fastcall".
-The syntax for a function declaration using fastcall is
+<LI>    The normal calling convention -- for non-variadic functions -- is
+named "fastcall". The syntax for a function declaration that
+<EM>explicitly</EM> uses fastcall is
 
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -663,7 +675,7 @@ or
 </PRE>
 </CODE></BLOCKQUOTE>
 
-An example would be
+An example is
 <BLOCKQUOTE><CODE>
 <PRE>
         void __fastcall__ f (unsigned char c)
@@ -675,10 +687,48 @@ The first form of the fastcall keyword is in the user namespace and can
 therefore be disabled with the <CODE>
 <A HREF="#option--standard">--standard</A></CODE> command line option.
 
-For functions declared as <CODE>fastcall</CODE>, the rightmost parameter is not
+For functions that are <CODE>fastcall</CODE>, the rightmost parameter is not
 pushed on the stack but left in the primary register when the function
-is called. This will reduce the cost when calling assembler functions
-significantly, especially when the function itself is rather small.
+is called. That significantly reduces the cost of calling those functions.<BR><BR>
+
+
+</LI>
+<LI>  There is another calling convention named "cdecl". Variadic functions
+(their prototypes have an ellipsis [<CODE>...</CODE>]) always use that
+convention. The syntax for a function declaration using cdecl is
+
+<BLOCKQUOTE><CODE>
+<PRE>
+        &lt;return type&gt; cdecl &lt;function name&gt; (&lt;parameter list&gt;)
+        
+</PRE>
+</CODE></BLOCKQUOTE>
+
+or
+<BLOCKQUOTE><CODE>
+<PRE>
+        &lt;return type&gt; __cdecl__ &lt;function name&gt; (&lt;parameter list&gt;)
+        
+</PRE>
+</CODE></BLOCKQUOTE>
+
+An example is
+<BLOCKQUOTE><CODE>
+<PRE>
+        int* __cdecl__ f (unsigned char c)
+        
+</PRE>
+</CODE></BLOCKQUOTE>
+
+
+The first form of the cdecl keyword is in the user namespace;
+and therefore, can be disabled with the <CODE>
+<A HREF="#option--standard">--standard</A></CODE> command-line option.
+
+For functions that are <CODE>cdecl</CODE>, the rightmost parameter is pushed
+onto the stack before the function is called. That increases the cost
+of calling those functions, especially when they are called from many
+places.<BR><BR>
 
 
 </LI>
