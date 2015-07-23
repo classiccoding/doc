@@ -9,7 +9,7 @@
 <H1>cc65 function reference</H1>
 
 <H2>
-<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2014-05-26
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2015-07-21
 <HR>
 <EM>cc65 is a C compiler for 6502 based systems. This function reference describes
 the C functions available in the standard library.</EM>
@@ -1549,6 +1549,8 @@ the CBM systems are classified as being "regular" files, for example.</LI>
 <UL>
 <LI>The minimum blocksize that can be added is 6 bytes; the function will
 ignore smaller blocks.</LI>
+<LI>The function is available only as a fastcall function; so, it may be used
+only in the presence of a prototype.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -1594,6 +1596,8 @@ previously been allocated by <CODE>
 <UL>
 <LI>Passing a pointer to a block that was is not the result of one of the
 allocation functions, or that has been free'd will give unpredicable results.</LI>
+<LI>The function is available only as a fastcall function; so, it may be used
+only in the presence of a prototype.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -1663,7 +1667,7 @@ be allocated from the heap using <CODE>
 <P><CODE>
 <A HREF="#stdlib.h">stdlib.h</A></CODE></P>
 <DT><B>Declaration</B><DD>
-<P><CODE>size_t __fastcall__ _heapmemavail (void);</CODE></P>
+<P><CODE>size_t _heapmemavail (void);</CODE></P>
 <DT><B>Description</B><DD>
 <P>The function returns the total number of bytes available on
 the heap.</P>
@@ -2327,6 +2331,13 @@ used in presence of a prototype.</LI>
 <P><CODE>void __fastcall__ atmos_load(const char* name);</CODE></P>
 <DT><B>Description</B><DD>
 <P><CODE>atmos_load</CODE> reads a memory block from tape.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is available only as a fastcall function; so, it may be used
+only in the presence of a prototype.</LI>
+</UL>
+</P>
 <DT><B>Availability</B><DD>
 <P>cc65</P>
 <DT><B>See also</B><DD>
@@ -2355,6 +2366,13 @@ used in presence of a prototype.</LI>
 <P><CODE>void __fastcall__ atmos_save(const char* name, const void* start, const void* end);</CODE></P>
 <DT><B>Description</B><DD>
 <P><CODE>atmos_save</CODE> writes a memory block to tape.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is available only as a fastcall function; so, it may be used
+only in the presence of a prototype.</LI>
+</UL>
+</P>
 <DT><B>Availability</B><DD>
 <P>cc65</P>
 <DT><B>See also</B><DD>
@@ -2549,7 +2567,7 @@ be used in presence of a prototype.</LI>
 <DT><B>Declaration</B><DD>
 <P><CODE>void* __fastcall__ bsearch (const void* key,
 const void* base, size_t n, size_t size,
-int (*cmp) (const void*, const void*));</CODE></P>
+int __fastcall__ (* cmp) (const void*, const void*));</CODE></P>
 <DT><B>Description</B><DD>
 <P><CODE>bsearch</CODE> searches a sorted array for a member that
 matches the one pointed to by <CODE>key</CODE>. <CODE>base</CODE> is the address of the array,
@@ -2565,6 +2583,8 @@ the compare function given.</LI>
 return one of the members.</LI>
 <LI>The function is only available as fastcall function, so it may only
 be used in presence of a prototype.</LI>
+<LI>The function to which <CODE>cmp</CODE> points must have the <CODE>fastcall</CODE> calling
+convention.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -6718,6 +6738,8 @@ the <CODE>
 <UL>
 <LI>The pointer passed as parameter is the pointer to the module memory,
 not the pointer to the control structure.</LI>
+<LI>The function is available only as a fastcall function; so, it may be used
+only in the presence of a prototype.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -6745,7 +6767,7 @@ not the pointer to the control structure.</LI>
 <P><CODE>
 <A HREF="#modload.h">modload.h</A></CODE></P>
 <DT><B>Declaration</B><DD>
-<P><CODE>unsigned char mod_load (struct mod_ctrl* ctrl);</CODE></P>
+<P><CODE>unsigned char __fastcall__ mod_load (struct mod_ctrl* ctrl);</CODE></P>
 <DT><B>Description</B><DD>
 <P>The function will load a code module into memory and relocate
 it. The function will return an error code. If <CODE>MLOAD_OK</CODE> is returned, the
@@ -6766,6 +6788,8 @@ the module just loaded. Possible error codes are:
 <LI>The 
 <A HREF="ld65.html">ld65</A> linker is needed to create
 relocatable o65 modules for use with this function.</LI>
+<LI>The function is available only as a fastcall function; so, it may be used
+only in the presence of a prototype.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -7307,7 +7331,7 @@ from memory.</LI>
 <P><CODE>
 <A HREF="#mouse.h">mouse.h</A></CODE></P>
 <DT><B>Declaration</B><DD>
-<P><CODE>unsigned char __fastcall__ mouse_unload (void);</CODE></P>
+<P><CODE>unsigned char mouse_unload (void);</CODE></P>
 <DT><B>Description</B><DD>
 <P>The function unloads a loaded mouse driver and frees all
 memory allocated for the driver.</P>
@@ -7671,7 +7695,7 @@ be used in presence of a prototype.</LI>
 <A HREF="#stdlib.h">stdlib.h</A></CODE></P>
 <DT><B>Declaration</B><DD>
 <P><CODE>void __fastcall__ qsort (void* base, size_t count,
-size_t size, int (*compare) (const void*, const void*));</CODE></P>
+size_t size, int __fastcall__ (* compare) (const void*, const void*));</CODE></P>
 <DT><B>Description</B><DD>
 <P><CODE>qsort</CODE> sorts an array according to a given compare
 function <CODE>compare</CODE>. <CODE>base</CODE> is the address of the array, <CODE>count</CODE>
@@ -7684,6 +7708,8 @@ the function used to compare the members.</P>
 the function is undefined.</LI>
 <LI>The function is only available as fastcall function, so it may only
 be used in presence of a prototype.</LI>
+<LI>The function to which <CODE>compare</CODE> points must have the <CODE>fastcall</CODE>
+calling convention.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
@@ -11191,6 +11217,8 @@ ratio for a loaded driver. The value is not reset by
 <A HREF="#tgi_init">tgi_init</A>, so if a driver is linked statically to an application,
 switching into and out of graphics mode will not restore the original aspect
 ratio.</LI>
+<LI>The function is available only as a fastcall function; so, it may be used
+only in the presence of a prototype.</LI>
 </UL>
 </P>
 <DT><B>Availability</B><DD>
