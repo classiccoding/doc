@@ -9,9 +9,9 @@
 <H1>ca65 Users Guide</H1>
 
 <H2>
-<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2014-04-24
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2015-07-29
 <HR>
-<EM>ca65 is a powerful macro assembler for the 6502, 65C02 and 65816 CPUs. It is
+<EM>ca65 is a powerful macro assembler for the 6502, 65C02, and 65816 CPUs. It is
 used as a companion assembler for the cc65 crosscompiler, but it may also be
 used as a standalone product.</EM>
 <HR>
@@ -714,25 +714,22 @@ it is ignored).</P>
 </H2>
 
 
-<P>In 65816 mode several aliases are accepted in addition to the official
+<P>In 65816 mode, several aliases are accepted, in addition to the official
 mnemonics:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        BGE is an alias for BCS
-        BLT is an alias for BCC
-        CPA is an alias for CMP
-        DEA is an alias for DEC A
-        INA is an alias for INC A
-        SWA is an alias for XBA
-        TAD is an alias for TCD
-        TAS is an alias for TCS
-        TDA is an alias for TDC
-        TSA is an alias for TSC
+CPA is an alias for CMP
+DEA is an alias for DEC A
+INA is an alias for INC A
+SWA is an alias for XBA
+TAD is an alias for TCD
+TAS is an alias for TCS
+TDA is an alias for TDC
+TSA is an alias for TSC
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-
 
 
 <H2><A NAME="6502X-mode"></A> <A NAME="ss4.3">4.3</A> <A HREF="#toc4.3">6502X mode</A>
@@ -4207,8 +4204,8 @@ packages are:</P>
         atari           Defines the scrcode macro.
         cbm             Defines the scrcode macro.
         cpu             Defines constants for the .CPU variable.
-        generic         Defines generic macros like add and sub.
-        longbranch      Defines conditional long jump macros.
+        generic         Defines generic macroes like add, sub, and blt.
+        longbranch      Defines conditional long-jump macroes.
   
 </PRE>
 </CODE></BLOCKQUOTE>
@@ -5406,46 +5403,46 @@ are:</P>
 </H2>
 
 
-<P>This macro package defines macros that are useful in almost any program.
-Currently defined macros are:</P>
+<P>This macro package defines macroes that are useful in almost any program.
+Currently defined macroes are:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  add     Arg
+        .macro  add     Arg     ; add without carry
                 clc
                 adc     Arg
         .endmacro
 
-        .macro  sub     Arg
+        .macro  sub     Arg     ; subtract without borrow
                 sec
                 sbc     Arg
         .endmacro
 
-        .macro  bge     Arg
+        .macro  bge     Arg     ; branch on greater-than or equal
                 bcs     Arg
         .endmacro
 
-        .macro  blt     Arg
+        .macro  blt     Arg     ; branch on less-than
                 bcc     Arg
         .endmacro
 
-        .macro  bgt     Arg
+        .macro  bgt     Arg     ; branch on greater-than
                 .local  L
                 beq     L
                 bcs     Arg
         L:
         .endmacro
 
-        .macro  ble     Arg
+        .macro  ble     Arg     ; branch on less-than or equal
                 beq     Arg
                 bcc     Arg
         .endmacro
 
-        .macro  bnz     Arg
+        .macro  bnz     Arg     ; branch on not zero
                 bne     Arg
         .endmacro
 
-        .macro  bze     Arg
+        .macro  bze     Arg     ; branch on zero
                 beq     Arg
         .endmacro
 </PRE>
