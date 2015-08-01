@@ -9,7 +9,7 @@
 <H1>ca65 Users Guide</H1>
 
 <H2>
-<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2015-07-29
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2015-08-01
 <HR>
 <EM>ca65 is a powerful macro assembler for the 6502, 65C02, and 65816 CPUs. It is
 used as a companion assembler for the cc65 crosscompiler, but it may also be
@@ -4617,7 +4617,7 @@ had any need for local macro definitions.</P>
 segment, that is, a named section of data. The default segment is
 "CODE". There may be up to 254 different segments per object file
 (and up to 65534 per executable). There are shortcut commands for
-the most common segments ("CODE", "DATA" and "BSS").</P>
+the most common segments ("ZEROPAGE", "CODE", "RODATA", "DATA", and "BSS").</P>
 <P>The command is followed by a string containing the segment name (there are
 some constraints for the name - as a rule of thumb use only those segment
 names that would also be valid identifiers). There may also be an optional
@@ -4650,8 +4650,9 @@ segment specified as zeropage cannot be declared as being absolute later.</P>
 <P>See: <CODE>
 <A HREF="#.BSS">.BSS</A></CODE>, <CODE>
 <A HREF="#.CODE">.CODE</A></CODE>, <CODE>
-<A HREF="#.DATA">.DATA</A></CODE> and <CODE>
-<A HREF="#.RODATA">.RODATA</A></CODE></P>
+<A HREF="#.DATA">.DATA</A></CODE>, <CODE>
+<A HREF="#.RODATA">.RODATA</A></CODE>, and <CODE>
+<A HREF="#.ZEROPAGE">.ZEROPAGE</A></CODE></P>
 
 
 <H2><A NAME=".SET"></A> <A NAME="ss11.95">11.95</A> <A HREF="#toc11.95"><CODE>.SET</CODE></A>
@@ -4864,7 +4865,7 @@ shortcut for</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .segment  "ZEROPAGE", zeropage
+        .segment  "ZEROPAGE": zeropage
   
 </PRE>
 </CODE></BLOCKQUOTE>
