@@ -31,37 +31,43 @@ compiler.</EM>
 <LI><A NAME="toc4.2">4.2</A> <A HREF="c64.html#ss4.2"><CODE>c64-asm.cfg</CODE></A>
 </UL>
 <P>
-<H2><A NAME="toc5">5.</A> <A HREF="c64.html#s5">Platform-specific header files</A></H2>
+<H2><A NAME="toc5">5.</A> <A HREF="c64.html#s5">Extras</A></H2>
 
 <UL>
-<LI><A NAME="toc5.1">5.1</A> <A HREF="c64.html#ss5.1">C64-specific functions</A>
-<LI><A NAME="toc5.2">5.2</A> <A HREF="c64.html#ss5.2">CBM-specific functions</A>
-<LI><A NAME="toc5.3">5.3</A> <A HREF="c64.html#ss5.3">Hardware access</A>
+<LI><A NAME="toc5.1">5.1</A> <A HREF="c64.html#ss5.1">80 Columns conio driver</A>
 </UL>
 <P>
-<H2><A NAME="toc6">6.</A> <A HREF="c64.html#s6">Loadable drivers</A></H2>
+<H2><A NAME="toc6">6.</A> <A HREF="c64.html#s6">Platform-specific header files</A></H2>
 
 <UL>
-<LI><A NAME="toc6.1">6.1</A> <A HREF="c64.html#ss6.1">Graphics drivers</A>
-<LI><A NAME="toc6.2">6.2</A> <A HREF="c64.html#ss6.2">Extended memory drivers</A>
-<LI><A NAME="toc6.3">6.3</A> <A HREF="c64.html#ss6.3">Joystick drivers</A>
-<LI><A NAME="toc6.4">6.4</A> <A HREF="c64.html#ss6.4">Mouse drivers</A>
-<LI><A NAME="toc6.5">6.5</A> <A HREF="c64.html#ss6.5">RS232 device drivers</A>
+<LI><A NAME="toc6.1">6.1</A> <A HREF="c64.html#ss6.1">C64-specific functions</A>
+<LI><A NAME="toc6.2">6.2</A> <A HREF="c64.html#ss6.2">CBM-specific functions</A>
+<LI><A NAME="toc6.3">6.3</A> <A HREF="c64.html#ss6.3">Hardware access</A>
 </UL>
 <P>
-<H2><A NAME="toc7">7.</A> <A HREF="c64.html#s7">Limitations</A></H2>
-
-<P>
-<H2><A NAME="toc8">8.</A> <A HREF="c64.html#s8">Other hints</A></H2>
+<H2><A NAME="toc7">7.</A> <A HREF="c64.html#s7">Loadable drivers</A></H2>
 
 <UL>
-<LI><A NAME="toc8.1">8.1</A> <A HREF="c64.html#ss8.1">Escape code</A>
-<LI><A NAME="toc8.2">8.2</A> <A HREF="c64.html#ss8.2">Passing arguments to the program</A>
-<LI><A NAME="toc8.3">8.3</A> <A HREF="c64.html#ss8.3">Program return code</A>
-<LI><A NAME="toc8.4">8.4</A> <A HREF="c64.html#ss8.4">Interrupts</A>
+<LI><A NAME="toc7.1">7.1</A> <A HREF="c64.html#ss7.1">Graphics drivers</A>
+<LI><A NAME="toc7.2">7.2</A> <A HREF="c64.html#ss7.2">Extended memory drivers</A>
+<LI><A NAME="toc7.3">7.3</A> <A HREF="c64.html#ss7.3">Joystick drivers</A>
+<LI><A NAME="toc7.4">7.4</A> <A HREF="c64.html#ss7.4">Mouse drivers</A>
+<LI><A NAME="toc7.5">7.5</A> <A HREF="c64.html#ss7.5">RS232 device drivers</A>
 </UL>
 <P>
-<H2><A NAME="toc9">9.</A> <A HREF="c64.html#s9">License</A></H2>
+<H2><A NAME="toc8">8.</A> <A HREF="c64.html#s8">Limitations</A></H2>
+
+<P>
+<H2><A NAME="toc9">9.</A> <A HREF="c64.html#s9">Other hints</A></H2>
+
+<UL>
+<LI><A NAME="toc9.1">9.1</A> <A HREF="c64.html#ss9.1">Escape code</A>
+<LI><A NAME="toc9.2">9.2</A> <A HREF="c64.html#ss9.2">Passing arguments to the program</A>
+<LI><A NAME="toc9.3">9.3</A> <A HREF="c64.html#ss9.3">Program return code</A>
+<LI><A NAME="toc9.4">9.4</A> <A HREF="c64.html#ss9.4">Interrupts</A>
+</UL>
+<P>
+<H2><A NAME="toc10">10.</A> <A HREF="c64.html#s10">License</A></H2>
 
 
 <HR>
@@ -176,8 +182,49 @@ cl65 -o file.prg -u __EXEHDR__ -t c64 -C c64-asm.cfg source.s
 <P>Please note that in this case a changed start address doesn't make sense,
 since the program must be loaded to the BASIC start address.</P>
 
+<H2><A NAME="s5">5.</A> <A HREF="#toc5">Extras</A></H2>
 
-<H2><A NAME="s5">5.</A> <A HREF="#toc5">Platform-specific header files</A></H2>
+
+
+<H2><A NAME="ss5.1">5.1</A> <A HREF="#toc5.1">80 Columns conio driver</A>
+</H2>
+
+
+<P>The C64 package comes with an alternative software driven 80 columns
+module <CODE>c64-soft80.o</CODE> which uses the memory under I/O between $d000
+and $ffff.</P>
+<P>In memory constrained situations the memory from $400 to $7FF
+can be made available to a program by calling <CODE>_heapadd ((void *) 0x400, 0x400);</CODE>
+at the beginning of <CODE>main()</CODE>. Doing so is beneficial even if the program
+doesn't use the the heap explicitly because loading a driver uses the heap implicitly.</P>
+<P>Using <CODE>c64-soft80.o</CODE> is as simple as placing it on the linker command
+line like this:</P>
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+cl65 -t c64 myprog.c c64-soft80.o
+</PRE>
+</CODE></BLOCKQUOTE>
+</P>
+<P>Note that the soft80 conio driver is incompatible with the
+<CODE>c64-ram.emd (c64_ram_emd)</CODE> extended memory driver and the
+<CODE>c64-hi.tgi (c64_hi_tgi)</CODE> graphics driver.</P>
+
+<H3>80 Columns conio driver (monochrome)</H3>
+
+
+<P>In an (even more) memory constrained situation, a size optimized version of the
+software driven 80 columns module may be used, which only supports one common
+text color for the whole screen.</P>
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+cl65 -t c64 myprog.c c64-soft80mono.o
+</PRE>
+</CODE></BLOCKQUOTE>
+</P>
+
+<H2><A NAME="s6">6.</A> <A HREF="#toc6">Platform-specific header files</A></H2>
 
 
 <P>Programs containing C64-specific code may use the <CODE>c64.h</CODE> or <CODE>cbm.h</CODE>
@@ -186,7 +233,7 @@ one CBM platform, since it includes <CODE>c64.h</CODE> and declares several func
 common to all CBM platforms.</P>
 
 
-<H2><A NAME="ss5.1">5.1</A> <A HREF="#toc5.1">C64-specific functions</A>
+<H2><A NAME="ss6.1">6.1</A> <A HREF="#toc6.1">C64-specific functions</A>
 </H2>
 
 
@@ -199,7 +246,7 @@ common to all CBM platforms.</P>
 </P>
 
 
-<H2><A NAME="ss5.2">5.2</A> <A HREF="#toc5.2">CBM-specific functions</A>
+<H2><A NAME="ss6.2">6.2</A> <A HREF="#toc6.2">CBM-specific functions</A>
 </H2>
 
 
@@ -235,7 +282,7 @@ declaration and usage.</P>
 </P>
 
 
-<H2><A NAME="ss5.3">5.3</A> <A HREF="#toc5.3">Hardware access</A>
+<H2><A NAME="ss6.3">6.3</A> <A HREF="#toc6.3">Hardware access</A>
 </H2>
 
 
@@ -269,13 +316,13 @@ is explained in <CODE>_6526.h</CODE>.</P>
 
 
 
-<H2><A NAME="s6">6.</A> <A HREF="#toc6">Loadable drivers</A></H2>
+<H2><A NAME="s7">7.</A> <A HREF="#toc7">Loadable drivers</A></H2>
 
 
 <P>The names in the parentheses denote the symbols to be used for static linking of the drivers.</P>
 
 
-<H2><A NAME="ss6.1">6.1</A> <A HREF="#toc6.1">Graphics drivers</A>
+<H2><A NAME="ss7.1">7.1</A> <A HREF="#toc7.1">Graphics drivers</A>
 </H2>
 
 
@@ -292,9 +339,11 @@ palette of the 16 C64 colors).</P>
 </DL>
 </P>
 
+<P>Note that the graphics drivers are incompatible with the
+<CODE>c64-ram.emd (c64_ram_emd)</CODE> extended memory driver and the
+<CODE>c64-soft80.o</CODE> software 80 columns conio driver.</P>
 
-
-<H2><A NAME="ss6.2">6.2</A> <A HREF="#toc6.2">Extended memory drivers</A>
+<H2><A NAME="ss7.2">7.2</A> <A HREF="#toc7.2">Extended memory drivers</A>
 </H2>
 
 
@@ -321,7 +370,7 @@ bytes each. Written and contributed by Marco van den Heuvel.</P>
 <DT><B><CODE>c64-ram.emd (c64_ram_emd)</CODE></B><DD>
 <P>A driver for the hidden RAM below the I/O area and kernal ROM. Supports 48
 256 byte pages. Please note that this driver is incompatible with any of the
-graphics drivers!</P>
+graphics drivers, or the soft80 conio driver!</P>
 
 <DT><B><CODE>c64-ramcart.emd (c64_ramcart_emd)</CODE></B><DD>
 <P>A driver for the RamCart 64/128 written and contributed by Maciej Witkowiak.
@@ -348,7 +397,7 @@ indeed 7680 pages of 256 bytes each.</P>
 
 
 
-<H2><A NAME="ss6.3">6.3</A> <A HREF="#toc6.3">Joystick drivers</A>
+<H2><A NAME="ss7.3">7.3</A> <A HREF="#toc7.3">Joystick drivers</A>
 </H2>
 
 
@@ -380,7 +429,7 @@ the firebutton is labeled &#34;5&#34; and ENTER.</P>
 
 
 
-<H2><A NAME="ss6.4">6.4</A> <A HREF="#toc6.4">Mouse drivers</A>
+<H2><A NAME="ss7.4">7.4</A> <A HREF="#toc7.4">Mouse drivers</A>
 </H2>
 
 
@@ -410,7 +459,7 @@ the C64.</P>
 
 
 
-<H2><A NAME="ss6.5">6.5</A> <A HREF="#toc6.5">RS232 device drivers</A>
+<H2><A NAME="ss7.5">7.5</A> <A HREF="#toc7.5">RS232 device drivers</A>
 </H2>
 
 
@@ -430,25 +479,25 @@ flow control because of a full buffer.</P>
 
 
 
-<H2><A NAME="s7">7.</A> <A HREF="#toc7">Limitations</A></H2>
+<H2><A NAME="s8">8.</A> <A HREF="#toc8">Limitations</A></H2>
 
 
 
 
 
-<H2><A NAME="s8">8.</A> <A HREF="#toc8">Other hints</A></H2>
+<H2><A NAME="s9">9.</A> <A HREF="#toc9">Other hints</A></H2>
 
 
 
 
-<H2><A NAME="ss8.1">8.1</A> <A HREF="#toc8.1">Escape code</A>
+<H2><A NAME="ss9.1">9.1</A> <A HREF="#toc9.1">Escape code</A>
 </H2>
 
 
 <P>For an Esc, press CTRL and the <CODE>[</CODE> key.</P>
 
 
-<H2><A NAME="ss8.2">8.2</A> <A HREF="#toc8.2">Passing arguments to the program</A>
+<H2><A NAME="ss9.2">9.2</A> <A HREF="#toc9.2">Passing arguments to the program</A>
 </H2>
 
 
@@ -474,7 +523,7 @@ supported.</LI>
 </P>
 
 
-<H2><A NAME="ss8.3">8.3</A> <A HREF="#toc8.3">Program return code</A>
+<H2><A NAME="ss9.3">9.3</A> <A HREF="#toc9.3">Program return code</A>
 </H2>
 
 
@@ -482,7 +531,7 @@ supported.</LI>
 <CODE>ST</CODE> variable.</P>
 
 
-<H2><A NAME="ss8.4">8.4</A> <A HREF="#toc8.4">Interrupts</A>
+<H2><A NAME="ss9.4">9.4</A> <A HREF="#toc9.4">Interrupts</A>
 </H2>
 
 
@@ -495,7 +544,7 @@ feature in the
 
 
 
-<H2><A NAME="s9">9.</A> <A HREF="#toc9">License</A></H2>
+<H2><A NAME="s10">10.</A> <A HREF="#toc10">License</A></H2>
 
 
 <P>This software is provided 'as-is', without any expressed or implied
