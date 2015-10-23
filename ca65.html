@@ -91,10 +91,12 @@ used as a standalone product.</EM>
 
 <UL>
 <LI><A NAME="toc9.1">9.1</A> <A HREF="ca65.html#ss9.1"><CODE>*</CODE></A>
-<LI><A NAME="toc9.2">9.2</A> <A HREF="ca65.html#ss9.2"><CODE>.CPU</CODE></A>
-<LI><A NAME="toc9.3">9.3</A> <A HREF="ca65.html#ss9.3"><CODE>.PARAMCOUNT</CODE></A>
-<LI><A NAME="toc9.4">9.4</A> <A HREF="ca65.html#ss9.4"><CODE>.TIME</CODE></A>
-<LI><A NAME="toc9.5">9.5</A> <A HREF="ca65.html#ss9.5"><CODE>.VERSION</CODE></A>
+<LI><A NAME="toc9.2">9.2</A> <A HREF="ca65.html#ss9.2"><CODE>.ASIZE</CODE></A>
+<LI><A NAME="toc9.3">9.3</A> <A HREF="ca65.html#ss9.3"><CODE>.CPU</CODE></A>
+<LI><A NAME="toc9.4">9.4</A> <A HREF="ca65.html#ss9.4"><CODE>.ISIZE</CODE></A>
+<LI><A NAME="toc9.5">9.5</A> <A HREF="ca65.html#ss9.5"><CODE>.PARAMCOUNT</CODE></A>
+<LI><A NAME="toc9.6">9.6</A> <A HREF="ca65.html#ss9.6"><CODE>.TIME</CODE></A>
+<LI><A NAME="toc9.7">9.7</A> <A HREF="ca65.html#ss9.7"><CODE>.VERSION</CODE></A>
 </UL>
 <P>
 <H2><A NAME="toc10">10.</A> <A HREF="ca65.html#s10">Pseudo functions</A></H2>
@@ -1577,7 +1579,39 @@ assignments to <CODE>*</CODE>, use <CODE>
 <A HREF="#.ORG">.ORG</A></CODE> instead.</P>
 
 
-<H2><A NAME=".CPU"></A> <A NAME="ss9.2">9.2</A> <A HREF="#toc9.2"><CODE>.CPU</CODE></A>
+<H2><A NAME=".ASIZE"></A> <A NAME="ss9.2">9.2</A> <A HREF="#toc9.2"><CODE>.ASIZE</CODE></A>
+</H2>
+
+
+<P>Reading this pseudo variable will return the current size of the
+Accumulator in bits.</P>
+<P>For the 65816 instruction set .ASIZE will return either 8 or 16, depending
+on the current size of the operand in immediate accu addressing mode.</P>
+<P>For all other CPU instruction sets, .ASIZE will always return 8.</P>
+<P>Example:</P>
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+        ; Reverse Subtract with Accumulator
+        ; A = memory - A
+        .macro rsb param
+                .if .asize = 8
+                        eor     #$ff
+                .else
+                        eor     #$ffff
+                .endif
+                sec
+                adc     param
+        .endmacro
+  
+</PRE>
+</CODE></BLOCKQUOTE>
+</P>
+<P>See also: <CODE>
+<A HREF="#.ISIZE">.ISIZE</A></CODE></P>
+
+
+<H2><A NAME=".CPU"></A> <A NAME="ss9.3">9.3</A> <A HREF="#toc9.3"><CODE>.CPU</CODE></A>
 </H2>
 
 
@@ -1609,7 +1643,20 @@ even more complex expressions.</P>
 </P>
 
 
-<H2><A NAME=".PARAMCOUNT"></A> <A NAME="ss9.3">9.3</A> <A HREF="#toc9.3"><CODE>.PARAMCOUNT</CODE></A>
+<H2><A NAME=".ISIZE"></A> <A NAME="ss9.4">9.4</A> <A HREF="#toc9.4"><CODE>.ISIZE</CODE></A>
+</H2>
+
+
+<P>Reading this pseudo variable will return the current size of the Index
+register in bits.</P>
+<P>For the 65816 instruction set .ISIZE will return either 8 or 16, depending
+on the current size of the operand in immediate index addressing mode.</P>
+<P>For all other CPU instruction sets, .ISIZE will always return 8.</P>
+<P>See also: <CODE>
+<A HREF="#.ASIZE">.ASIZE</A></CODE></P>
+
+
+<H2><A NAME=".PARAMCOUNT"></A> <A NAME="ss9.5">9.5</A> <A HREF="#toc9.5"><CODE>.PARAMCOUNT</CODE></A>
 </H2>
 
 
@@ -1633,7 +1680,7 @@ the actual number of parameters that were given in the macro invocation.</P>
 <A HREF="#macros">Macros</A>.</P>
 
 
-<H2><A NAME=".TIME"></A> <A NAME="ss9.4">9.4</A> <A HREF="#toc9.4"><CODE>.TIME</CODE></A>
+<H2><A NAME=".TIME"></A> <A NAME="ss9.6">9.6</A> <A HREF="#toc9.6"><CODE>.TIME</CODE></A>
 </H2>
 
 
@@ -1653,7 +1700,7 @@ code.</P>
 </P>
 
 
-<H2><A NAME=".VERSION"></A> <A NAME="ss9.5">9.5</A> <A HREF="#toc9.5"><CODE>.VERSION</CODE></A>
+<H2><A NAME=".VERSION"></A> <A NAME="ss9.7">9.7</A> <A HREF="#toc9.7"><CODE>.VERSION</CODE></A>
 </H2>
 
 
