@@ -194,7 +194,7 @@ since the program must be loaded to the BASIC start address.</P>
 module <CODE>c64-soft80.o</CODE> which uses the memory under I/O between $d000
 and $ffff.</P>
 <P>In memory constrained situations the memory from $400 to $7FF
-can be made available to a program by calling <CODE>_heapadd ((void *) 0x400, 0x400);</CODE>
+can be made available to a program by calling <CODE>_heapadd ((void *) 0x0400, 0x0400);</CODE>
 at the beginning of <CODE>main()</CODE>. Doing so is beneficial even if the program
 doesn't use the the heap explicitly because loading a driver uses the heap implicitly.</P>
 <P>Using <CODE>c64-soft80.o</CODE> is as simple as placing it on the linker command
