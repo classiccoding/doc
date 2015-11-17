@@ -9,7 +9,8 @@
 <H1>ca65 Users Guide</H1>
 
 <H2>
-<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2015-08-01
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A>,<BR>
+<A HREF="mailto:greg.king5@verizon.net">Greg King</A></H2>2015-11-17
 <HR>
 <EM>ca65 is a powerful macro assembler for the 6502, 65C02, and 65816 CPUs. It is
 used as a companion assembler for the cc65 crosscompiler, but it may also be
@@ -1726,8 +1727,8 @@ either a string or an expression.</P>
 </H2>
 
 
-<P>The <CODE>.ADDRSIZE</CODE> function is used to return the interal address size 
-associated with a symbol. This can be helpful in macros when knowing the address 
+<P>The <CODE>.ADDRSIZE</CODE> function is used to return the interal address size
+associated with a symbol. This can be helpful in macros when knowing the address
 size of symbol can help with custom instructions.</P>
 <P>Example:</P>
 <P>
@@ -2983,8 +2984,8 @@ current position. Otherwise the function yields false. As an example, the
 
 
 <P>Builtin function. The function expects an identifier as argument in braces.
-The argument is evaluated, and the function yields "true" if the identifier 
-has already been defined as the name of a macro. Otherwise the function yields 
+The argument is evaluated, and the function yields "true" if the identifier
+has already been defined as the name of a macro. Otherwise the function yields
 false. Example:</P>
 <P>
 <BLOCKQUOTE><CODE>
@@ -2993,7 +2994,7 @@ false. Example:</P>
                 clc
                 adc foo
         .endmacro
-                 
+
         .if     .definedmacro(add)
                 add #$01
         .else
@@ -4950,10 +4951,10 @@ example:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  asr             ; Arithmetic shift right
-                cmp     #$80    ; Put bit 7 into carry
-                ror             ; Rotate right with carry
-        .endmacro
+.macro  asr             ; Arithmetic shift right
+        cmp     #$80    ; Put bit 7 into carry
+        ror             ; Rotate right with carry
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -4979,15 +4980,15 @@ by using the name, like this:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  inc16   addr
-                clc
-                lda     addr
-                adc     #$01
-                sta     addr
-                lda     addr+1
-                adc     #$00
-                sta     addr+1
-        .endmacro
+.macro  inc16   addr
+        clc
+        lda     addr
+        adc     #&lt;$0001
+        sta     addr
+        lda     addr+1
+        adc     #>$0001
+        sta     addr+1
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5005,13 +5006,13 @@ parameter. So</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-                clc
-                lda     $1000
-                adc     #$01
-                sta     $1000
-                lda     $1000+1
-                adc     #$00
-                sta     $1000+1
+        clc
+        lda     $1000
+        adc     #&lt;$0001
+        sta     $1000
+        lda     $1000+1
+        adc     #>$0001
+        sta     $1000+1
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5034,21 +5035,21 @@ opposite.</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  ldaxy   a, x, y
-        .ifnblank       a
-                lda     #a
-        .endif
-        .ifnblank       x
-                ldx     #x
-        .endif
-        .ifnblank       y
-                ldy     #y
-        .endif
-        .endmacro
+.macro  ldaxy   a, x, y
+.ifnblank       a
+        lda     #a
+.endif
+.ifnblank       x
+        ldx     #x
+.endif
+.ifnblank       y
+        ldy     #y
+.endif
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-<P>This macro may be called as follows:</P>
+<P>That macro may be called as follows:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -5060,19 +5061,19 @@ opposite.</P>
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-<P>There's another helper command for determining, which macro parameters are
+<P>There's another helper command for determining which macro parameters are
 valid: <CODE>
-<A HREF="#.PARAMCOUNT">.PARAMCOUNT</A></CODE> This command is
-replaced by the parameter count given, <EM>including</EM> intermediate empty macro
+<A HREF="#.PARAMCOUNT">.PARAMCOUNT</A></CODE>. That command is
+replaced by the parameter count given, <EM>including</EM> explicitly empty
 parameters:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        ldaxy   1               ; .PARAMCOUNT = 1
-        ldaxy   1,,3            ; .PARAMCOUNT = 3
-        ldaxy   1,2             ; .PARAMCOUNT = 2
-        ldaxy   1,              ; .PARAMCOUNT = 2
-        ldaxy   1,2,3           ; .PARAMCOUNT = 3
+        ldaxy   1       ; .PARAMCOUNT = 1
+        ldaxy   1,,3    ; .PARAMCOUNT = 3
+        ldaxy   1,2     ; .PARAMCOUNT = 2
+        ldaxy   1,      ; .PARAMCOUNT = 2
+        ldaxy   1,2,3   ; .PARAMCOUNT = 3
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5082,19 +5083,19 @@ case of a macro parameter).</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  foo     arg1, arg2
-                ...
-        .endmacro
+.macro  foo     arg1, arg2
+        ...
+.endmacro
 
-                foo     ($00,x)         ; Two parameters passed
-                foo     {($00,x)}       ; One parameter passed
+        foo     ($00,x)         ; Two parameters passed
+        foo     {($00,x)}       ; One parameter passed
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
 <P>In the first case, the macro is called with two parameters: '<CODE>($00</CODE>'
-and 'x)'. The comma is not passed to the macro, since it is part of the
+and '<CODE>x)</CODE>'. The comma is not passed to the macro, because it is part of the
 calling sequence, not the parameters.</P>
-<P>In the second case, '($00,x)' is passed to the macro, this time
+<P>In the second case, '<CODE>($00,x)</CODE>' is passed to the macro; this time,
 including the comma.</P>
 
 
@@ -5111,17 +5112,17 @@ functions will allow you to do exactly this:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  ldax    arg
-                .if (.match (.left (1, {arg}), #))
-                    ; immediate mode
-                    lda     #&lt;(.right (.tcount ({arg})-1, {arg}))
-                    ldx     #>(.right (.tcount ({arg})-1, {arg}))
-                .else
-                    ; assume absolute or zero page
-                    lda     arg
-                    ldx     1+(arg)
-                .endif
-        .endmacro
+.macro  ldax    arg
+        .if (.match (.left (1, {arg}), #))
+            ; immediate mode
+            lda     #&lt;(.right (.tcount ({arg})-1, {arg}))
+            ldx     #>(.right (.tcount ({arg})-1, {arg}))
+        .else
+            ; assume absolute or zero page
+            lda     arg
+            ldx     1+(arg)
+        .endif
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5137,11 +5138,11 @@ as end-of-list.</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        foo:    .word   $5678
-        ...
-                ldax    #$1234          ; X=$12, A=$34
-        ...
-                ldax    foo             ; X=$56, A=$78
+foo:    .word   $5678
+...
+        ldax    #$1234          ; X=$12, A=$34
+...
+        ldax    foo             ; X=$56, A=$78
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5155,42 +5156,43 @@ as end-of-list.</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  push    r1, r2, r3
-                lda     r1
-                pha
-        .if     .paramcount > 1
-                push    r2, r3
-        .endif
-        .endmacro
+.macro  push    r1, r2, r3
+        lda     r1
+        pha
+.ifnblank       r2
+        push    r2, r3
+.endif
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-<P>There's also a special macro to help writing recursive macros: <CODE>
-<A HREF="#.EXITMACRO">.EXITMACRO</A></CODE> This command will stop macro expansion
-immediately:</P>
+<P>There's also a special macro command to help with writing recursive macros:
+<CODE>
+<A HREF="#.EXITMACRO">.EXITMACRO</A></CODE>. That command will stop macro
+expansion immediately:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  push    r1, r2, r3, r4, r5, r6, r7
-        .ifblank        r1
-                ; First parameter is empty
-                .exitmacro
-        .else
-                lda     r1
-                pha
-        .endif
-                push    r2, r3, r4, r5, r6, r7
-        .endmacro
+.macro  push    r1, r2, r3, r4, r5, r6, r7
+.ifblank        r1
+        ; First parameter is empty
+        .exitmacro
+.else
+        lda     r1
+        pha
+.endif
+        push    r2, r3, r4, r5, r6, r7
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-<P>When expanding this macro, the expansion will push all given parameters
+<P>When expanding that macro, the expansion will push all given parameters
 until an empty one is encountered. The macro may be called like this:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        push    $20, $21, $32           ; Push 3 ZP locations
-        push    $21                     ; Push one ZP location
+        push    $20, $21, $32   ; Push 3 ZP locations
+        push    $21             ; Push one ZP location
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5208,15 +5210,15 @@ Have a look at the inc16 macro above. Here is it again:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  inc16   addr
-                clc
-                lda     addr
-                adc     #$01
-                sta     addr
-                lda     addr+1
-                adc     #$00
-                sta     addr+1
-        .endmacro
+.macro  inc16   addr
+        clc
+        lda     addr
+        adc     #&lt;$0001
+        sta     addr
+        lda     addr+1
+        adc     #>$0001
+        sta     addr+1
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5225,12 +5227,12 @@ written more efficiently, like this:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  inc16   addr
-                inc     addr
-                bne     Skip
-                inc     addr+1
-        Skip:
-        .endmacro
+.macro  inc16   addr
+        inc     addr
+        bne     Skip
+        inc     addr+1
+Skip:
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5245,13 +5247,13 @@ expansion. So we can solve the problem above by using <CODE>.LOCAL</CODE>:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  inc16   addr
-                .local  Skip            ; Make Skip a local symbol
-                inc     addr
-                bne     Skip
-                inc     addr+1
-        Skip:                           ; Not visible outside
-        .endmacro
+.macro  inc16   addr
+        .local  Skip            ; Make Skip a local symbol
+        inc     addr
+        bne     Skip
+        inc     addr+1
+Skip:                           ; Not visible outside
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5260,14 +5262,14 @@ that hides any labels:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  inc16   addr
-        .proc
-                inc     addr
-                bne     Skip
-                inc     addr+1
-        Skip:
-        .endproc
-        .endmacro
+.macro  inc16   addr
+.proc
+        inc     addr
+        bne     Skip
+        inc     addr+1
+Skip:
+.endproc
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5326,9 +5328,9 @@ following <CODE>.DEFINE</CODE>:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .define EQU     =
+.define EQU     =
 
-        foo     EQU     $1234           ; This is accepted now
+foo     EQU     $1234           ; This is accepted now
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5336,8 +5338,8 @@ following <CODE>.DEFINE</CODE>:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        ; Define the version number
-        .define VERSION         "12.3a"
+; Define the version number
+.define VERSION "12.3a"
 
         ; ... and use it
         .asciiz VERSION
@@ -5348,7 +5350,7 @@ following <CODE>.DEFINE</CODE>:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .define DEBUG(message)  .out    message
+.define DEBUG(message)  .out    message
 
         DEBUG   "Assembling include file #3"
 </PRE>
@@ -5361,13 +5363,13 @@ don't like that, use classic macros instead:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  DEBUG   message
-                .out    message
-        .endmacro
+.macro  DEBUG   message
+        .out    message
+.endmacro
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-<P>(This is an example where a problem can be solved with both macro types).</P>
+<P>(That is an example where a problem can be solved with both macro types).</P>
 
 
 <H2><A NAME="ss12.8">12.8</A> <A HREF="#toc12.8">Characters in macros</A>
@@ -5392,13 +5394,13 @@ be sure to take the translation into account.</P>
 
 
 <P>Macros can be deleted. This will not work if the macro that should be deleted
-is currently expanded as in the following non working example:</P>
+is currently expanded as in the following non-working example:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .macro  notworking
-                .delmacro       notworking
-        .endmacro
+.macro  notworking
+        .delmacro       notworking
+.endmacro
 
         notworking              ; Will not work
 </PRE>
@@ -5413,19 +5415,19 @@ for <CODE>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        .define value   1
-        .macro  mac
-                .byte   2
-        .endmacro
+.define value   1
+.macro  mac
+        .byte   2
+.endmacro
 
-                .byte   value           ; Emit one byte with value 1
-                mac                     ; Emit another byte with value 2
+        .byte   value           ; Emit one byte with value 1
+        mac                     ; Emit another byte with value 2
 
-        .undefine value
-        .delmacro mac
+.undefine value
+.delmacro mac
 
-                .byte   value           ; Error: Unknown identifier
-                mac                     ; Error: Missing ":"
+        .byte   value           ; Error: Unknown identifier
+        mac                     ; Error: Missing ":"
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
@@ -5436,6 +5438,7 @@ reading the argument to <CODE>.UNDEFINE</CODE>. This does also mean that the
 argument to <CODE>.UNDEFINE</CODE> is not allowed to come from another
 <CODE>.DEFINE</CODE>. All this is not necessary for classic macros, so having two
 different commands increases flexibility.</P>
+
 
 
 <H2><A NAME="macropackages"></A> <A NAME="s13">13.</A> <A HREF="#toc13">Macro packages</A></H2>
