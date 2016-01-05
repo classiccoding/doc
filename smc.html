@@ -239,7 +239,7 @@ SMC AdaptUnderlineWidth, { NOP }
 <P>
 <A NAME="Change branch"></A> </P>
 <DT><B><CODE>SMC_ChangeBranch label, destination (, register)</CODE></B><DD>
-<P>Used to modify the destination of a branch instruction. If the adress offset
+<P>Used to modify the destination of a branch instruction. If the address offset
 exceeds the supported range of 8-bit of the 6502, a error will be thrown.</P>
 <P>Example:
 <BLOCKQUOTE><CODE>
@@ -315,7 +315,7 @@ SMC GetK, { LDX #SMC_Value      }
 <A NAME="Transfer low-byte"></A> </P>
 <DT><B><CODE>SMC_TransferLowByte label, value (, register)</CODE></B><DD>
 <P>Does the same as '<CODE>SMC_TransferValue</CODE>' but should be used for
-low-bytes of adresses for better readability.</P>
+low-bytes of addresses for better readability.</P>
 <P>Example:
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -332,7 +332,7 @@ SMC LoadData, { LDA $2000 }
 <A NAME="Load low-byte"></A> </P>
 <DT><B><CODE>SMC_LoadLowByte label (, register)</CODE></B><DD>
 <P>Does the same as '<CODE>SMC_LoadValue</CODE>' but should be used for low-bytes
-of adresses for better readability.</P>
+of addresses for better readability.</P>
 <P>Example:
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -350,7 +350,7 @@ SMC LoadData, { LDA $2000 }
 <A NAME="Store low-byte"></A> </P>
 <DT><B><CODE>SMC_StoreLowByte label (, register)</CODE></B><DD>
 <P>Does the same as '<CODE>SMC_StoreValue</CODE>' but should be used for low-bytes
-of adresses for better readability.</P>
+of addresses for better readability.</P>
 <P>Example:
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -374,7 +374,7 @@ SMC StoreCollisionData, { STY $2200 }
 <A NAME="Transfer high-byte"></A> </P>
 <DT><B><CODE>SMC_TransferHighByte label, value (, register)</CODE></B><DD>
 <P>Loads and stores the given value via the named register to the high-byte
-adress portion of an SMC-instruction.</P>
+address portion of an SMC-instruction.</P>
 <P>Example:
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -393,7 +393,7 @@ PlayOtherSound:
 <P>
 <A NAME="Load high-byte"></A> </P>
 <DT><B><CODE>SMC_LoadHighByte label (, register)</CODE></B><DD>
-<P>Loads the high-byte part of an SMC-instruction adress to the given register.</P>
+<P>Loads the high-byte part of an SMC-instruction address to the given register.</P>
 <P>Example:
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -411,7 +411,7 @@ SMC GetVolume { LDA $3200,x }
 <P>
 <A NAME="Store high-byte"></A> </P>
 <DT><B><CODE>SMC_StoreHighByte label (, register)</CODE></B><DD>
-<P>Stores the high-byte adress part of an SMC-instruction from the given
+<P>Stores the high-byte address part of an SMC-instruction from the given
 register.</P>
 <P>Example:
 <BLOCKQUOTE><CODE>
@@ -433,7 +433,7 @@ SMC GetSoundData, { LDA Level1Base+Sound, y }
 </P>
 
 <P>
-<A NAME="Transfer single adress"></A> </P>
+<A NAME="Transfer single address"></A> </P>
 <DT><B><CODE>SMC_TransferAddressSingle label, address (, register)</CODE></B><DD>
 <P>Transfers the contents of the given address via the given register to the
 designated SMC instruction.</P>
@@ -455,7 +455,7 @@ SMC GetChar, { LDA  SMC_AbsAdr, x }
 </P>
 
 <P>
-<A NAME="Transfer adress"></A> </P>
+<A NAME="Transfer address"></A> </P>
 <DT><B><CODE>SMC_TransferAddress label, address</CODE></B><DD>
 <P>Loads contents of given address to A/X and stores the result to SMC
 instruction. Allows reuse of register contents by using
@@ -604,11 +604,11 @@ allowing reuse of some instructions.</P>
  8:     SMC FirstIncHighByte, { SMC_OperateOnHighByte inc, StoreAccuFirstSection }              ; code will be overwritten to 'beq RestoreCode' (*)
  9:     ...
 10:     SMC_TransferOpcode FirstIncHighByte, OPC_BEQ , x                                        ; change code marked above with (*)
-11:     SMC_TransferValue FirstIncHighByte, #(restoreCode - RestoreCodeBranchBaseAdr-2), x      ; set relative adress to 'RestoreCode'
+11:     SMC_TransferValue FirstIncHighByte, #(restoreCode - RestoreCodeBranchBaseAdr-2), x      ; set relative address to 'RestoreCode'
 12:     ...
 13: restoreCode:
 14:     SMC_TransferOpcode FirstIncHighByte, OPC_INC_abs , x                                    ; restore original code...
-15:     SMC_TransferValue FirstIncHighByte, #(&lt;(StoreToFirstSection+2)), x                   ; (second byte of inc contained low-byte of adress)
+15:     SMC_TransferValue FirstIncHighByte, #(&lt;(StoreToFirstSection+2)), x                   ; (second byte of inc contained low-byte of address)
 16:             ...
 </PRE>
 </CODE></BLOCKQUOTE>
