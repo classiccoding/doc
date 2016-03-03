@@ -3415,6 +3415,27 @@ enabled it, so using</P>
 at character is not allowed to start an identifier, even with this
 feature enabled.</P>
 
+<DT><B><CODE>bracket_as_indirect</CODE>
+<A NAME="bracket_as_indirect"></A> </B><DD>
+<P>Use <CODE>[]</CODE> instead of <CODE>()</CODE> for the indirect addressing modes.
+Example:</P>
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+        lda     [$82]
+        lda     [$82,x]
+        lda     [$82],y
+        jmp     [$fffe]
+        jmp     [table,x]
+    
+</PRE>
+</CODE></BLOCKQUOTE>
+
+<EM>Note:</EM> This should not be used in 65186 mode because it conflicts with
+the 65816 instruction syntax for far addressing. See the section covering
+<CODE>
+<A HREF="#address-sizes">address sizes</A></CODE> for more information.</P>
+
 <DT><B><CODE>c_comments</CODE>
 <A NAME="c_comments"></A> </B><DD>
 <P>Allow C like comments using <CODE>/*</CODE> and <CODE>*/</CODE> as left and right
