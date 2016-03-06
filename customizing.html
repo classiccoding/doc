@@ -109,15 +109,15 @@ vectors at the proper memory locations.  The segment definition is:</P>
 <HR>
 <PRE>
 SEGMENTS {
-    ZEROPAGE:  load = ZP,  type = zp,  define   = yes;
-    DATA:      load = ROM, type = rw,  define   = yes, run = RAM;
-    BSS:       load = RAM, type = bss, define   = yes;
-    HEAP:      load = RAM, type = bss, optional = yes;
-    STARTUP:   load = ROM, type = ro;
-    INIT:      load = ROM, type = ro,  optional = yes;
-    CODE:      load = ROM, type = ro;
-    RODATA:    load = ROM, type = ro;
-    VECTORS:   load = ROM, type = ro,  start    = $FFFA;
+    ZEROPAGE: load = ZP,  type = zp,  define   = yes;
+    DATA:     load = ROM, type = rw,  define   = yes, run = RAM;
+    BSS:      load = RAM, type = bss, define   = yes;
+    HEAP:     load = RAM, type = bss, optional = yes;
+    STARTUP:  load = ROM, type = ro;
+    ONCE:     load = ROM, type = ro,  optional = yes;
+    CODE:     load = ROM, type = ro;
+    RODATA:   load = ROM, type = ro;
+    VECTORS:  load = ROM, type = ro,  start    = $FFFA;
 }
 </PRE>
 <HR>
@@ -130,7 +130,7 @@ SEGMENTS {
 <P><CODE>       BSS:       </CODE>Uninitialized data stored in RAM (used for variable storage)</P>
 <P><CODE>       HEAP:      </CODE>Uninitialized C-level heap storage in RAM, optional</P>
 <P><CODE>       STARTUP:   </CODE>The program initialization code, stored in ROM</P>
-<P><CODE>       INIT:      </CODE>The code needed to initialize the system, stored in ROM</P>
+<P><CODE>       ONCE:      </CODE>The code run once to initialize the system, stored in ROM</P>
 <P><CODE>       CODE:      </CODE>The program code, stored in ROM</P>
 <P><CODE>       RODATA:    </CODE>Initialized data that cannot be modified by the program, stored in ROM</P>
 <P><CODE>       VECTORS:   </CODE>The interrupt vector table, stored in ROM at location $FFFA</P>

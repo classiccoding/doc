@@ -54,7 +54,7 @@ configurable and uses configuration files for high flexibility.</EM>
 <H2><A NAME="toc6">6.</A> <A HREF="ld65.html#s6">Special segments</A></H2>
 
 <UL>
-<LI><A NAME="toc6.1">6.1</A> <A HREF="ld65.html#ss6.1">INIT</A>
+<LI><A NAME="toc6.1">6.1</A> <A HREF="ld65.html#ss6.1">ONCE</A>
 <LI><A NAME="toc6.2">6.2</A> <A HREF="ld65.html#ss6.2">LOWCODE</A>
 <LI><A NAME="toc6.3">6.3</A> <A HREF="ld65.html#ss6.3">STARTUP</A>
 <LI><A NAME="toc6.4">6.4</A> <A HREF="ld65.html#ss6.4">ZPSAVE</A>
@@ -1123,13 +1123,13 @@ __STACKSIZE__=xxx</CODE> on the command line.</P>
 the compiler and the libraries that come with it. If you replace the builtin
 config files, you will need the following information.</P>
 
-<H2><A NAME="ss6.1">6.1</A> <A HREF="#toc6.1">INIT</A>
+<H2><A NAME="ss6.1">6.1</A> <A HREF="#toc6.1">ONCE</A>
 </H2>
 
 
-<P>The INIT segment is used for initialization code that may be reused once
+<P>The ONCE segment is used for initialization code run only once before
 execution reaches main() - provided that the program runs in RAM. You
-may for example add the INIT segment to the heap in really memory
+may for example add the ONCE segment to the heap in really memory
 constrained systems.</P>
 
 <H2><A NAME="ss6.2">6.2</A> <A HREF="#toc6.2">LOWCODE</A>
