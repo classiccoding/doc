@@ -217,7 +217,7 @@ The screen memory's start address can be obtained from the SAVMSC variable
 ($58).</P>
 
 <DT><B>Stack</B><DD>
-<P>The C runtime stack is located at end of the RAM memory area ($CFFF)
+<P>The C runtime stack is located at end of the MAIN memory area ($CFFF)
 and grows downwards.</P>
 
 <DT><B>Heap</B><DD>
@@ -673,7 +673,7 @@ The contents of this chunk come from the SYSCHKCHNK memory area of the linker co
 <LI>main program<BR>
 This load chunk is loaded at the selected program start address (default $2000) and
 contains all of the code and data of the program.<BR>
-The contents of this chunk come from the RAM memory area of the linker config file.</LI>
+The contents of this chunk come from the MAIN memory area of the linker config file.</LI>
 </OL>
 </P>
 
