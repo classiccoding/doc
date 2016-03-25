@@ -146,17 +146,17 @@ several usefull settings:</P>
 <P>
 <DL>
 
-<DT><B>LCADDR: $D400, LCSIZE: $C00</B><DD>
+<DT><B>LC address: $D400, LC size: $C00</B><DD>
 <P>For plain vanilla ProDOS 8 which doesn't actually use the Language Card bank 2
 memory from $D400 to $DFFF. This is the default setting.</P>
 
-<DT><B>LCADDR: $D000, LCSIZE: $1000</B><DD>
+<DT><B>LC address: $D000, LC size: $1000</B><DD>
 <P>For ProDOS 8 together with the function <CODE>rebootafterexit()</CODE>. If a program
 doesn't quit to the ProDOS 8 dispatcher but rather reboots the machine after
 exit then a plain vanilla ProDOS 8 doesn't make use of the Language Card bank
 2 at all.</P>
 
-<DT><B>LCADDR: $D000, LCSIZE: $3000</B><DD>
+<DT><B>LC address: $D000, LC size: $3000</B><DD>
 <P>For plain vanilla DOS 3.3 which doesn't make use of the Language Card at all.</P>
 
 </DL>
@@ -217,6 +217,7 @@ code size.</P>
 
 <P>Configuration for a system program running on ProDOS 8 and using the memory from
 $2000 to $BEFF.</P>
+<P>Parameters:</P>
 <P>
 <DL>
 
@@ -244,6 +245,7 @@ code size.</P>
 <P>Configuration for overlay programs with the up to nine overlays. The overlay files
 don't include the DOS 3.3 header. See <CODE>samples/overlaydemo.c</CODE> for more
 information on overlays.</P>
+<P>Parameters:</P>
 <P>
 <DL>
 
@@ -317,7 +319,7 @@ range.</P>
 <P>The easiest (and for really large programs in fact the only) way to have a cc65
 program use the memory from $800 to $2000 is to link it as binary
 (as opposed to system) program using the default linker configuration
-<A HREF="#apple-def-cfg">apple2enh.cfg</A> with __HIMEM__ set to $BF00
+<A HREF="#apple-def-cfg">apple2enh.cfg</A> with <CODE>__HIMEM__</CODE>set to $BF00
 and load it with the targetutil LOADER.SYSTEM. The program then works like a system
 program (i.e. quits to the ProDOS dispatcher).</P>
 <P>Using LOADER.SYSTEM is as simple as copying it to the ProDOS 8 directory of the
