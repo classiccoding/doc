@@ -28,10 +28,9 @@ implemented for the cc65 C compiler.</EM>
 
 <UL>
 <LI><A NAME="toc4.1">4.1</A> <A HREF="apple2enh.html#ss4.1">default config file (<CODE>apple2enh.cfg</CODE>)</A>
-<LI><A NAME="toc4.2">4.2</A> <A HREF="apple2enh.html#ss4.2"><CODE>apple2enh-dos33.cfg</CODE></A>
-<LI><A NAME="toc4.3">4.3</A> <A HREF="apple2enh.html#ss4.3"><CODE>apple2enh-system.cfg</CODE></A>
-<LI><A NAME="toc4.4">4.4</A> <A HREF="apple2enh.html#ss4.4"><CODE>apple2enh-loader.cfg</CODE></A>
-<LI><A NAME="toc4.5">4.5</A> <A HREF="apple2enh.html#ss4.5"><CODE>apple2enh-reboot.cfg</CODE></A>
+<LI><A NAME="toc4.2">4.2</A> <A HREF="apple2enh.html#ss4.2"><CODE>apple2enh-system.cfg</CODE></A>
+<LI><A NAME="toc4.3">4.3</A> <A HREF="apple2enh.html#ss4.3"><CODE>apple2enh-overlay.cfg</CODE></A>
+<LI><A NAME="toc4.4">4.4</A> <A HREF="apple2enh.html#ss4.4"><CODE>apple2enh-asm.cfg</CODE></A>
 </UL>
 <P>
 <H2><A NAME="toc5">5.</A> <A HREF="apple2enh.html#s5">ProDOS 8 system programs</A></H2>
@@ -137,13 +136,32 @@ However while running module constructors/destructors the Language Card is disab
 <P>Enabling the Language Card allows to use it as additional memory for cc65
 generated code. However code is never automatically placed there. Rather code
 needs to be explicitly placed in the Language Card either per file by compiling
-with <CODE>--code-name HIGHCODE</CODE> or per function by enclosing in <CODE>#pragma
-code-name (push, "HIGHCODE")</CODE> and <CODE>#pragma code-name (pop)</CODE>. In either case the
-cc65 runtime system takes care of actually moving the code into the Language
-Card.</P>
+with <CODE>--code-name LC</CODE> or per function by enclosing in <CODE>#pragma code-name
+(push, "LC")</CODE> and <CODE>#pragma code-name (pop)</CODE>. In either case the cc65 runtime
+system takes care of actually moving the code into the Language Card.</P>
 <P>The amount of memory available in the Language Card for generated code depends
-on the chosen 
-<A HREF="#link-configs">linker configuration</A>.</P>
+on the 
+<A HREF="#link-configs">linker configuration</A> parameters. There are
+several usefull settings:</P>
+<P>
+<DL>
+
+<DT><B>LCADDR: $D400, LCSIZE: $C00</B><DD>
+<P>For plain vanilla ProDOS 8 which doesn't actually use the Language Card bank 2
+memory from $D400 to $DFFF. This is the default setting.</P>
+
+<DT><B>LCADDR: $D000, LCSIZE: $1000</B><DD>
+<P>For ProDOS 8 together with the function <CODE>rebootafterexit()</CODE>. If a program
+doesn't quit to the ProDOS 8 dispatcher but rather reboots the machine after
+exit then a plain vanilla ProDOS 8 doesn't make use of the Language Card bank
+2 at all.</P>
+
+<DT><B>LCADDR: $D000, LCSIZE: $3000</B><DD>
+<P>For plain vanilla DOS 3.3 which doesn't make use of the Language Card at all.</P>
+
+</DL>
+</P>
+
 
 
 
@@ -156,141 +174,126 @@ The apple2enh package comes with additional secondary linker config files, which
 are used via <CODE>-t apple2enh -C &lt;configfile&gt;</CODE>.</P>
 
 
-<H2><A NAME="ss4.1">4.1</A> <A HREF="#toc4.1">default config file (<CODE>apple2enh.cfg</CODE>)</A>
+<H2><A NAME="apple-def-cfg"></A> <A NAME="ss4.1">4.1</A> <A HREF="#toc4.1">default config file (<CODE>apple2enh.cfg</CODE>)</A>
 </H2>
 
 
-<P>Default configuration optimized for a binary program running on ProDOS 8 with
-BASIC.SYSTEM. A plain vanilla ProDOS 8 doesn't actually use the Language Card
-bank 2 memory from $D400 to $DFFF.</P>
+<P>Default configuration for a binary program.</P>
+<P>Parameters:</P>
 <P>
 <DL>
 
-<DT><B><CODE>RAM:</CODE> Main memory area</B><DD>
-<P>From $803 to $95FF (35.5 KB)</P>
-
-<DT><B><CODE>LC:</CODE> Language Card memory area</B><DD>
-<P>From $D400 to $DFFF (3 KB)</P>
-
 <DT><B><CODE>STARTADDRESS:</CODE> Program start address</B><DD>
-<P>Variable (default: $803)</P>
+<P>Default: $803. Use <CODE>-S &lt;addr&gt;</CODE> to set a different start address.</P>
 
-<DT><B><CODE>HEADER:</CODE> Binary file header</B><DD>
-<P>DOS 3.3 header (address and length)</P>
+<DT><B><CODE>__EXEHDR__:</CODE> Executable file header</B><DD>
+<P>Default: DOS 3.3 header (address and length). Use <CODE>-D __EXEHDR__=0</CODE> to omit
+the header.</P>
+
+<DT><B><CODE>__STACKSIZE__:</CODE> C runtime stack size</B><DD>
+<P>Default: $800. Use <CODE>-D __STACKSIZE__=&lt;size&gt;</CODE> to set a different
+stack size.</P>
+
+<DT><B><CODE>__HIMEM__:</CODE> Highest usable memory address presumed at link time</B><DD>
+<P>Default: $9600. Use <CODE>-D __HIMEM__=&lt;addr&gt;</CODE> to set a different
+highest usable address.</P>
+
+<DT><B><CODE>__LCADDR__:</CODE> Address of code in the Language Card</B><DD>
+<P>Default: $D400. Use <CODE>-D __LCADDR__=&lt;addr&gt;</CODE> to set a different
+code address.</P>
+
+<DT><B><CODE>__LCSIZE__:</CODE> Size of code in the Language Card</B><DD>
+<P>Default: $C00. Use <CODE>-D __LCSIZE__=&lt;size&gt;</CODE> to set a different
+code size.</P>
 
 </DL>
 </P>
 
 
 
-<H2><A NAME="ss4.2">4.2</A> <A HREF="#toc4.2"><CODE>apple2enh-dos33.cfg</CODE></A>
+<H2><A NAME="apple-sys-cfg"></A> <A NAME="ss4.2">4.2</A> <A HREF="#toc4.2"><CODE>apple2enh-system.cfg</CODE></A>
 </H2>
 
 
-<P>Configuration optimized for a binary program running on DOS 3.3. A plain
-vanilla DOS 3.3 doesn't make use of the Language Card at all.</P>
+<P>Configuration for a system program running on ProDOS 8 and using the memory from
+$2000 to $BEFF.</P>
 <P>
 <DL>
 
-<DT><B><CODE>RAM:</CODE> Main memory area</B><DD>
-<P>From $803 to $95FF (35.5 KB)</P>
+<DT><B><CODE>__STACKSIZE__:</CODE> C runtime stack size</B><DD>
+<P>Default: $800. Use <CODE>-D __STACKSIZE__=&lt;size&gt;</CODE> to set a different
+stack size.</P>
 
-<DT><B><CODE>LC:</CODE> Language Card memory area</B><DD>
-<P>From $D000 to $FFFF (12 KB)</P>
+<DT><B><CODE>__LCADDR__:</CODE> Address of code in the Language Card</B><DD>
+<P>Default: $D400. Use <CODE>-D __LCADDR__=&lt;addr&gt;</CODE> to set a different
+code address.</P>
 
-<DT><B><CODE>STARTADDRESS:</CODE> Program start address</B><DD>
-<P>Variable (default: $803)</P>
-
-<DT><B><CODE>HEADER:</CODE> Binary file header</B><DD>
-<P>DOS 3.3 header (address and length)</P>
+<DT><B><CODE>__LCSIZE__:</CODE> Size of code in the Language Card</B><DD>
+<P>Default: $C00. Use <CODE>-D __LCSIZE__=&lt;size&gt;</CODE> to set a different
+code size.</P>
 
 </DL>
 </P>
 
 
 
-<H2><A NAME="apple-sys-cfg"></A> <A NAME="ss4.3">4.3</A> <A HREF="#toc4.3"><CODE>apple2enh-system.cfg</CODE></A>
+<H2><A NAME="ss4.3">4.3</A> <A HREF="#toc4.3"><CODE>apple2enh-overlay.cfg</CODE></A>
 </H2>
 
 
-<P>Configuration for a system program running on ProDOS 8.</P>
+<P>Configuration for overlay programs with the up to nine overlays. The overlay files
+don't include the DOS 3.3 header. See <CODE>samples/overlaydemo.c</CODE> for more
+information on overlays.</P>
 <P>
 <DL>
 
-<DT><B><CODE>RAM:</CODE> Main memory area</B><DD>
-<P>From $2000 to $BEFF (39.75 KB)</P>
-
-<DT><B><CODE>LC:</CODE> Language Card memory area</B><DD>
-<P>From $D400 to $DFFF (3 KB)</P>
-
 <DT><B><CODE>STARTADDRESS:</CODE> Program start address</B><DD>
-<P>Fixed ($2000)</P>
+<P>Default: $803. Use <CODE>-S &lt;addr&gt;</CODE> to set a different start address.</P>
 
-<DT><B><CODE>HEADER:</CODE> Binary file header</B><DD>
-<P>None</P>
+<DT><B><CODE>__EXEHDR__:</CODE> Executable file header</B><DD>
+<P>Default: DOS 3.3 header (address and length). Use <CODE>-D __EXEHDR__=0</CODE> to omit
+the header.</P>
+
+<DT><B><CODE>__STACKSIZE__:</CODE> C runtime stack size</B><DD>
+<P>Default: $800. Use <CODE>-D __STACKSIZE__=&lt;size&gt;</CODE> to set a different
+stack size.</P>
+
+<DT><B><CODE>__HIMEM__:</CODE> Highest usable memory address presumed at link time</B><DD>
+<P>Default: $9600. Use <CODE>-D __HIMEM__=&lt;addr&gt;</CODE> to set a different
+highest usable address.</P>
+
+<DT><B><CODE>__LCADDR__:</CODE> Address of code in the Language Card</B><DD>
+<P>Default: $D400. Use <CODE>-D __LCADDR__=&lt;addr&gt;</CODE> to set a different
+code address.</P>
+
+<DT><B><CODE>__LCSIZE__:</CODE> Size of code in the Language Card</B><DD>
+<P>Default: $C00. Use <CODE>-D __LCSIZE__=&lt;size&gt;</CODE> to set a different
+code size.</P>
+
+<DT><B><CODE>__OVERLAYSIZE__:</CODE> Size of code in the overlays</B><DD>
+<P>Default: $1000. Use <CODE>-D __OVERLAYSIZE__=&lt;size&gt;</CODE> to set a different
+code size.</P>
 
 </DL>
 </P>
 
 
 
-<H2><A NAME="apple-load-cfg"></A> <A NAME="ss4.4">4.4</A> <A HREF="#toc4.4"><CODE>apple2enh-loader.cfg</CODE></A>
+<H2><A NAME="ss4.4">4.4</A> <A HREF="#toc4.4"><CODE>apple2enh-asm.cfg</CODE></A>
 </H2>
 
 
-<P>Configuration optimized for a binary program running on ProDOS 8 without
-BASIC.SYSTEM. Intended to be used with <B>LOADER.SYSTEM - an
-Apple&nbsp;][ ProDOS 8 loader for cc65 programs</B>, which is available
-in the cc65 User Contributions section.</P>
-<P>A program loaded by LOADER.SYSTEM works like a ProDOS 8 system program but
-isn't tied to the start address $2000. Thus with the default start
-address $800 the main memory area is increased by 6 KB.</P>
+<P>Configuration for a assembler programs which don't need a special setup.</P>
+<P>Parameters:</P>
 <P>
 <DL>
 
-<DT><B><CODE>RAM:</CODE> Main memory area</B><DD>
-<P>From $800 to $BEFF (45.75 KB)</P>
-
-<DT><B><CODE>LC:</CODE> Language Card memory area</B><DD>
-<P>From $D400 to $DFFF (3 KB)</P>
-
 <DT><B><CODE>STARTADDRESS:</CODE> Program start address</B><DD>
-<P>Variable (default: $800)</P>
+<P>Default: $803. Use <CODE>-S &lt;addr&gt;</CODE> to set a different start address.</P>
 
-<DT><B><CODE>HEADER:</CODE> Binary file header</B><DD>
-<P>DOS 3.3 header (address and length)</P>
-
-</DL>
-</P>
-
-
-
-<H2><A NAME="ss4.5">4.5</A> <A HREF="#toc4.5"><CODE>apple2enh-reboot.cfg</CODE></A>
-</H2>
-
-
-<P>Configuration optimized for a binary program running on ProDOS 8 without
-BASIC.SYSTEM. Intended to be used with <B>LOADER.SYSTEM - an
-Apple&nbsp;][ ProDOS 8 loader for cc65 programs</B> (see above) together
-with the function <CODE>rebootafterexit()</CODE>.</P>
-<P>If a ProDOS 8 system program doesn't quit to the ProDOS 8 dispatcher but rather
-reboots the machine after exit then a plain vanilla ProDOS 8 doesn't make use of
-the Language Card bank 2 at all.</P>
-<P>This setup makes nearly 50 KB available to a cc65 program - on a 64 KB machine!</P>
-<P>
-<DL>
-
-<DT><B><CODE>RAM:</CODE> Main memory area</B><DD>
-<P>From $800 to $BEFF (45.75 KB)</P>
-
-<DT><B><CODE>LC:</CODE> Language Card memory area</B><DD>
-<P>From $D000 to $DFFF (4 KB)</P>
-
-<DT><B><CODE>STARTADDRESS:</CODE> Program start address</B><DD>
-<P>Variable (default: $800)</P>
-
-<DT><B><CODE>HEADER:</CODE> Binary file header</B><DD>
-<P>DOS 3.3 header (address and length)</P>
+<DT><B><CODE>__EXEHDR__:</CODE> Executable file header</B><DD>
+<P>Default: No header. Use <CODE>-u __EXEHDR__ apple2enh.lib</CODE> to add a DOS 3.3 header
+(address and length).</P>
 
 </DL>
 </P>
@@ -313,10 +316,10 @@ range.</P>
 
 <P>The easiest (and for really large programs in fact the only) way to have a cc65
 program use the memory from $800 to $2000 is to link it as binary
-(as opposed to system) program using the linker configuration
-<A HREF="#apple-load-cfg">apple2enh-loader.cfg</A> with start address
-$803 and load it with the targetutil LOADER.SYSTEM. The program then works
-like a system program (i.e. quits to the ProDOS dispatcher).</P>
+(as opposed to system) program using the default linker configuration
+<A HREF="#apple-def-cfg">apple2enh.cfg</A> with __HIMEM__ set to $BF00
+and load it with the targetutil LOADER.SYSTEM. The program then works like a system
+program (i.e. quits to the ProDOS dispatcher).</P>
 <P>Using LOADER.SYSTEM is as simple as copying it to the ProDOS 8 directory of the
 program to load under name &lt;program&gt;.SYSTEM as a system program. For
 example the program <CODE>MYPROG</CODE> is loaded by <CODE>MYPROG.SYSTEM</CODE>.</P>
@@ -425,8 +428,8 @@ function clears the corresponding area at the bottom of the screen.</P>
 <DT><B><CODE>a2e.hi.tgi (a2e_hi_tgi)</CODE></B><DD>
 <P>This driver features a resolution of 280&times;192 with 8 colors and two
 hires pages. Note that programs using this driver will have to be linked
-with <CODE>--start-addr $4000</CODE> to reserve the first hires page or with
-<CODE>--start-addr $6000</CODE> to reserve both hires pages.</P>
+with <CODE>-S $4000</CODE> to reserve the first hires page or with <CODE>-S $6000</CODE>
+to reserve both hires pages.</P>
 <P>Note that the second hires page is only available if the text display is not in
 80 column mode. This can be asserted by calling <CODE>videomode (VIDEOMODE_40COL);</CODE>
 before installing the driver.</P>
@@ -634,7 +637,7 @@ program. See the discussion of the <CODE>.CONDES</CODE> feature in the
 <P>The function 
 <A HREF="dio.html#s1">dio_open()</A> has the single
 parameter <CODE>device</CODE> to identify the device to be opened. Therefore an
-Apple&nbsp;II slot and drive pair is mapped to that <CODE>drive_id</CODE> according
+Apple&nbsp;II slot and drive pair is mapped to that <CODE>device</CODE> according
 to the formula</P>
 <P>
 <BLOCKQUOTE><CODE>
