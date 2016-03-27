@@ -258,10 +258,11 @@ used as a standalone product.</EM>
 <UL>
 <LI><A NAME="toc13.1">13.1</A> <A HREF="ca65.html#ss13.1"><CODE>.MACPACK generic</CODE></A>
 <LI><A NAME="toc13.2">13.2</A> <A HREF="ca65.html#ss13.2"><CODE>.MACPACK longbranch</CODE></A>
-<LI><A NAME="toc13.3">13.3</A> <A HREF="ca65.html#ss13.3"><CODE>.MACPACK atari</CODE></A>
-<LI><A NAME="toc13.4">13.4</A> <A HREF="ca65.html#ss13.4"><CODE>.MACPACK cbm</CODE></A>
-<LI><A NAME="toc13.5">13.5</A> <A HREF="ca65.html#ss13.5"><CODE>.MACPACK cpu</CODE></A>
-<LI><A NAME="toc13.6">13.6</A> <A HREF="ca65.html#ss13.6"><CODE>.MACPACK module</CODE></A>
+<LI><A NAME="toc13.3">13.3</A> <A HREF="ca65.html#ss13.3"><CODE>.MACPACK apple2</CODE></A>
+<LI><A NAME="toc13.4">13.4</A> <A HREF="ca65.html#ss13.4"><CODE>.MACPACK atari</CODE></A>
+<LI><A NAME="toc13.5">13.5</A> <A HREF="ca65.html#ss13.5"><CODE>.MACPACK cbm</CODE></A>
+<LI><A NAME="toc13.6">13.6</A> <A HREF="ca65.html#ss13.6"><CODE>.MACPACK cpu</CODE></A>
+<LI><A NAME="toc13.7">13.7</A> <A HREF="ca65.html#ss13.7"><CODE>.MACPACK module</CODE></A>
 </UL>
 <P>
 <H2><A NAME="toc14">14.</A> <A HREF="ca65.html#s14">Predefined constants</A></H2>
@@ -5559,7 +5560,7 @@ jump to the actual branch target.</P>
 
 
 
-<H2><A NAME="ss13.3">13.3</A> <A HREF="#toc13.3"><CODE>.MACPACK atari</CODE></A>
+<H2><A NAME="ss13.3">13.3</A> <A HREF="#toc13.3"><CODE>.MACPACK apple2</CODE></A>
 </H2>
 
 
@@ -5567,7 +5568,7 @@ jump to the actual branch target.</P>
 as argument and places this string into memory translated into screen codes.</P>
 
 
-<H2><A NAME="ss13.4">13.4</A> <A HREF="#toc13.4"><CODE>.MACPACK cbm</CODE></A>
+<H2><A NAME="ss13.4">13.4</A> <A HREF="#toc13.4"><CODE>.MACPACK atari</CODE></A>
 </H2>
 
 
@@ -5575,7 +5576,15 @@ as argument and places this string into memory translated into screen codes.</P>
 as argument and places this string into memory translated into screen codes.</P>
 
 
-<H2><A NAME="ss13.5">13.5</A> <A HREF="#toc13.5"><CODE>.MACPACK cpu</CODE></A>
+<H2><A NAME="ss13.5">13.5</A> <A HREF="#toc13.5"><CODE>.MACPACK cbm</CODE></A>
+</H2>
+
+
+<P>This macro package defines a macro named <CODE>scrcode</CODE>. It takes a string
+as argument and places this string into memory translated into screen codes.</P>
+
+
+<H2><A NAME="ss13.6">13.6</A> <A HREF="#toc13.6"><CODE>.MACPACK cpu</CODE></A>
 </H2>
 
 
@@ -5642,7 +5651,7 @@ bit. Using</P>
 CPUs (the latter two are upwards compatible to the 65SC02).</P>
 
 
-<H2><A NAME="ss13.6">13.6</A> <A HREF="#toc13.6"><CODE>.MACPACK module</CODE></A>
+<H2><A NAME="ss13.7">13.7</A> <A HREF="#toc13.7"><CODE>.MACPACK module</CODE></A>
 </H2>
 
 
