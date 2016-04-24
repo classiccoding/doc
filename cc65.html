@@ -9,7 +9,8 @@
 <H1>cc65 Users Guide</H1>
 
 <H2>
-<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2015-05-26
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A>,<BR>
+<A HREF="mailto:gregdk@users.sf.net">Greg King</A></H2>2016-04-22
 <HR>
 <EM>cc65 is a C compiler for 6502 targets. It supports several 6502 based home
 computers like the Commodore and Atari machines, but it is easily retargetable.</EM>
@@ -609,7 +610,7 @@ that you must not mix pointers to those functions with pointers to
 user-written, cdecl functions (the calling conventions are incompatible).
 
 </LI>
-<LI>    The <CODE>volatile</CODE> keyword doesn't have an effect. This is not as bad
+<LI>    The <CODE>volatile</CODE> keyword has almost no effect. That is not as bad
 as it sounds, since the 6502 has so few registers that it isn't
 possible to keep values in registers anyway.
 
@@ -633,7 +634,7 @@ file. The syntax is
 
 <BLOCKQUOTE><CODE>
 <PRE>
-        asm (&lt;string literal&gt;[, optional parameters]) ;
+        asm [optional volatile] (&lt;string literal&gt;[, optional parameters]) ;
         
 </PRE>
 </CODE></BLOCKQUOTE>
@@ -641,13 +642,13 @@ file. The syntax is
 or
 <BLOCKQUOTE><CODE>
 <PRE>
-        __asm__ (&lt;string literal&gt;[, optional parameters]) ;
+        __asm__ [optional volatile] (&lt;string literal&gt;[, optional parameters]) ;
         
 </PRE>
 </CODE></BLOCKQUOTE>
 
 
-The first form is in the user namespace and is disabled if the <CODE>-A</CODE>
+The first form is in the user namespace; and, is disabled if the <CODE>-A</CODE>
 switch is given.
 
 There is a whole section covering inline assembler statements,
@@ -835,6 +836,7 @@ size zero, even if it is initialized.
 </LI>
 </UL>
 </P>
+
 
 
 
@@ -1326,39 +1328,43 @@ syntax is</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        asm (&lt;string literal&gt;[, optional parameters]) ;
+        asm [optional volatile] (&lt;string literal&gt;[, optional parameters]) ;
 </PRE>
 </CODE></BLOCKQUOTE>
 
 or
 <BLOCKQUOTE><CODE>
 <PRE>
-        __asm__ (&lt;string literal&gt;[, optional parameters]) ;
+        __asm__ [optional volatile] (&lt;string literal&gt;[, optional parameters]) ;
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
 
-<P>The first form is in the user namespace and is disabled by <CODE>
+<P>The first form is in the user namespace; and, is disabled by <CODE>
 <A HREF="#option--standard">--standard</A></CODE> if the argument is not <CODE>cc65</CODE>.</P>
-<P>The asm statement may be used inside a function and on global file level. An
-inline assembler statement is a primary expression, so it may also be used as
-part of an expression. Please note however that the result of an expression
-containing just an inline assembler statement is always of type <CODE>void</CODE>.</P>
-<P>The contents of the string literal are preparsed by the compiler and inserted
-into the generated assembly output, so that the can be further processed by
-the backend and especially the optimizer. For this reason, the compiler does
-only allow regular 6502 opcodes to be used with the inline assembler. Pseudo
-instructions (like <CODE>.import</CODE>, <CODE>.byte</CODE> and so on) are <EM>not</EM> allowed,
+<P>The <CODE>asm</CODE> statement can be used only inside a function.  Please note that
+the result of an inline assembler expression is always of type <CODE>void</CODE>.</P>
+<P>The contents of the string literal are preparsed by the compiler; and, inserted
+into the generated assembly output, so that it can be processed further by
+the backend -- and, especially the optimizer. For that reason, the compiler does
+allow only regular 6502 opcodes to be used with the inline assembler. Pseudo
+instructions (like <CODE>.import</CODE>, <CODE>.byte</CODE>, and so on) are <EM>not</EM> allowed,
 even if the ca65 assembler (which is used to translate the generated assembler
-code) would accept them. The builtin inline assembler is not a replacement for
-the full blown macro assembler which comes with the compiler.</P>
+code) would accept them. The built-in inline assembler is not a replacement for
+the full-blown macro assembler which comes with the compiler.</P>
 <P>Note: Inline assembler statements are subject to all optimizations done by the
-compiler. There is currently no way to protect an inline assembler statement
-from being moved or removed completely by the optimizer. If in doubt, check
-the generated assembler output, or disable optimizations.</P>
+compiler. There currently is no way to protect an inline assembler statement
+-- alone -- from being moved or removed completely by the optimizer. If in
+doubt, check the generated assembler output; or, disable optimizations (for
+that function).</P>
+<P>As a shortcut, you can put the <CODE>volatile</CODE> qualifier in your <CODE>asm</CODE>
+statements.  It will disable optimization for the functions in which those
+<CODE>asm volatile</CODE> statements sit.  The effect is the same as though you put
+&lt;/#pragma optimize(push, off)/ above those functions, and &lt;/#pragma
+optimize(pop)/ below those functions.</P>
 <P>The string literal may contain format specifiers from the following list. For
 each format specifier, an argument is expected which is inserted instead of
-the format specifier before passing the assembly code line to the backend.</P>
+the format specifier, before passing the assembly code line to the backend.</P>
 <P>
 <UL>
 <LI><CODE>%b</CODE> - Numerical 8-bit value</LI>
@@ -1372,9 +1378,9 @@ the format specifier before passing the assembly code line to the backend.</P>
 </UL>
 </P>
 
-<P>Using these format specifiers, you can access C <CODE>#defines</CODE>, variables or
+<P>Using those format specifiers, you can access C <CODE>#defines</CODE>, variables, or
 similar stuff from the inline assembler. For example, to load the value of
-a C <CODE>#define</CODE> into the Y register, one would use</P>
+a C <CODE>#define</CODE> into the Y index register, one would use</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -1399,11 +1405,11 @@ a C <CODE>#define</CODE> into the Y register, one would use</P>
 </CODE></BLOCKQUOTE>
 </P>
 <P>The next example shows how to use global variables to exchange data between C
-an assembler and how to handle assembler jumps:</P>
+and assembler; and, how to handle assembler jumps:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        unsigned char globalSubA, globalSubB, globalSubResult;
+        static unsigned char globalSubA, globalSubB, globalSubResult;
 
         /* return a-b, return 255 if b>a */
         unsigned char sub (unsigned char a, unsigned char b)
@@ -1423,20 +1429,20 @@ an assembler and how to handle assembler jumps:</P>
 </CODE></BLOCKQUOTE>
 </P>
 
-<P>Arrays can also be accessed:</P>
+<P>Arrays also can be accessed:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        unsigned char globalSquareTable[] = {
+        static const unsigned char globalSquareTable[] = {
             0, 1, 4, 9, 16, 25, 36, 49, 64, 81,
             100, 121, 144, 169, 196, 225
         };
-        unsigned char globalSquareA, globalSquareResult;
+        static unsigned char globalSquareA, globalSquareResult;
 
         /* return a*a for a&lt;16, else 255 */
         unsigned char square (unsigned char a)
         {
-            if (a>15){
+            if (a > 15) {
                 return 255;
             }
             globalSquareA = a;
@@ -1450,12 +1456,13 @@ an assembler and how to handle assembler jumps:</P>
 </P>
 
 <P>Note: Do not embed the assembler labels that are used as names of global
-variables or functions into your asm statements. Code like this</P>
+variables or functions into your <CODE>asm</CODE> statements. Code such as this:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
         int foo;
-        int bar () { return 1; }
+        int bar (void) { return 1; }
+        ...
         __asm__ ("lda _foo");           /* DON'T DO THAT! */
         ...
         __asm__ ("jsr _bar");           /* DON'T DO THAT EITHER! */
@@ -1463,8 +1470,8 @@ variables or functions into your asm statements. Code like this</P>
 </CODE></BLOCKQUOTE>
 </P>
 
-<P>may stop working if the way, the compiler generates these names is changed in
-a future version. Instead use the format specifiers from the table above:</P>
+<P>might stop working if the way that the compiler generates those names is changed in
+a future version. Instead, use the format specifiers from the table above:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -1474,6 +1481,7 @@ a future version. Instead use the format specifiers from the table above:</P>
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
+
 
 
 
