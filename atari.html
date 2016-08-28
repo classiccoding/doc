@@ -41,6 +41,7 @@ compiler.</EM>
 <UL>
 <LI><A NAME="toc5.1">5.1</A> <A HREF="atari.html#ss5.1">Atari specific functions</A>
 <LI><A NAME="toc5.2">5.2</A> <A HREF="atari.html#ss5.2">Hardware access</A>
+<LI><A NAME="toc5.3">5.3</A> <A HREF="atari.html#ss5.3">Character mapping</A>
 </UL>
 <P>
 <H2><A NAME="toc6">6.</A> <A HREF="atari.html#s6">Loadable drivers</A></H2>
@@ -402,6 +403,56 @@ for the declaration of the structure.</P>
 </P>
 
 
+
+<H2><A NAME="ss5.3">5.3</A> <A HREF="#toc5.3">Character mapping</A>
+</H2>
+
+
+<P>The Atari has two representations for characters:
+<OL>
+<LI> ATASCII is character mapping which is similar to ASCII and used
+by the CIO system of the OS. This is the default mapping of cc65 when
+producing code for the atari target.</LI>
+<LI> The internal/screen mapping represents the real value of the
+screen ram when showing a character.</LI>
+</OL>
+</P>
+<P>For direct memory access (simplicity and speed) enabling the internal
+mapping can be useful. This can be achieved by including the
+"<CODE>atari_screen_charmap.h</CODE>" header.</P>
+<P>A word of caution: Since the <CODE>0x00</CODE> character has to be mapped in an
+incompatible way to the C-standard, the usage of string functions in
+conjunction with internal character mapped strings delivers unexpected
+results regarding the string length. The end of strings are detected where
+you may not expect them (to early or (much) to late). Internal mapped
+strings typically support the "<CODE>mem...()</CODE>" functions.</P>
+<P><EM>For assembler sources the macro "<CODE>scrcode</CODE>" from the "<CODE>atari.mac</CODE>"
+package delivers the same feature.</EM></P>
+<P>You can switch back to the ATASCII mapping by including
+"<CODE>atari_atascii_charmap.h</CODE>".</P>
+<P>A final note: Since cc65 has currently some difficulties with string merging
+under different mappings, defining remapped strings works only flawlessly
+with static array initialization:</P>
+<P>
+<PRE>
+#include &lt;atari\_screen\_charmap.h&gt;
+char pcScreenMappingString[] = "Hello Atari!";
+
+#include &lt;atari_atascii_charmap.h&gt;
+char pcAtasciiMappingString[] = "Hello Atari!";
+</PRE>
+</P>
+<P>delivers correct results, while</P>
+<P>
+<PRE>
+#include &lt;atari_screen_charmap.h&gt;
+char* pcScreenMappingString = "Hello Atari!";
+
+#include &lt;atari_atascii_charmap.h&gt;
+char* pcAtasciiMappingString = "Hello Atari!";
+</PRE>
+</P>
+<P>does not.</P>
 
 
 <H2><A NAME="s6">6.</A> <A HREF="#toc6">Loadable drivers</A></H2>
