@@ -39,9 +39,10 @@ used as a standalone product.</EM>
 <LI><A NAME="toc4.1">4.1</A> <A HREF="ca65.html#ss4.1">Assembler syntax</A>
 <LI><A NAME="toc4.2">4.2</A> <A HREF="ca65.html#ss4.2">65816 mode</A>
 <LI><A NAME="toc4.3">4.3</A> <A HREF="ca65.html#ss4.3">6502X mode</A>
-<LI><A NAME="toc4.4">4.4</A> <A HREF="ca65.html#ss4.4">sweet16 mode</A>
-<LI><A NAME="toc4.5">4.5</A> <A HREF="ca65.html#ss4.5">Number format</A>
-<LI><A NAME="toc4.6">4.6</A> <A HREF="ca65.html#ss4.6">Conditional assembly</A>
+<LI><A NAME="toc4.4">4.4</A> <A HREF="ca65.html#ss4.4">4510 mode</A>
+<LI><A NAME="toc4.5">4.5</A> <A HREF="ca65.html#ss4.5">sweet16 mode</A>
+<LI><A NAME="toc4.6">4.6</A> <A HREF="ca65.html#ss4.6">Number format</A>
+<LI><A NAME="toc4.7">4.7</A> <A HREF="ca65.html#ss4.7">Conditional assembly</A>
 </UL>
 <P>
 <H2><A NAME="toc5">5.</A> <A HREF="ca65.html#s5">Expressions</A></H2>
@@ -441,7 +442,7 @@ additional directories. See also the section about
 <DT><B><CODE>--cpu type</CODE></B><DD>
 <P>Set the default for the CPU type. The option takes a parameter, which
 may be one of</P>
-<P>6502, 65SC02, 65C02, 65816, sweet16, HuC6280</P>
+<P>6502, 6502X, 65SC02, 65C02, 65816, sweet16, HuC6280, 4510</P>
 
 <P>
 <A NAME="option-create-dep"></A> </P>
@@ -721,18 +722,16 @@ it is ignored).</P>
 <P>In 65816 mode, several aliases are accepted, in addition to the official
 mnemonics:</P>
 <P>
-<BLOCKQUOTE><CODE>
-<PRE>
-CPA is an alias for CMP
-DEA is an alias for DEC A
-INA is an alias for INC A
-SWA is an alias for XBA
-TAD is an alias for TCD
-TAS is an alias for TCS
-TDA is an alias for TDC
-TSA is an alias for TSC
-</PRE>
-</CODE></BLOCKQUOTE>
+<UL>
+<LI><CODE>CPA</CODE> is an alias for <CODE>CMP</CODE></LI>
+<LI><CODE>DEA</CODE> is an alias for <CODE>DEC A</CODE></LI>
+<LI><CODE>INA</CODE> is an alias for <CODE>INC A</CODE></LI>
+<LI><CODE>SWA</CODE> is an alias for <CODE>XBA</CODE></LI>
+<LI><CODE>TAD</CODE> is an alias for <CODE>TCD</CODE></LI>
+<LI><CODE>TAS</CODE> is an alias for <CODE>TCS</CODE></LI>
+<LI><CODE>TDA</CODE> is an alias for <CODE>TDC</CODE></LI>
+<LI><CODE>TSA</CODE> is an alias for <CODE>TSC</CODE></LI>
+</UL>
 </P>
 
 
@@ -766,8 +765,30 @@ from the mentioned web page, for more information, see there.</P>
 </P>
 
 
+<H2><A NAME="ss4.4">4.4</A> <A HREF="#toc4.4">4510 mode</A>
+</H2>
 
-<H2><A NAME="sweet16-mode"></A> <A NAME="ss4.4">4.4</A> <A HREF="#toc4.4">sweet16 mode</A>
+
+<P>The 4510 is a microcontroller that is the core of the Commodore C65 aka C64DX.
+It contains among other functions a slightly modified 65CE02/4502 CPU, to allow
+address mapping for 20 bits of address space (1 megabyte addressable area).
+As compared to the description of the CPU in the
+<A HREF="http://www.zimmers.net/anonftp/pub/cbm/c65/c65manualupdated.txt.gz">C65 System Specification</A>
+<A HREF="https://raw.githubusercontent.com/MEGA65/c65-specifications/master/c65manualupdated.txt">(updated version)</A> uses these changes:
+<UL>
+<LI><CODE>LDA (d,SP),Y</CODE> may also be written as <CODE>LDA (d,S),Y</CODE>
+(matching the 65816 notataion).</LI>
+<LI>All branch instruction allow now 16 bit offsets. To use a 16 bit
+branch you have to prefix these with an "L" (e.g. "<CODE>LBNE</CODE>" instead of
+"<CODE>BNE</CODE>"). This might change at a later implementation of the assembler.</LI>
+</UL>
+
+For more information about the Commodore C65/C64DX and the 4510 CPU, see
+<A HREF="http://www.zimmers.net/anonftp/pub/cbm/c65/">http://www.zimmers.net/anonftp/pub/cbm/c65/</A> and
+<A HREF="https://en.wikipedia.org/wiki/Commodore_65">Wikipedia</A>.</P>
+
+
+<H2><A NAME="sweet16-mode"></A> <A NAME="ss4.5">4.5</A> <A HREF="#toc4.5">sweet16 mode</A>
 </H2>
 
 
@@ -795,7 +816,7 @@ nor does it call the interpreter. All this must be done by your program. Apple
 <A HREF="http://www.6502.org/source/interpreters/sweet16.htm">http://www.6502.org/source/interpreters/sweet16.htm</A>.</P>
 
 
-<H2><A NAME="ss4.5">4.5</A> <A HREF="#toc4.5">Number format</A>
+<H2><A NAME="ss4.6">4.6</A> <A HREF="#toc4.6">Number format</A>
 </H2>
 
 
@@ -805,7 +826,7 @@ denotes a binary value, and a bare number is interpreted as a decimal. There
 are currently no octal values and no floats.</P>
 
 
-<H2><A NAME="ss4.6">4.6</A> <A HREF="#toc4.6">Conditional assembly</A>
+<H2><A NAME="ss4.7">4.7</A> <A HREF="#toc4.7">Conditional assembly</A>
 </H2>
 
 
