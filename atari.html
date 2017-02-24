@@ -41,7 +41,8 @@ compiler.</EM>
 <UL>
 <LI><A NAME="toc5.1">5.1</A> <A HREF="atari.html#ss5.1">Atari specific functions</A>
 <LI><A NAME="toc5.2">5.2</A> <A HREF="atari.html#ss5.2">Hardware access</A>
-<LI><A NAME="toc5.3">5.3</A> <A HREF="atari.html#ss5.3">Character mapping</A>
+<LI><A NAME="toc5.3">5.3</A> <A HREF="atari.html#ss5.3">Display lists</A>
+<LI><A NAME="toc5.4">5.4</A> <A HREF="atari.html#ss5.4">Character mapping</A>
 </UL>
 <P>
 <H2><A NAME="toc6">6.</A> <A HREF="atari.html#s6">Loadable drivers</A></H2>
@@ -403,8 +404,51 @@ for the declaration of the structure.</P>
 </P>
 
 
+<H2><A NAME="ss5.3">5.3</A> <A HREF="#toc5.3">Display lists</A>
+</H2>
 
-<H2><A NAME="ss5.3">5.3</A> <A HREF="#toc5.3">Character mapping</A>
+
+<P>A major feature of the Atari graphics chip "ANTIC" is to
+process instructions for the display generation.
+cc65 supports constructing these display lists by offering defines
+for the instructions. In conjunction with the "void"-variable extension
+of cc65, display lists can be created quite comfortable:</P>
+<P>
+<PRE>
+...
+unsigned char ScreenMemory[100];
+
+void DisplayList =
+{
+        DL_BLK8,
+        DL_BLK8,
+        DL_BLK8,
+        DL_LMS(DL_CHR20x8x2),
+        ScreenMemory,
+        DL_CHR20x8x2,
+        DL_CHR20x8x2,
+        DL_CHR20x8x2,
+        DL_BLK4,
+        DL_CHR20x8x2,
+        DL_JVB
+};
+...
+POKEW(560,(unsigned int)&amp;DisplayList);              // SDLSTL
+...
+</PRE>
+</P>
+<P>Please inspect the <CODE>_antic.h</CODE> header file to detemine the supported
+instruction names. Modifiers on instructions can be nested without need
+for an order:</P>
+<P><CODE>DL_LMS(DL_HSCROL(DL_VSCROL(DL_DLI(DL_MAP80x4x2))))</CODE></P>
+<P>Please mind that ANTIC has memory alignment requirements for "player
+missile graphics"-data, font data, display lists and screen memory. Creation
+of a special linker configuration with appropriate aligned segments and
+switching to that segment in the c-code is usually neccessary. A more memory
+hungry solution consists in using the "<CODE>posix_memalign()</CODE>" function in
+conjunction with copying your data to the allocated memory.</P>
+
+<H2><A NAME="ss5.4">5.4</A> <A HREF="#toc5.4">Character mapping</A>
 </H2>
 
 
