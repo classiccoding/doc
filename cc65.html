@@ -41,22 +41,24 @@ computers like the Commodore and Atari machines, but it is easily retargetable.<
 <H2><A NAME="toc7">7.</A> <A HREF="cc65.html#s7">#pragmas</A></H2>
 
 <UL>
-<LI><A NAME="toc7.1">7.1</A> <A HREF="cc65.html#ss7.1"><CODE>#pragma bss-name ([push,] &lt;name&gt;)</CODE></A>
-<LI><A NAME="toc7.2">7.2</A> <A HREF="cc65.html#ss7.2"><CODE>#pragma charmap (&lt;index&gt;, &lt;code&gt;)</CODE></A>
-<LI><A NAME="toc7.3">7.3</A> <A HREF="cc65.html#ss7.3"><CODE>#pragma check-stack ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.4">7.4</A> <A HREF="cc65.html#ss7.4"><CODE>#pragma code-name ([push,] &lt;name&gt;)</CODE></A>
-<LI><A NAME="toc7.5">7.5</A> <A HREF="cc65.html#ss7.5"><CODE>#pragma codesize ([push,] &lt;int&gt;)</CODE></A>
-<LI><A NAME="toc7.6">7.6</A> <A HREF="cc65.html#ss7.6"><CODE>#pragma data-name ([push,] &lt;name&gt;)</CODE></A>
-<LI><A NAME="toc7.7">7.7</A> <A HREF="cc65.html#ss7.7"><CODE>#pragma local-strings ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.8">7.8</A> <A HREF="cc65.html#ss7.8"><CODE>#pragma optimize ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.9">7.9</A> <A HREF="cc65.html#ss7.9"><CODE>#pragma rodata-name ([push,] &lt;name&gt;)</CODE></A>
-<LI><A NAME="toc7.10">7.10</A> <A HREF="cc65.html#ss7.10"><CODE>#pragma regvaraddr ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.11">7.11</A> <A HREF="cc65.html#ss7.11"><CODE>#pragma register-vars ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.12">7.12</A> <A HREF="cc65.html#ss7.12"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.13">7.13</A> <A HREF="cc65.html#ss7.13"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.14">7.14</A> <A HREF="cc65.html#ss7.14"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
-<LI><A NAME="toc7.15">7.15</A> <A HREF="cc65.html#ss7.15"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.16">7.16</A> <A HREF="cc65.html#ss7.16"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
+<LI><A NAME="toc7.1">7.1</A> <A HREF="cc65.html#ss7.1"><CODE>#pragma allow-eager-inline ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.2">7.2</A> <A HREF="cc65.html#ss7.2"><CODE>#pragma bss-name ([push,] &lt;name&gt;)</CODE></A>
+<LI><A NAME="toc7.3">7.3</A> <A HREF="cc65.html#ss7.3"><CODE>#pragma charmap (&lt;index&gt;, &lt;code&gt;)</CODE></A>
+<LI><A NAME="toc7.4">7.4</A> <A HREF="cc65.html#ss7.4"><CODE>#pragma check-stack ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.5">7.5</A> <A HREF="cc65.html#ss7.5"><CODE>#pragma code-name ([push,] &lt;name&gt;)</CODE></A>
+<LI><A NAME="toc7.6">7.6</A> <A HREF="cc65.html#ss7.6"><CODE>#pragma codesize ([push,] &lt;int&gt;)</CODE></A>
+<LI><A NAME="toc7.7">7.7</A> <A HREF="cc65.html#ss7.7"><CODE>#pragma data-name ([push,] &lt;name&gt;)</CODE></A>
+<LI><A NAME="toc7.8">7.8</A> <A HREF="cc65.html#ss7.8"><CODE>#pragma inline-stdfuncs ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.9">7.9</A> <A HREF="cc65.html#ss7.9"><CODE>#pragma local-strings ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.10">7.10</A> <A HREF="cc65.html#ss7.10"><CODE>#pragma optimize ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.11">7.11</A> <A HREF="cc65.html#ss7.11"><CODE>#pragma rodata-name ([push,] &lt;name&gt;)</CODE></A>
+<LI><A NAME="toc7.12">7.12</A> <A HREF="cc65.html#ss7.12"><CODE>#pragma regvaraddr ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.13">7.13</A> <A HREF="cc65.html#ss7.13"><CODE>#pragma register-vars ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.14">7.14</A> <A HREF="cc65.html#ss7.14"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.15">7.15</A> <A HREF="cc65.html#ss7.15"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.16">7.16</A> <A HREF="cc65.html#ss7.16"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
+<LI><A NAME="toc7.17">7.17</A> <A HREF="cc65.html#ss7.17"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.18">7.18</A> <A HREF="cc65.html#ss7.18"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
 </UL>
 <P>
 <H2><A NAME="toc8">8.</A> <A HREF="cc65.html#s8">Register variables</A></H2>
@@ -120,7 +122,7 @@ Short options:
   -O                            Optimize code
   -Oi                           Optimize code, inline more code
   -Or                           Enable register variables
-  -Os                           Inline some known functions
+  -Os                           Inline some standard functions
   -T                            Include source as comment
   -V                            Print the compiler version number
   -W warning[,...]              Suppress warnings
@@ -150,9 +152,11 @@ Long options:
   --debug-opt name              Debug optimization steps
   --dep-target target           Use this dependency target
   --disable-opt name            Disable an optimization step
+  --eagerly-inline-funcs        Eagerly inline some known functions
   --enable-opt name             Enable an optimization step
   --help                        Help (this text)
   --include-dir dir             Set an include directory search path
+  --inline-stdfuncs             Inline some standard functions
   --list-opt-steps              List all optimizer steps and exit
   --list-warnings               List available warning types for -W
   --local-strings               Emit string literals immediately
@@ -273,9 +277,51 @@ is defined to the value "1".</P>
 generated assembler code. This will cause the assembler to include all
 symbols in a special section in the object file.</P>
 
+<P>
+<A NAME="option-eagerly-inline-funcs"></A> </P>
+<DT><B><CODE>--eagerly-inline-funcs</CODE></B><DD>
+<P>Have the compiler eagerly inline these functions from the C library:
+<UL>
+<LI><CODE>memcpy()</CODE></LI>
+<LI><CODE>memset()</CODE></LI>
+<LI><CODE>strcmp()</CODE></LI>
+<LI><CODE>strcpy()</CODE></LI>
+<LI><CODE>strlen()</CODE></LI>
+<LI>most of the functions declared in <CODE>&lt;ctype.h&gt;</CODE></LI>
+</UL>
+</P>
+<P>Note: This has two consequences:
+<UL>
+<LI>You may not use names of standard C functions for your own functions.
+If you do that, your program is not standard-compliant anyway; but,
+using <CODE>--eagerly-inline-funcs</CODE> actually will break things.
+
+</LI>
+<LI>The inlined string and memory functions will not handle strings or
+memory areas larger than 255 bytes.  Similarly, the inlined <CODE>is..()</CODE>
+functions will not work with values outside the char. range (such as
+<CODE>EOF</CODE>).
+
+</LI>
+</UL>
+</P>
+<P><CODE>--eagerly-inline-funcs</CODE> implies the <CODE>
+<A HREF="#option-inline-stdfuncs">--inline-stdfuncs</A></CODE> command line option.</P>
+<P>See also <CODE>
+<A HREF="#pragma-allow-eager-inline">#pragma&nbsp;allow-eager-inline</A></CODE>.</P>
+
 
 <DT><B><CODE>-h, --help</CODE></B><DD>
 <P>Print the short option summary shown above.</P>
+
+<P>
+<A NAME="option-inline-stdfuncs"></A> </P>
+<DT><B><CODE>--inline-stdfuncs</CODE></B><DD>
+<P>Allow the compiler to inline some standard functions from the C library like
+strlen.  This will not only remove the overhead for a function call, but will
+make the code visible for the optimizer.  See also the <CODE>
+<A HREF="#option-O">-Os</A></CODE> command line option and <CODE>
+<A HREF="#pragma-inline-stdfuncs">#pragma&nbsp;inline-stdfuncs</A></CODE>.</P>
 
 <P>
 <A NAME="option-list-warnings"></A> </P>
@@ -484,25 +530,13 @@ variables may be placed in registers (which are actually zero page
 locations). See also the <CODE>
 <A HREF="#option-register-vars">--register-vars</A></CODE> command line option, and the 
 <A HREF="#register-vars">discussion of register variables</A> below.</P>
-<P>Using <CODE>-Os</CODE> will force the compiler to inline some known functions from
-the C library like strlen. Note: This has two consequences:</P>
-<P>
-<UL>
-<LI>You may not use names of standard C functions in your own code. If you
-do that, your program is not standard compliant anyway, but using
-<CODE>-Os</CODE> will actually break things.
-
-</LI>
-<LI>The inlined string and memory functions will not handle strings or
-memory areas larger than 255 bytes. Similarly, the inlined <CODE>is..()</CODE>
-functions will not work with values outside the char. range (such as
-<CODE>EOF</CODE>).
-
-</LI>
-</UL>
-</P>
+<P>Using <CODE>-Os</CODE> will allow the compiler to inline some standard functions
+from the C library like strlen.  This will not only remove the overhead
+for a function call, but will make the code visible for the optimizer.
+See also <CODE>
+<A HREF="#option-inline-stdfuncs">--inline-stdfuncs</A></CODE>.</P>
 <P>It is possible to concatenate the modifiers for <CODE>-O</CODE>. For example, to
-enable register variables and inlining of known functions, you may use
+enable register variables and inlining of standard functions, you may use
 <CODE>-Ors</CODE>.</P>
 
 
@@ -560,6 +594,7 @@ control this setting, for smaller pieces of code, from within your sources.</P>
 
 
 
+
 <H2><A NAME="s3">3.</A> <A HREF="#toc3">Input and output</A></H2>
 
 
@@ -599,22 +634,22 @@ option. Its use for maximum standards compatibility is advised.</P>
 and the one defined by the ISO standard:</P>
 <P>
 <UL>
-<LI>    The datatypes "float" and "double" are not available.
+<LI>  The datatypes "float" and "double" are not available.
 
 </LI>
-<LI>    C Functions may not return structs (or unions), and structs may not
+<LI>  C Functions may not return structs (or unions), and structs may not
 be passed as parameters by value. However, struct assignment *is*
 possible.
 
 </LI>
-<LI>    Most of the C library is available with only the fastcall calling
+<LI>  Most of the C library is available with only the fastcall calling
 convention (
 <A HREF="#extension-fastcall">see below</A>).  It means
 that you must not mix pointers to those functions with pointers to
 user-written, cdecl functions (the calling conventions are incompatible).
 
 </LI>
-<LI>    The <CODE>volatile</CODE> keyword has almost no effect. That is not as bad
+<LI>  The <CODE>volatile</CODE> keyword has almost no effect. That is not as bad
 as it sounds, since the 6502 has so few registers that it isn't
 possible to keep values in registers anyway.
 
@@ -633,7 +668,7 @@ mind, you should be able to write fairly portable code.</P>
 <P>This cc65 version has some extensions to the ISO C standard.</P>
 <P>
 <UL>
-<LI>    The compiler allows to insert assembler statements into the output
+<LI>  The compiler allows to insert assembler statements into the output
 file. The syntax is
 
 <BLOCKQUOTE><CODE>
@@ -661,7 +696,7 @@ There is a whole section covering inline assembler statements,
 <P>
 <A NAME="extension-fastcall"></A> </P>
 </LI>
-<LI>    The normal calling convention -- for non-variadic functions -- is
+<LI>  The normal calling convention -- for non-variadic functions -- is
 named "fastcall". The syntax for a function declaration that
 <EM>explicitly</EM> uses fastcall is
 
@@ -694,7 +729,7 @@ therefore be disabled with the <CODE>
 
 For functions that are <CODE>fastcall</CODE>, the rightmost parameter is not
 pushed on the stack but left in the primary register when the function
-is called. That significantly reduces the cost of calling those functions.<BR><BR>
+is called. That significantly reduces the cost of calling those functions.
 
 
 </LI>
@@ -733,11 +768,11 @@ and therefore, can be disabled with the <CODE>
 For functions that are <CODE>cdecl</CODE>, the rightmost parameter is pushed
 onto the stack before the function is called. That increases the cost
 of calling those functions, especially when they are called from many
-places.<BR><BR>
+places.
 
 
 </LI>
-<LI>    There are two pseudo variables named <CODE>__AX__</CODE> and <CODE>__EAX__</CODE>.
+<LI>  There are two pseudo variables named <CODE>__AX__</CODE> and <CODE>__EAX__</CODE>.
 Both refer to the primary register that is used by the compiler to
 evaluate expressions or return function results. <CODE>__AX__</CODE> is of
 type <CODE>unsigned int</CODE> and <CODE>__EAX__</CODE> of type <CODE>long unsigned int</CODE>
@@ -761,7 +796,7 @@ will give the high byte of any unsigned value.
 
 
 </LI>
-<LI>    Inside a function, the identifier <CODE>__func__</CODE> gives the name of the
+<LI>  Inside a function, the identifier <CODE>__func__</CODE> gives the name of the
 current function as a string. Outside of functions, <CODE>__func__</CODE> is
 undefined.
 Example:
@@ -920,6 +955,10 @@ defined as <CODE>0x02E0</CODE>.</P>
 <P>This macro expands to the date of translation of the preprocessing
 translation unit in the form "Mmm dd yyyy".</P>
 
+<DT><B><CODE>__EAGERLY_INLINE_FUNCS__</CODE></B><DD>
+<P>Is defined if the compiler was called with the <CODE>
+<A HREF="#option-eagerly-inline-funcs">--eagerly-inline-funcs</A></CODE> command line option.</P>
+
 <DT><B><CODE>__FILE__</CODE></B><DD>
 <P>This macro expands to a string containing the name of the C source file.</P>
 
@@ -988,6 +1027,7 @@ translation unit in the form "hh:mm:ss".</P>
 </P>
 
 
+
 <H2><A NAME="pragmas"></A> <A NAME="s7">7.</A> <A HREF="#toc7">#pragmas</A></H2>
 
 
@@ -997,7 +1037,22 @@ If the first parameter is <CODE>push</CODE>, the old value is saved onto a stack
 before changing it. The value may later be restored by using the <CODE>pop</CODE>
 parameter with the <CODE>#pragma</CODE>.</P>
 
-<H2><A NAME="pragma-bss-name"></A> <A NAME="ss7.1">7.1</A> <A HREF="#toc7.1"><CODE>#pragma bss-name ([push,] &lt;name&gt;)</CODE></A>
+
+<H2><A NAME="pragma-allow-eager-inline"></A> <A NAME="ss7.1">7.1</A> <A HREF="#toc7.1"><CODE>#pragma allow-eager-inline ([push,] on|off)</CODE></A>
+</H2>
+
+
+<P>Allow eager inlining of known functions.  If the argument is "off", eager
+inlining is disabled, otherwise it is enabled. Please note that (in contrast
+to the <CODE>
+<A HREF="#option-eagerly-inline-funcs">--eagerly-inline-funcs</A></CODE>
+command line option) this pragma does not imply the <CODE>
+<A HREF="#option-inline-stdfuncs">--inline-stdfuncs</A></CODE> command line option.  Rather it marks code to be safe for
+eager inlining of known functions if inlining of standard functions is enabled.</P>
+<P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
+
+
+<H2><A NAME="pragma-bss-name"></A> <A NAME="ss7.2">7.2</A> <A HREF="#toc7.2"><CODE>#pragma bss-name ([push,] &lt;name&gt;)</CODE></A>
 </H2>
 
 
@@ -1021,7 +1076,7 @@ uninitialized variables do not have the value zero.</P>
 </P>
 
 
-<H2><A NAME="pragma-charmap"></A> <A NAME="ss7.2">7.2</A> <A HREF="#toc7.2"><CODE>#pragma charmap (&lt;index&gt;, &lt;code&gt;)</CODE></A>
+<H2><A NAME="pragma-charmap"></A> <A NAME="ss7.3">7.3</A> <A HREF="#toc7.3"><CODE>#pragma charmap (&lt;index&gt;, &lt;code&gt;)</CODE></A>
 </H2>
 
 
@@ -1063,7 +1118,7 @@ if you are certain that you know what you are doing (see <CODE>
 </P>
 
 
-<H2><A NAME="pragma-check-stack"></A> <A NAME="ss7.3">7.3</A> <A HREF="#toc7.3"><CODE>#pragma check-stack ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-check-stack"></A> <A NAME="ss7.4">7.4</A> <A HREF="#toc7.4"><CODE>#pragma check-stack ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1076,7 +1131,8 @@ detected, the program is aborted.</P>
 they're enabled.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
-<H2><A NAME="pragma-code-name"></A> <A NAME="ss7.4">7.4</A> <A HREF="#toc7.4"><CODE>#pragma code-name ([push,] &lt;name&gt;)</CODE></A>
+
+<H2><A NAME="pragma-code-name"></A> <A NAME="ss7.5">7.5</A> <A HREF="#toc7.5"><CODE>#pragma code-name ([push,] &lt;name&gt;)</CODE></A>
 </H2>
 
 
@@ -1097,7 +1153,7 @@ configuration file.</P>
 </P>
 
 
-<H2><A NAME="pragma-codesize"></A> <A NAME="ss7.5">7.5</A> <A HREF="#toc7.5"><CODE>#pragma codesize ([push,] &lt;int&gt;)</CODE></A>
+<H2><A NAME="pragma-codesize"></A> <A NAME="ss7.6">7.6</A> <A HREF="#toc7.6"><CODE>#pragma codesize ([push,] &lt;int&gt;)</CODE></A>
 </H2>
 
 
@@ -1108,7 +1164,7 @@ generation and optimization phase. It gives the allowed size increase factor
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-data-name"></A> <A NAME="ss7.6">7.6</A> <A HREF="#toc7.6"><CODE>#pragma data-name ([push,] &lt;name&gt;)</CODE></A>
+<H2><A NAME="pragma-data-name"></A> <A NAME="ss7.7">7.7</A> <A HREF="#toc7.7"><CODE>#pragma data-name ([push,] &lt;name&gt;)</CODE></A>
 </H2>
 
 
@@ -1129,7 +1185,19 @@ configuration file.</P>
 </P>
 
 
-<H2><A NAME="pragma-local-strings"></A> <A NAME="ss7.7">7.7</A> <A HREF="#toc7.7"><CODE>#pragma local-strings ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-inline-stdfuncs"></A> <A NAME="ss7.8">7.8</A> <A HREF="#toc7.8"><CODE>#pragma inline-stdfuncs ([push,] on|off)</CODE></A>
+</H2>
+
+
+<P>Allow the compiler to inline some standard functions from the C library like
+strlen.  If the argument is "off", inlining is disabled, otherwise it is enabled.</P>
+<P>See also the the <CODE>
+<A HREF="#option-inline-stdfuncs">--inline-stdfuncs</A></CODE>
+command line option.</P>
+<P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
+
+
+<H2><A NAME="pragma-local-strings"></A> <A NAME="ss7.9">7.9</A> <A HREF="#toc7.9"><CODE>#pragma local-strings ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1144,7 +1212,7 @@ or rodata segment, but cannot be merged. When inactive, string literals are
 remembered and output as a whole when translation is finished.</P>
 
 
-<H2><A NAME="pragma-optimize"></A> <A NAME="ss7.8">7.8</A> <A HREF="#toc7.8"><CODE>#pragma optimize ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-optimize"></A> <A NAME="ss7.10">7.10</A> <A HREF="#toc7.10"><CODE>#pragma optimize ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1159,7 +1227,7 @@ determine if the generated code is optimized or not.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-rodata-name"></A> <A NAME="ss7.9">7.9</A> <A HREF="#toc7.9"><CODE>#pragma rodata-name ([push,] &lt;name&gt;)</CODE></A>
+<H2><A NAME="pragma-rodata-name"></A> <A NAME="ss7.11">7.11</A> <A HREF="#toc7.11"><CODE>#pragma rodata-name ([push,] &lt;name&gt;)</CODE></A>
 </H2>
 
 
@@ -1180,7 +1248,7 @@ configuration file.</P>
 </P>
 
 
-<H2><A NAME="pragma-regvaraddr"></A> <A NAME="ss7.10">7.10</A> <A HREF="#toc7.10"><CODE>#pragma regvaraddr ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-regvaraddr"></A> <A NAME="ss7.12">7.12</A> <A HREF="#toc7.12"><CODE>#pragma regvaraddr ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1207,7 +1275,7 @@ register variables. So be careful with this #pragma.</P>
 </P>
 
 
-<H2><A NAME="pragma-register-vars"></A> <A NAME="ss7.11">7.11</A> <A HREF="#toc7.11"><CODE>#pragma register-vars ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-register-vars"></A> <A NAME="ss7.13">7.13</A> <A HREF="#toc7.13"><CODE>#pragma register-vars ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1218,7 +1286,7 @@ variables are explained in more detail in
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-signed-chars"></A> <A NAME="ss7.12">7.12</A> <A HREF="#toc7.12"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-signed-chars"></A> <A NAME="ss7.14">7.14</A> <A HREF="#toc7.14"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1230,7 +1298,7 @@ better code. This default may be overridden by the <CODE>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-static-locals"></A> <A NAME="ss7.13">7.13</A> <A HREF="#toc7.13"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-static-locals"></A> <A NAME="ss7.15">7.15</A> <A HREF="#toc7.15"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1242,7 +1310,7 @@ most cases faster, but non-reentrant code.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-warn"></A> <A NAME="ss7.14">7.14</A> <A HREF="#toc7.14"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
+<H2><A NAME="pragma-warn"></A> <A NAME="ss7.16">7.16</A> <A HREF="#toc7.16"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1268,7 +1336,7 @@ changing it.</P>
 </P>
 
 
-<H2><A NAME="pragma-writable-strings"></A> <A NAME="ss7.15">7.15</A> <A HREF="#toc7.15"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-writable-strings"></A> <A NAME="ss7.17">7.17</A> <A HREF="#toc7.17"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1284,7 +1352,7 @@ worry.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="ss7.16">7.16</A> <A HREF="#toc7.16"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
+<H2><A NAME="ss7.18">7.18</A> <A HREF="#toc7.18"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
 </H2>
 
 
@@ -1300,7 +1368,6 @@ The compiler will create a matching import declaration for the assembler.</P>
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-
 
 
 
@@ -1572,13 +1639,13 @@ including commercial applications, and to alter it and redistribute it
 freely, subject to the following restrictions:</P>
 <P>
 <OL>
-<LI>    The origin of this software must not be misrepresented; you must not
+<LI>  The origin of this software must not be misrepresented; you must not
 claim that you wrote the original software. If you use this software
 in a product, an acknowledgment in the product documentation would be
 appreciated but is not required.</LI>
-<LI>    Altered source versions must be plainly marked as such, and must not
+<LI>  Altered source versions must be plainly marked as such, and must not
 be misrepresented as being the original software.</LI>
-<LI>    This notice may not be removed or altered from any source
+<LI>  This notice may not be removed or altered from any source
 distribution.</LI>
 </OL>
 </P>
