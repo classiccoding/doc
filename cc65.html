@@ -533,8 +533,9 @@ locations). See also the <CODE>
 <P>Using <CODE>-Os</CODE> will allow the compiler to inline some standard functions
 from the C library like strlen.  This will not only remove the overhead
 for a function call, but will make the code visible for the optimizer.
-See also <CODE>
-<A HREF="#option-inline-stdfuncs">--inline-stdfuncs</A></CODE>.</P>
+See also the <CODE>
+<A HREF="#option-inline-stdfuncs">--inline-stdfuncs</A></CODE>
+command line option.</P>
 <P>It is possible to concatenate the modifiers for <CODE>-O</CODE>. For example, to
 enable register variables and inlining of standard functions, you may use
 <CODE>-Ors</CODE>.</P>
@@ -1191,7 +1192,7 @@ configuration file.</P>
 
 <P>Allow the compiler to inline some standard functions from the C library like
 strlen.  If the argument is "off", inlining is disabled, otherwise it is enabled.</P>
-<P>See also the the <CODE>
+<P>See also the <CODE>
 <A HREF="#option-inline-stdfuncs">--inline-stdfuncs</A></CODE>
 command line option.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
