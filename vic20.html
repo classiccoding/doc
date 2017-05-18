@@ -3,14 +3,14 @@
 <HEAD>
  <LINK REL="stylesheet" TYPE="text/css" HREF="doc.css">
  <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.66">
- <TITLE>Commodore VIC20 (aka VC20) specific information for cc65</TITLE>
+ <TITLE>Commodore VIC20 (aka VC20 aka VIC1001) specific information for cc65</TITLE>
 </HEAD>
 <BODY>
-<H1>Commodore VIC20 (aka VC20) specific information for cc65</H1>
+<H1>Commodore VIC20 (aka VC20 aka VIC1001) specific information for cc65</H1>
 
 <H2>
 <A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A>,<BR>
-<A HREF="mailto:polluks@sdf.lonestar.org">Stefan A. Haubenthal</A></H2>2014-04-12
+<A HREF="mailto:polluks@sdf.lonestar.org">Stefan A. Haubenthal</A></H2>2017-05-18
 <HR>
 <EM>An overview over the VIC20 runtime system as it is implemented for the cc65 C
 compiler.</EM>
@@ -45,15 +45,17 @@ compiler.</EM>
 <P>
 <H2><A NAME="toc6">6.</A> <A HREF="vic20.html#s6">Limitations</A></H2>
 
+<UL>
+<LI><A NAME="toc6.1">6.1</A> <A HREF="vic20.html#ss6.1">Escape code</A>
+</UL>
 <P>
 <H2><A NAME="toc7">7.</A> <A HREF="vic20.html#s7">Other hints</A></H2>
 
 <UL>
-<LI><A NAME="toc7.1">7.1</A> <A HREF="vic20.html#ss7.1">Escape code</A>
-<LI><A NAME="toc7.2">7.2</A> <A HREF="vic20.html#ss7.2">Passing arguments to the program</A>
-<LI><A NAME="toc7.3">7.3</A> <A HREF="vic20.html#ss7.3">Program return code</A>
-<LI><A NAME="toc7.4">7.4</A> <A HREF="vic20.html#ss7.4">Using extended memory</A>
-<LI><A NAME="toc7.5">7.5</A> <A HREF="vic20.html#ss7.5">Interrupts</A>
+<LI><A NAME="toc7.1">7.1</A> <A HREF="vic20.html#ss7.1">Passing arguments to the program</A>
+<LI><A NAME="toc7.2">7.2</A> <A HREF="vic20.html#ss7.2">Program return code</A>
+<LI><A NAME="toc7.3">7.3</A> <A HREF="vic20.html#ss7.3">Using extended memory</A>
+<LI><A NAME="toc7.4">7.4</A> <A HREF="vic20.html#ss7.4">Interrupts</A>
 </UL>
 <P>
 <H2><A NAME="toc8">8.</A> <A HREF="vic20.html#s8">License</A></H2>
@@ -252,20 +254,21 @@ joysticks are supported.</P>
 
 
 
+<H2><A NAME="ss6.1">6.1</A> <A HREF="#toc6.1">Escape code</A>
+</H2>
+
+
+<P>The CTRL key cannot be used to type most control characters,
+entering an Esc is not possible.</P>
+
+
 
 <H2><A NAME="s7">7.</A> <A HREF="#toc7">Other hints</A></H2>
 
 
 
 
-<H2><A NAME="ss7.1">7.1</A> <A HREF="#toc7.1">Escape code</A>
-</H2>
-
-
-<P>For an Esc, press CTRL and the <CODE>[</CODE> key.</P>
-
-
-<H2><A NAME="ss7.2">7.2</A> <A HREF="#toc7.2">Passing arguments to the program</A>
+<H2><A NAME="ss7.1">7.1</A> <A HREF="#toc7.1">Passing arguments to the program</A>
 </H2>
 
 
@@ -291,7 +294,7 @@ supported.</LI>
 </P>
 
 
-<H2><A NAME="ss7.3">7.3</A> <A HREF="#toc7.3">Program return code</A>
+<H2><A NAME="ss7.2">7.2</A> <A HREF="#toc7.2">Program return code</A>
 </H2>
 
 
@@ -299,12 +302,11 @@ supported.</LI>
 <CODE>ST</CODE> variable.</P>
 
 
-<H2><A NAME="ss7.4">7.4</A> <A HREF="#toc7.4">Using extended memory</A>
+<H2><A NAME="ss7.3">7.3</A> <A HREF="#toc7.3">Using extended memory</A>
 </H2>
 
 
-<P>The extended memory at $A000 may be added to the heap by using the following
-code:</P>
+<P>BLK5 memory may be added to the heap by using the following code:</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
@@ -318,7 +320,7 @@ code:</P>
 </P>
 
 
-<H2><A NAME="ss7.5">7.5</A> <A HREF="#toc7.5">Interrupts</A>
+<H2><A NAME="ss7.4">7.4</A> <A HREF="#toc7.4">Interrupts</A>
 </H2>
 
 
