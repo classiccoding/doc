@@ -57,8 +57,9 @@ computers like the Commodore and Atari machines, but it is easily retargetable.<
 <LI><A NAME="toc7.14">7.14</A> <A HREF="cc65.html#ss7.14"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
 <LI><A NAME="toc7.15">7.15</A> <A HREF="cc65.html#ss7.15"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
 <LI><A NAME="toc7.16">7.16</A> <A HREF="cc65.html#ss7.16"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
-<LI><A NAME="toc7.17">7.17</A> <A HREF="cc65.html#ss7.17"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.18">7.18</A> <A HREF="cc65.html#ss7.18"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
+<LI><A NAME="toc7.17">7.17</A> <A HREF="cc65.html#ss7.17"><CODE>#pragma wrapped-call (&lt;push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
+<LI><A NAME="toc7.18">7.18</A> <A HREF="cc65.html#ss7.18"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.19">7.19</A> <A HREF="cc65.html#ss7.19"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
 </UL>
 <P>
 <H2><A NAME="toc8">8.</A> <A HREF="cc65.html#s8">Register variables</A></H2>
@@ -1337,7 +1338,33 @@ changing it.</P>
 </P>
 
 
-<H2><A NAME="pragma-writable-strings"></A> <A NAME="ss7.17">7.17</A> <A HREF="#toc7.17"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-wrapped-call"></A> <A NAME="ss7.17">7.17</A> <A HREF="#toc7.17"><CODE>#pragma wrapped-call (&lt;push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
+</H2>
+
+
+<P>This pragma sets a wrapper for functions, often used for trampolines.
+The name is a function returning void and taking no parameters.
+The identifier is an 8-bit number that's set to tmp4.</P>
+<P>The address of the function is passed in ptr4.</P>
+<P>This is useful for example with banked memory, to automatically
+switch banks to where this function resides, and then restore
+the bank when it returns.</P>
+<P>The <CODE>#pragma</CODE> requires the push and pop parameters as explained above.</P>
+<P>Example:
+<BLOCKQUOTE><CODE>
+<PRE>
+        void mytrampoline(void);
+
+        #pragma wrapped-call (push, mytrampoline, 0)
+        void somefunc(void);
+        #pragma wrapped-call (pop)
+  
+</PRE>
+</CODE></BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="pragma-writable-strings"></A> <A NAME="ss7.18">7.18</A> <A HREF="#toc7.18"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1353,7 +1380,7 @@ worry.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="ss7.18">7.18</A> <A HREF="#toc7.18"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
+<H2><A NAME="ss7.19">7.19</A> <A HREF="#toc7.19"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
 </H2>
 
 
