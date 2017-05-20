@@ -10,7 +10,7 @@
 
 <H2>
 <A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A>,<BR>
-<A HREF="mailto:gregdk@users.sf.net">Greg King</A></H2>2017-03-21
+<A HREF="mailto:gregdk@users.sf.net">Greg King</A></H2>2017-05-20
 <HR>
 <EM>cc65 is a C compiler for 6502 targets. It supports several 6502 based home
 computers like the Commodore and Atari machines, but it is easily retargetable.</EM>
@@ -57,7 +57,7 @@ computers like the Commodore and Atari machines, but it is easily retargetable.<
 <LI><A NAME="toc7.14">7.14</A> <A HREF="cc65.html#ss7.14"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
 <LI><A NAME="toc7.15">7.15</A> <A HREF="cc65.html#ss7.15"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
 <LI><A NAME="toc7.16">7.16</A> <A HREF="cc65.html#ss7.16"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
-<LI><A NAME="toc7.17">7.17</A> <A HREF="cc65.html#ss7.17"><CODE>#pragma wrapped-call (&lt;push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
+<LI><A NAME="toc7.17">7.17</A> <A HREF="cc65.html#ss7.17"><CODE>#pragma wrapped-call (push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
 <LI><A NAME="toc7.18">7.18</A> <A HREF="cc65.html#ss7.18"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
 <LI><A NAME="toc7.19">7.19</A> <A HREF="cc65.html#ss7.19"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
 </UL>
@@ -1338,26 +1338,33 @@ changing it.</P>
 </P>
 
 
-<H2><A NAME="pragma-wrapped-call"></A> <A NAME="ss7.17">7.17</A> <A HREF="#toc7.17"><CODE>#pragma wrapped-call (&lt;push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
+<H2><A NAME="pragma-wrapped-call"></A> <A NAME="ss7.17">7.17</A> <A HREF="#toc7.17"><CODE>#pragma wrapped-call (push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
 </H2>
 
 
-<P>This pragma sets a wrapper for functions, often used for trampolines.
-The name is a function returning void and taking no parameters.
-The identifier is an 8-bit number that's set to tmp4.</P>
-<P>The address of the function is passed in ptr4.</P>
-<P>This is useful for example with banked memory, to automatically
-switch banks to where this function resides, and then restore
-the bank when it returns.</P>
-<P>The <CODE>#pragma</CODE> requires the push and pop parameters as explained above.</P>
+<P>This pragma sets a wrapper for functions, often used for trampolines.</P>
+<P>The name is a function returning <CODE>void</CODE>, and taking no parameters.
+It must preserve the CPU's <CODE>A</CODE> and <CODE>X</CODE> registers if it wraps any
+<CODE>__fastcall__</CODE> functions that have parameters.  It must preserve
+the <CODE>Y</CODE> register if it wraps any variadic functions (they have "<CODE>...</CODE>"
+in their prototypes).</P>
+<P>The identifier is an 8-bit number that's set into <CODE>tmp4</CODE>.</P>
+<P>The address of a wrapped function is passed in <CODE>ptr4</CODE>.  The wrapper can
+call that function by using "<CODE>jsr callptr4</CODE>".</P>
+<P>This feature is useful, for example, with banked memory, to switch banks
+automatically to where a wrapped function resides, and then to restore the
+previous bank when it returns.</P>
+<P>The <CODE>#pragma</CODE> requires the push or pop argument as explained above.</P>
 <P>Example:
 <BLOCKQUOTE><CODE>
 <PRE>
-        void mytrampoline(void);
+/* Note that this code can be in a header. */
+void mytrampoline(void); /* Doesn't corrupt __AX__ */
 
-        #pragma wrapped-call (push, mytrampoline, 0)
-        void somefunc(void);
-        #pragma wrapped-call (pop)
+#pragma wrapped-call (push, mytrampoline, 5)
+void somefunc1(void);
+void somefunc2(int, char *);
+#pragma wrapped-call (pop)
   
 </PRE>
 </CODE></BLOCKQUOTE>
