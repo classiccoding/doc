@@ -9,7 +9,8 @@
 <H1>cl65 Users Guide</H1>
 
 <H2>
-<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>01.08.2000, 27.11.2000, 02.10.2001
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A>,<BR>
+<A HREF="mailto:greg.king5@verizon.net">Greg King</A></H2>2017-05-24
 <HR>
 <EM>cl65 is the compile &amp; link utility for cc65, the 6502 C compiler. It was
 designed as a smart frontend for the C compiler (cc65), the assembler (ca65),
@@ -69,6 +70,7 @@ Short options:
   -C name                       Use linker config file
   -Cl                           Make local variables static
   -D sym[=defn]                 Define a preprocessor symbol
+  -E                            Stop after the preprocessing stage
   -I dir                        Set a compiler include directory path
   -L path                       Specify a library search path
   -Ln name                      Create a VICE label file
@@ -140,80 +142,89 @@ Long options:
 </PRE>
 </CODE></BLOCKQUOTE>
 </P>
-<P>Most of the options have the same meaning than the corresponding compiler,
-assembler or linker option. See the documentation for these tools for an
+<P>Most of the options have the same meanings as the corresponding compiler,
+assembler, and linker options. See the documentation for those tools for an
 explanation. If an option is available for more than one of the tools, it
-is set for all tools, where it is available. One example for this is <CODE>-v</CODE>:
-The compiler, the assembler and the linker are all called with the <CODE>-v</CODE>
+is set for all tools where it is available. One example for that is <CODE>-v</CODE>:
+The compiler, the assembler, and the linker are all called with the <CODE>-v</CODE>
 switch.</P>
 <P>There are a few remaining options that control the behaviour of cl65:</P>
 <P>
 <DL>
 
+<DT><B><CODE>-E</CODE></B><DD>
+<P>This option is passed to the cc65 compiler; and, it forces cl65 to stop
+before the assembly step. That means that C-level preprocessor directives
+are obeyed; and, macroes are expanded.  But, the C source isn't compiled.
+If the <CODE>-o</CODE> option isn't used, then the C code results are written into
+files with a ".i" suffix on their base names.  Assembler files, object
+files, and libraries given on the command line are ignored.</P>
+
+
 <DT><B><CODE>-S</CODE></B><DD>
-<P>This option forces cl65 to stop after the assembly step. This means that
-C files are translated into assembler files, but nothing more is done.
-Assembler files, object files and libraries given on the command line
+<P>This option forces cl65 to stop before the assembly step. That means that
+C files are translated into assembler files; but, nothing more is done.
+Assembler files, object files, and libraries given on the command line
 are ignored.</P>
 
 
 <DT><B><CODE>-c</CODE></B><DD>
-<P>This options forces cl65 to stop after the assembly step. This means
+<P>This option forces cl65 to stop after the assembly step. That means
 that C and assembler files given on the command line are translated into
-object files, but there is no link step, and object files and libraries
+object files; but, there is no link step.  Object files and libraries
 given on the command line are ignored.</P>
 
 
 <DT><B><CODE>-o name</CODE></B><DD>
-<P>The -o option is used for the target name in the final step. This causes
-problems, if the linker will not be called, and there are several input
-files on the command line. In this case, the name given with -o will be
+<P>The -o option is used for the target name in the final step. That causes
+problems if the linker will not be called, and there are several input
+files on the command line. In that case, the name given with -o will be
 used for all of them, which makes the option pretty useless. You
-shouldn't use -o when more than one output file is created.</P>
+shouldn't use <CODE>-o</CODE> when more than one output file is created.</P>
 
 
 <DT><B><CODE>--print-target-path</CODE></B><DD>
-<P>This option prints the absolute path of the target file directory and exits
+<P>This option prints the absolute path of the target file directory, and exits
 then. It is supposed to be used with shell backquotes or the GNU make shell
-function. This way you can write build scripts or Makefiles accessing target
+function. That way, you can write build scripts or Makefiles accessing target
 files without any assumption about the cc65 installation path.</P>
 
 
 <DT><B><CODE>-t sys, --target sys</CODE></B><DD>
-<P>The default for this option is different from the compiler and linker in the
-case that the option is missing: While the other tools (compiler, assembler
+<P>The default for this option is different from the compiler and linker, in the
+case that the option is missing:  While the other tools (compiler, assembler,
 and linker) will use the "none" system settings by default, cl65 will use
-the C64 as a target system by default. This was chosen since most people
+"c64" as a target system by default. That was chosen because most people
 seem to use cc65 to develop for the C64.</P>
 
 
 <DT><B><CODE>-Wa options, --asm-args options</CODE></B><DD>
 <P>Pass options directly to the assembler. This may be used to pass options
 that aren't directly supported by cl65. Several options may be separated by
-commas, the commas are replaced by spaces when passing them to the
-assembler. Beware: Passing arguments directly to the assembler may interfere
-with some of the defaults, because cl65 doesn't parse the options passed. So
-if cl65 supports an option by itself, do not pass this option to the
+commas; the commas are replaced by spaces when passing them to the
+assembler. Beware: Passing arguments directly to the assembler might interfere
+with some of the defaults because cl65 doesn't parse the options passed. So,
+if cl65 supports an option by itself, do not pass that option to the
 assembler by means of the <CODE>-Wa</CODE> switch.</P>
 
 
 <DT><B><CODE>-Wc options, --cc-args options</CODE></B><DD>
 <P>Pass options directly to the compiler. This may be used to pass options
 that aren't directly supported by cl65. Several options may be separated by
-commas, the commas are replaced by spaces when passing them to the
-compiler. Beware: Passing arguments directly to the compiler may interfere
-with some of the defaults, because cl65 doesn't parse the options passed. So
-if cl65 supports an option by itself, do not pass this option to the
+commas; the commas are replaced by spaces when passing them to the
+compiler. Beware: Passing arguments directly to the compiler might interfere
+with some of the defaults because cl65 doesn't parse the options passed. So,
+if cl65 supports an option by itself, do not pass that option to the
 compiler by means of the <CODE>-Wc</CODE> switch.</P>
 
 
 <DT><B><CODE>-Wl options, --ld-args options</CODE></B><DD>
 <P>Pass options directly to the linker. This may be used to pass options that
 aren't directly supported by cl65. Several options may be separated by
-commas, the commas are replaced by spaces when passing them to the linker.
-Beware: Passing arguments directly to the linker may interfere with some of
-the defaults, because cl65 doesn't parse the options passed. So if cl65
-supports an option by itself, do not pass this option to the linker by means
+commas; the commas are replaced by spaces when passing them to the linker.
+Beware: Passing arguments directly to the linker might interfere with some of
+the defaults because cl65 doesn't parse the options passed. So, if cl65
+supports an option by itself, do not pass that option to the linker by means
 of the <CODE>-Wl</CODE> switch.</P>
 
 </DL>
@@ -224,22 +235,21 @@ of the <CODE>-Wl</CODE> switch.</P>
 <H2><A NAME="s3">3.</A> <A HREF="#toc3">More usage</A></H2>
 
 
-<P>Since cl65 was created to simplify the use of the cc65 development
+<P>Because cl65 was created to simplify the use of the cc65 development
 package, it tries to be smart about several things.</P>
 <P>
 <UL>
 <LI>    If you don't give a target system on the command line, cl65
 defaults to the C64.
 </LI>
-<LI>    When linking, cl65 will supply the names of the startup file and
-library for the target system to the linker, so you don't have to do
-that.
+<LI>  When linking, cl65 will supply the name of the library file for
+the target system to the linker; so, you don't have to do that.
 </LI>
 <LI>    If the final step is the linker, and the name of the output file was
 not explicitly given, cl65 will use the name of the first input file
-without the extension, provided that the name of this file has an
-extension. So you don't need to name the executable name in most
-cases, just give the name of your "main" file as first input file.</LI>
+without the extension, provided that the name of that file has an
+extension. So, you don't need to give the executable name in most
+cases; just give the name of your "main" file as the first input file.</LI>
 </UL>
 </P>
 <P>The command line is parsed from left to right, and the actual processing tool
@@ -261,7 +271,7 @@ and debug info enabled.</P>
 <UL>
 <LI>C files: <CODE>.c</CODE></LI>
 <LI>Assembler files: <CODE>.s</CODE>, <CODE>.asm</CODE>, <CODE>.a65</CODE></LI>
-<LI>Object files: <CODE>.o</CODE> <CODE>.obj</CODE></LI>
+<LI>Object files: <CODE>.o</CODE>, <CODE>.obj</CODE></LI>
 <LI>Libraries: <CODE>.a</CODE>, <CODE>.lib</CODE></LI>
 <LI>GEOS resource files: <CODE>.grc</CODE></LI>
 <LI>o65 files: <CODE>.o65</CODE>, <CODE>.emd</CODE>, <CODE>.joy</CODE>, <CODE>.tgi</CODE></LI>
