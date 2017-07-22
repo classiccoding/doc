@@ -2,7 +2,7 @@
 <HTML>
 <HEAD>
  <LINK REL="stylesheet" TYPE="text/css" HREF="doc.css">
- <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.66">
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
  <TITLE>cc65 Users Guide</TITLE>
 </HEAD>
 <BODY>
@@ -50,16 +50,17 @@ computers like the Commodore and Atari machines, but it is easily retargetable.<
 <LI><A NAME="toc7.7">7.7</A> <A HREF="cc65.html#ss7.7"><CODE>#pragma data-name ([push,] &lt;name&gt;)</CODE></A>
 <LI><A NAME="toc7.8">7.8</A> <A HREF="cc65.html#ss7.8"><CODE>#pragma inline-stdfuncs ([push,] on|off)</CODE></A>
 <LI><A NAME="toc7.9">7.9</A> <A HREF="cc65.html#ss7.9"><CODE>#pragma local-strings ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.10">7.10</A> <A HREF="cc65.html#ss7.10"><CODE>#pragma optimize ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.11">7.11</A> <A HREF="cc65.html#ss7.11"><CODE>#pragma rodata-name ([push,] &lt;name&gt;)</CODE></A>
-<LI><A NAME="toc7.12">7.12</A> <A HREF="cc65.html#ss7.12"><CODE>#pragma regvaraddr ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.13">7.13</A> <A HREF="cc65.html#ss7.13"><CODE>#pragma register-vars ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.14">7.14</A> <A HREF="cc65.html#ss7.14"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.15">7.15</A> <A HREF="cc65.html#ss7.15"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.16">7.16</A> <A HREF="cc65.html#ss7.16"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
-<LI><A NAME="toc7.17">7.17</A> <A HREF="cc65.html#ss7.17"><CODE>#pragma wrapped-call (push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
-<LI><A NAME="toc7.18">7.18</A> <A HREF="cc65.html#ss7.18"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
-<LI><A NAME="toc7.19">7.19</A> <A HREF="cc65.html#ss7.19"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
+<LI><A NAME="toc7.10">7.10</A> <A HREF="cc65.html#ss7.10"><CODE>#pragma message (&lt;message&gt;)</CODE></A>
+<LI><A NAME="toc7.11">7.11</A> <A HREF="cc65.html#ss7.11"><CODE>#pragma optimize ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.12">7.12</A> <A HREF="cc65.html#ss7.12"><CODE>#pragma rodata-name ([push,] &lt;name&gt;)</CODE></A>
+<LI><A NAME="toc7.13">7.13</A> <A HREF="cc65.html#ss7.13"><CODE>#pragma regvaraddr ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.14">7.14</A> <A HREF="cc65.html#ss7.14"><CODE>#pragma register-vars ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.15">7.15</A> <A HREF="cc65.html#ss7.15"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.16">7.16</A> <A HREF="cc65.html#ss7.16"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.17">7.17</A> <A HREF="cc65.html#ss7.17"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
+<LI><A NAME="toc7.18">7.18</A> <A HREF="cc65.html#ss7.18"><CODE>#pragma wrapped-call (push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
+<LI><A NAME="toc7.19">7.19</A> <A HREF="cc65.html#ss7.19"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
+<LI><A NAME="toc7.20">7.20</A> <A HREF="cc65.html#ss7.20"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
 </UL>
 <P>
 <H2><A NAME="toc8">8.</A> <A HREF="cc65.html#s8">Register variables</A></H2>
@@ -1214,7 +1215,31 @@ or rodata segment, but cannot be merged. When inactive, string literals are
 remembered and output as a whole when translation is finished.</P>
 
 
-<H2><A NAME="pragma-optimize"></A> <A NAME="ss7.10">7.10</A> <A HREF="#toc7.10"><CODE>#pragma optimize ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-message"></A> <A NAME="ss7.10">7.10</A> <A HREF="#toc7.10"><CODE>#pragma message (&lt;message&gt;)</CODE></A>
+</H2>
+
+
+<P>This pragma is used to display informational messages at compile-time.</P>
+<P>The message intented to be displayed must be a string literal.</P>
+<P>Example:
+<BLOCKQUOTE><CODE>
+<PRE>
+        #pragma message ("in a bottle")
+  
+</PRE>
+</CODE></BLOCKQUOTE>
+</P>
+<P>Results in the compiler outputting the following to stderr:
+<BLOCKQUOTE><CODE>
+<PRE>
+        example.c(42): Note: in a bottle
+  
+</PRE>
+</CODE></BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="pragma-optimize"></A> <A NAME="ss7.11">7.11</A> <A HREF="#toc7.11"><CODE>#pragma optimize ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1229,7 +1254,7 @@ determine if the generated code is optimized or not.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-rodata-name"></A> <A NAME="ss7.11">7.11</A> <A HREF="#toc7.11"><CODE>#pragma rodata-name ([push,] &lt;name&gt;)</CODE></A>
+<H2><A NAME="pragma-rodata-name"></A> <A NAME="ss7.12">7.12</A> <A HREF="#toc7.12"><CODE>#pragma rodata-name ([push,] &lt;name&gt;)</CODE></A>
 </H2>
 
 
@@ -1250,7 +1275,7 @@ configuration file.</P>
 </P>
 
 
-<H2><A NAME="pragma-regvaraddr"></A> <A NAME="ss7.12">7.12</A> <A HREF="#toc7.12"><CODE>#pragma regvaraddr ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-regvaraddr"></A> <A NAME="ss7.13">7.13</A> <A HREF="#toc7.13"><CODE>#pragma regvaraddr ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1277,7 +1302,7 @@ register variables. So be careful with this #pragma.</P>
 </P>
 
 
-<H2><A NAME="pragma-register-vars"></A> <A NAME="ss7.13">7.13</A> <A HREF="#toc7.13"><CODE>#pragma register-vars ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-register-vars"></A> <A NAME="ss7.14">7.14</A> <A HREF="#toc7.14"><CODE>#pragma register-vars ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1288,7 +1313,7 @@ variables are explained in more detail in
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-signed-chars"></A> <A NAME="ss7.14">7.14</A> <A HREF="#toc7.14"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-signed-chars"></A> <A NAME="ss7.15">7.15</A> <A HREF="#toc7.15"><CODE>#pragma signed-chars ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1300,7 +1325,7 @@ better code. This default may be overridden by the <CODE>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-static-locals"></A> <A NAME="ss7.15">7.15</A> <A HREF="#toc7.15"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-static-locals"></A> <A NAME="ss7.16">7.16</A> <A HREF="#toc7.16"><CODE>#pragma static-locals ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1312,7 +1337,7 @@ most cases faster, but non-reentrant code.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="pragma-warn"></A> <A NAME="ss7.16">7.16</A> <A HREF="#toc7.16"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
+<H2><A NAME="pragma-warn"></A> <A NAME="ss7.17">7.17</A> <A HREF="#toc7.17"><CODE>#pragma warn (name, [push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1338,7 +1363,7 @@ changing it.</P>
 </P>
 
 
-<H2><A NAME="pragma-wrapped-call"></A> <A NAME="ss7.17">7.17</A> <A HREF="#toc7.17"><CODE>#pragma wrapped-call (push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
+<H2><A NAME="pragma-wrapped-call"></A> <A NAME="ss7.18">7.18</A> <A HREF="#toc7.18"><CODE>#pragma wrapped-call (push, &lt;name&gt;, &lt;identifier&gt;)</CODE></A>
 </H2>
 
 
@@ -1371,7 +1396,7 @@ void somefunc2(int, char *);
 </P>
 
 
-<H2><A NAME="pragma-writable-strings"></A> <A NAME="ss7.18">7.18</A> <A HREF="#toc7.18"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
+<H2><A NAME="pragma-writable-strings"></A> <A NAME="ss7.19">7.19</A> <A HREF="#toc7.19"><CODE>#pragma writable-strings ([push,] on|off)</CODE></A>
 </H2>
 
 
@@ -1387,7 +1412,7 @@ worry.</P>
 <P>The <CODE>#pragma</CODE> understands the push and pop parameters as explained above.</P>
 
 
-<H2><A NAME="ss7.19">7.19</A> <A HREF="#toc7.19"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
+<H2><A NAME="ss7.20">7.20</A> <A HREF="#toc7.20"><CODE>#pragma zpsym (&lt;name&gt;)</CODE></A>
 </H2>
 
 
