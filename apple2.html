@@ -71,6 +71,7 @@ implemented for the cc65 C compiler.</EM>
 <LI><A NAME="toc9.1">9.1</A> <A HREF="apple2.html#ss9.1">Passing arguments to the program</A>
 <LI><A NAME="toc9.2">9.2</A> <A HREF="apple2.html#ss9.2">Interrupts</A>
 <LI><A NAME="toc9.3">9.3</A> <A HREF="apple2.html#ss9.3">DIO</A>
+<LI><A NAME="toc9.4">9.4</A> <A HREF="apple2.html#ss9.4">Specifying file types for fopen</A>
 </UL>
 <P>
 <H2><A NAME="toc10">10.</A> <A HREF="apple2.html#s10">License</A></H2>
@@ -645,6 +646,110 @@ This condition is indicated by the <CODE>_oserror</CODE> value 82.</P>
 </DL>
 </P>
 
+
+
+<H2><A NAME="ss9.4">9.4</A> <A HREF="#toc9.4">Specifying file types for fopen</A>
+</H2>
+
+
+<P>
+<DL>
+
+<DT><B>Explanation of File Types</B><DD>
+<P>ProDOS associates a file type and an auxiliary type with each file.
+These type specifications are separate from the file's name, unlike
+Windows which uses the file name's suffix (a.k.a.
+extension) to specify the file type. For example, <CODE>.exe</CODE>, 
+<CODE>.doc</CODE>, or <CODE>.bat</CODE>.
+The ProDOS low-level 
+Machine-Language Interface (MLI) functions for creating and opening 
+files require these types to be specified. And if they don't match
+with the file being opened, the operation may fail.</P>
+<P>In contrast, the ISO C function <CODE>fopen()</CODE> and the POSIX function
+<CODE>open()</CODE> have no parameter to specify either a file type or an
+auxiliary type. Therefore, some additional mechanism for specifying
+the file types is needed. </P>
+
+<DT><B>Specifying the File Type and Auxiliary Type</B><DD>
+<P>There are two global variables provided that allow the file type
+and auxiliary type to be specified before a call to <CODE>fopen()</CODE>
+or <CODE>open()</CODE>. They are defined in <CODE>apple2_filetype.h</CODE>:</P>
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+  extern unsigned char _filetype;  /* Default: PRODOS_T_BIN */
+  extern unsigned int _auxtype;    /* Default: 0            */
+  
+</PRE>
+</CODE></BLOCKQUOTE>
+  </P>
+<P>The header file <CODE>apple2_filetype.h</CODE> also defines many values
+that can be used to set these variables. It is included in
+<CODE>apple2.h</CODE>, which is in turn included in <CODE>apple2enh.h</CODE>.
+So it isn't necessary to include it directly. Just
+include one of <CODE>apple2.h</CODE> or <CODE>apple2enh.h</CODE>.</P>
+
+<DT><B>Example</B><DD>
+<P>A text file cannot be created with just the
+standard C functions because they default to the binary type 
+<CODE>PRODOS_T_BIN</CODE>. The <CODE>_filetype</CODE> variable must be set to
+<CODE>PRODOS_T_TXT</CODE> to create a text file. </P>
+<P>For a text file, 
+<CODE>_auxtype</CODE> specifies the record length. A zero record
+length text file is referred to as a sequential text file.
+This is equivalent to text files on 
+other operating systems, except that the line terminator is a
+carriage return instead of a line-feed (Linux/BSD/MacOS) or 
+carriage return, line-feed pair (Windows).</P>
+<P>The "sequential" text file terminology is in contrast to a 
+"random-access" text file which would
+have a fixed-length, non-zero record length, so that the 
+file position of any individual record can be calculated.</P>
+<P>For this example, the
+<CODE>_auxtype</CODE> does not need to be set because it defaults to
+the desired value, which is zero. To be more explicit, 
+<CODE>_auxtype</CODE> can also be set to <CODE>PRODOS_AUX_T_TXT_SEQ</CODE>
+which is defined as zero.</P>
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+    #include &lt;stdio.h&gt;
+    #include &lt;string.h&gt;
+    #include &lt;errno.h&gt;
+    #include &lt;apple2.h&gt;
+
+    void main(void)
+    {
+        FILE *out;
+        char *name = "MY.FAVS";
+
+        /*-----------------------------*/
+
+        _filetype = PRODOS_T_TXT;
+        _auxtype  = PRODOS_AUX_T_TXT_SEQ;
+
+        /*-----------------------------*/
+
+        if ((out = fopen(name, "w")) != NULL) {
+            fputs("Jorah Mormont\r", out);
+            fputs("Brienne of Tarth\r", out);
+            fputs("Daenerys Targaryen\r", out);
+            fputs("Sandor Clegane\r", out);
+            if (fclose(out) == EOF) {
+                fprintf(stderr, "fclose failed for %s: %s", name, strerror(errno));
+            }
+        }
+        else {
+            fprintf(stderr, "fopen failed for %s: %s", name, strerror(errno));
+        }
+    }
+  
+</PRE>
+</CODE></BLOCKQUOTE>
+  </P>
+
+</DL>
+</P>
 
 
 
