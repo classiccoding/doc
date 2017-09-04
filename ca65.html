@@ -2103,7 +2103,7 @@ reserved keyword "A".</P>
 <BLOCKQUOTE><CODE>
 <PRE>
         ; Reserve space for the larger of two data blocks
-        savearea:       .max (.sizeof (foo), .sizeof (bar))
+        savearea:       .res .max (.sizeof (foo), .sizeof (bar))
   
 </PRE>
 </CODE></BLOCKQUOTE>
@@ -2176,8 +2176,8 @@ right paren in the given case).</P>
 <P>
 <BLOCKQUOTE><CODE>
 <PRE>
-        ; Reserve space for some data, but 256 bytes minimum
-        savearea:       .min (.sizeof (foo), 256)
+        ; Reserve space for some data, but 256 bytes maximum
+        savearea:       .res .min (.sizeof (foo), 256)
   
 </PRE>
 </CODE></BLOCKQUOTE>
