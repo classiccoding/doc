@@ -11,9 +11,8 @@
 <H2>
 <A HREF="mailto:jede@oric.org">Jede</A></H2>2017-01-22
 <HR>
-<EM>An overview over the Telestrat (
-<A HREF="http://orix.oric.org">Telemon 3.0</A>) runtime system as it is implemented for the
-cc65 C compiler.</EM>
+<EM>An overview over the Telestrat (Telemon 2.4 &amp; Telemon 3.x : http://orix.oric.org) runtime system as it is implemented for the cc65 C
+compiler.)</EM>
 <HR>
 <P>
 <H2><A NAME="toc1">1.</A> <A HREF="telestrat.html#s1">Overview</A></H2>
@@ -35,10 +34,11 @@ cc65 C compiler.</EM>
 <H2><A NAME="toc5">5.</A> <A HREF="telestrat.html#s5">Loadable drivers</A></H2>
 
 <UL>
-<LI><A NAME="toc5.1">5.1</A> <A HREF="telestrat.html#ss5.1">Extended memory drivers</A>
-<LI><A NAME="toc5.2">5.2</A> <A HREF="telestrat.html#ss5.2">Joystick drivers</A>
-<LI><A NAME="toc5.3">5.3</A> <A HREF="telestrat.html#ss5.3">Mouse drivers</A>
-<LI><A NAME="toc5.4">5.4</A> <A HREF="telestrat.html#ss5.4">RS232 device drivers</A>
+<LI><A NAME="toc5.1">5.1</A> <A HREF="telestrat.html#ss5.1">TGI</A>
+<LI><A NAME="toc5.2">5.2</A> <A HREF="telestrat.html#ss5.2">Extended memory drivers</A>
+<LI><A NAME="toc5.3">5.3</A> <A HREF="telestrat.html#ss5.3">Joystick drivers</A>
+<LI><A NAME="toc5.4">5.4</A> <A HREF="telestrat.html#ss5.4">Mouse drivers</A>
+<LI><A NAME="toc5.5">5.5</A> <A HREF="telestrat.html#ss5.5">RS232 device drivers</A>
 </UL>
 <P>
 <H2><A NAME="toc6">6.</A> <A HREF="telestrat.html#s6">Limitations</A></H2>
@@ -160,14 +160,32 @@ structures; accessing the struct fields will access the chip registers.</P>
 
 
 
-<H2><A NAME="ss5.1">5.1</A> <A HREF="#toc5.1">Extended memory drivers</A>
+<H2><A NAME="ss5.1">5.1</A> <A HREF="#toc5.1">TGI</A>
+</H2>
+
+
+<P>TGI drivers is available on Oric Telestrat with some functions :</P>
+<P>
+<UL>
+<LI></LI>
+<LI>tgi_install</LI>
+<LI>tgi_init</LI>
+<LI>tgi_clear</LI>
+<LI>tgi_setpixel</LI>
+<LI>tgi_getmaxx</LI>
+<LI>tgi_getmaxy</LI>
+</UL>
+</P>
+
+
+<H2><A NAME="ss5.2">5.2</A> <A HREF="#toc5.2">Extended memory drivers</A>
 </H2>
 
 
 <P>No extended memory drivers are currently available for the Telestrat.</P>
 
 
-<H2><A NAME="ss5.2">5.2</A> <A HREF="#toc5.2">Joystick drivers</A>
+<H2><A NAME="ss5.3">5.3</A> <A HREF="#toc5.3">Joystick drivers</A>
 </H2>
 
 
@@ -179,7 +197,7 @@ structures; accessing the struct fields will access the chip registers.</P>
 </P>
 
 
-<H2><A NAME="ss5.3">5.3</A> <A HREF="#toc5.3">Mouse drivers</A>
+<H2><A NAME="ss5.4">5.4</A> <A HREF="#toc5.4">Mouse drivers</A>
 </H2>
 
 
@@ -190,13 +208,13 @@ structures; accessing the struct fields will access the chip registers.</P>
 </DL>
 </P>
 
-<H2><A NAME="ss5.4">5.4</A> <A HREF="#toc5.4">RS232 device drivers</A>
+<H2><A NAME="ss5.5">5.5</A> <A HREF="#toc5.5">RS232 device drivers</A>
 </H2>
 
 
 <P>
 <DL>
-<P>Telestrat has a RS232 port, but it's not used</P>
+<P>Telestrat has a RS232 port, but it's not usable in cc65.</P>
 
 </DL>
 </P>
