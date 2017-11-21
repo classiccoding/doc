@@ -10,7 +10,7 @@
 
 <H2>
 <A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A>,<BR>
-<A HREF="mailto:greg.king5@verizon.net">Greg King</A></H2>2017-09-02
+<A HREF="mailto:greg.king5@verizon.net">Greg King</A></H2>2017-11-21
 <HR>
 <EM>cc65 is a C compiler for 6502 based systems. This function reference describes
 the C functions available in the standard library.</EM>
@@ -347,8 +347,9 @@ the C functions available in the standard library.</EM>
 <LI><A NAME="toc3.268">3.268</A> <A HREF="funcref.html#ss3.268">utoa</A>
 <LI><A NAME="toc3.269">3.269</A> <A HREF="funcref.html#ss3.269">vcprintf</A>
 <LI><A NAME="toc3.270">3.270</A> <A HREF="funcref.html#ss3.270">videomode</A>
-<LI><A NAME="toc3.271">3.271</A> <A HREF="funcref.html#ss3.271">wherex</A>
-<LI><A NAME="toc3.272">3.272</A> <A HREF="funcref.html#ss3.272">wherey</A>
+<LI><A NAME="toc3.271">3.271</A> <A HREF="funcref.html#ss3.271">waitvsync</A>
+<LI><A NAME="toc3.272">3.272</A> <A HREF="funcref.html#ss3.272">wherex</A>
+<LI><A NAME="toc3.273">3.273</A> <A HREF="funcref.html#ss3.273">wherey</A>
 </UL>
 
 <HR>
@@ -849,7 +850,12 @@ function.</P>
 </H2>
 
 
-
+<P>
+<UL>
+<LI>
+<A HREF="#waitvsync">waitvsync</A></LI>
+</UL>
+</P>
 <P>(incomplete)</P>
 
 
@@ -972,7 +978,12 @@ function.</P>
 </H2>
 
 
-
+<P>
+<UL>
+<LI>
+<A HREF="#waitvsync">waitvsync</A></LI>
+</UL>
+</P>
 <P>(incomplete)</P>
 
 
@@ -990,7 +1001,12 @@ It does not declare any functions.</P>
 </H2>
 
 
-
+<P>
+<UL>
+<LI>
+<A HREF="#waitvsync">waitvsync</A></LI>
+</UL>
+</P>
 <P>(incomplete)</P>
 
 
@@ -12290,7 +12306,36 @@ used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="wherex"></A> <A NAME="ss3.271">3.271</A> <A HREF="#toc3.271">wherex</A>
+<H2><A NAME="waitvsync"></A> <A NAME="ss3.271">3.271</A> <A HREF="#toc3.271">waitvsync</A>
+</H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Wait until the start of the next frame.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#gamate.h">gamate.h</A></CODE>,
+<CODE>
+<A HREF="#nes.h">nes.h</A></CODE>,
+<CODE>
+<A HREF="#pce.h">pce.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void waitvsync (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Wait for vertical sync to reduce flickering.</P>
+<DT><B>Availability</B><DD>
+<P>Platforms above</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="wherex"></A> <A NAME="ss3.272">3.272</A> <A HREF="#toc3.272">wherex</A>
 </H2>
 
 
@@ -12322,7 +12367,7 @@ cursor. Zero is returned for the leftmost screen position.</P>
 </P>
 
 
-<H2><A NAME="wherey"></A> <A NAME="ss3.272">3.272</A> <A HREF="#toc3.272">wherey</A>
+<H2><A NAME="wherey"></A> <A NAME="ss3.273">3.273</A> <A HREF="#toc3.273">wherey</A>
 </H2>
 
 
