@@ -1,0 +1,1750 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <LINK REL="stylesheet" TYPE="text/css" HREF="doc.css">
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>Tiny Graphics Interface</TITLE>
+</HEAD>
+<BODY>
+<H1>Tiny Graphics Interface</H1>
+
+<H2>
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2017-11-23
+<HR>
+<EM>The cc65 library provides functions for platform independent graphics.
+Include the tgi.h header file to get the necessary definitions.</EM>
+<HR>
+<P><CODE>tgi.h</CODE>
+<A NAME="tgi.h"></A> </P>
+
+
+
+<P>
+<H2><A NAME="toc1">1.</A> <A HREF="tgi.html#s1">tgi_arc</A></H2>
+
+<P>
+<H2><A NAME="toc2">2.</A> <A HREF="tgi.html#s2">tgi_bar</A></H2>
+
+<P>
+<H2><A NAME="toc3">3.</A> <A HREF="tgi.html#s3">tgi_circle</A></H2>
+
+<P>
+<H2><A NAME="toc4">4.</A> <A HREF="tgi.html#s4">tgi_clear</A></H2>
+
+<P>
+<H2><A NAME="toc5">5.</A> <A HREF="tgi.html#s5">tgi_done</A></H2>
+
+<P>
+<H2><A NAME="toc6">6.</A> <A HREF="tgi.html#s6">tgi_ellipse</A></H2>
+
+<P>
+<H2><A NAME="toc7">7.</A> <A HREF="tgi.html#s7">tgi_free_vectorfont</A></H2>
+
+<P>
+<H2><A NAME="toc8">8.</A> <A HREF="tgi.html#s8">tgi_getaspectratio</A></H2>
+
+<P>
+<H2><A NAME="toc9">9.</A> <A HREF="tgi.html#s9">tgi_getcolor</A></H2>
+
+<P>
+<H2><A NAME="toc10">10.</A> <A HREF="tgi.html#s10">tgi_getcolorcount</A></H2>
+
+<P>
+<H2><A NAME="toc11">11.</A> <A HREF="tgi.html#s11">tgi_getdefpalette</A></H2>
+
+<P>
+<H2><A NAME="toc12">12.</A> <A HREF="tgi.html#s12">tgi_geterror</A></H2>
+
+<P>
+<H2><A NAME="toc13">13.</A> <A HREF="tgi.html#s13">tgi_geterrormsg</A></H2>
+
+<P>
+<H2><A NAME="toc14">14.</A> <A HREF="tgi.html#s14">tgi_getmaxcolor</A></H2>
+
+<P>
+<H2><A NAME="toc15">15.</A> <A HREF="tgi.html#s15">tgi_getmaxx</A></H2>
+
+<P>
+<H2><A NAME="toc16">16.</A> <A HREF="tgi.html#s16">tgi_getmaxy</A></H2>
+
+<P>
+<H2><A NAME="toc17">17.</A> <A HREF="tgi.html#s17">tgi_getpagecount</A></H2>
+
+<P>
+<H2><A NAME="toc18">18.</A> <A HREF="tgi.html#s18">tgi_getpalette</A></H2>
+
+<P>
+<H2><A NAME="toc19">19.</A> <A HREF="tgi.html#s19">tgi_getpixel</A></H2>
+
+<P>
+<H2><A NAME="toc20">20.</A> <A HREF="tgi.html#s20">tgi_getxres</A></H2>
+
+<P>
+<H2><A NAME="toc21">21.</A> <A HREF="tgi.html#s21">tgi_getyres</A></H2>
+
+<P>
+<H2><A NAME="toc22">22.</A> <A HREF="tgi.html#s22">tgi_gotoxy</A></H2>
+
+<P>
+<H2><A NAME="toc23">23.</A> <A HREF="tgi.html#s23">tgi_init</A></H2>
+
+<P>
+<H2><A NAME="toc24">24.</A> <A HREF="tgi.html#s24">tgi_install</A></H2>
+
+<P>
+<H2><A NAME="toc25">25.</A> <A HREF="tgi.html#s25">tgi_install_vectorfont</A></H2>
+
+<P>
+<H2><A NAME="toc26">26.</A> <A HREF="tgi.html#s26">tgi_ioctl</A></H2>
+
+<P>
+<H2><A NAME="toc27">27.</A> <A HREF="tgi.html#s27">tgi_line</A></H2>
+
+<P>
+<H2><A NAME="toc28">28.</A> <A HREF="tgi.html#s28">tgi_lineto</A></H2>
+
+<P>
+<H2><A NAME="toc29">29.</A> <A HREF="tgi.html#s29">tgi_load_driver</A></H2>
+
+<P>
+<H2><A NAME="toc30">30.</A> <A HREF="tgi.html#s30">tgi_load_vectorfont</A></H2>
+
+<P>
+<H2><A NAME="toc31">31.</A> <A HREF="tgi.html#s31">tgi_outtext</A></H2>
+
+<P>
+<H2><A NAME="toc32">32.</A> <A HREF="tgi.html#s32">tgi_outtextxy</A></H2>
+
+<P>
+<H2><A NAME="toc33">33.</A> <A HREF="tgi.html#s33">tgi_pieslice</A></H2>
+
+<P>
+<H2><A NAME="toc34">34.</A> <A HREF="tgi.html#s34">tgi_setaspectratio</A></H2>
+
+<P>
+<H2><A NAME="toc35">35.</A> <A HREF="tgi.html#s35">tgi_setcolor</A></H2>
+
+<P>
+<H2><A NAME="toc36">36.</A> <A HREF="tgi.html#s36">tgi_setdrawpage</A></H2>
+
+<P>
+<H2><A NAME="toc37">37.</A> <A HREF="tgi.html#s37">tgi_setpalette</A></H2>
+
+<P>
+<H2><A NAME="toc38">38.</A> <A HREF="tgi.html#s38">tgi_setpixel</A></H2>
+
+<P>
+<H2><A NAME="toc39">39.</A> <A HREF="tgi.html#s39">tgi_setviewpage</A></H2>
+
+<P>
+<H2><A NAME="toc40">40.</A> <A HREF="tgi.html#s40">tgi_gettextheight</A></H2>
+
+<P>
+<H2><A NAME="toc41">41.</A> <A HREF="tgi.html#s41">tgi_settextscale</A></H2>
+
+<P>
+<H2><A NAME="toc42">42.</A> <A HREF="tgi.html#s42">tgi_settextstyle</A></H2>
+
+<P>
+<H2><A NAME="toc43">43.</A> <A HREF="tgi.html#s43">tgi_gettextwidth</A></H2>
+
+<P>
+<H2><A NAME="toc44">44.</A> <A HREF="tgi.html#s44">tgi_uninstall</A></H2>
+
+<P>
+<H2><A NAME="toc45">45.</A> <A HREF="tgi.html#s45">tgi_unload</A></H2>
+
+
+<HR>
+<H2><A NAME="tgi_arc"></A> <A NAME="s1">1.</A> <A HREF="#toc1">tgi_arc</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Draw an elliptic arc in the current color.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_arc (int x, int y,
+unsigned char rx, unsigned char ry, unsigned sa, unsigned ea);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The function draws an elliptic arc with center at x/y and
+radii rx/ry using the current drawing color. The arc covers the angle
+between sa and ea (startangle and endangle), which must be in the range
+0..360.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+<LI>The function behaves unexpectedly or may crash if the angles are out
+of range.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_bar">tgi_bar</A>,
+<A HREF="#tgi_circle">tgi_circle</A>,
+<A HREF="#tgi_ellipse">tgi_ellipse</A>,
+<A HREF="#tgi_pieslice">tgi_pieslice</A>,
+<A HREF="#tgi_setcolor">tgi_setcolor</A></P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+/* Draw the upper half of an ellipse */
+tgi_setcolor(TGI_COLOR_BLUE);
+tgi_arc (50, 50, 40, 20, 0, 180);
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_bar"></A> <A NAME="s2">2.</A> <A HREF="#toc2">tgi_bar</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>The function fills a rectangle on the drawpage with the current
+color.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_bar (int x1, int y1, int x2, int y2);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The function fills a rectangle on the drawpage with the current
+color.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi function</P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+tgi_setcolor(TGI_COLOR_GREEN);
+tgi_bar(10, 10, 100, 60);
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_circle"></A> <A NAME="s3">3.</A> <A HREF="#toc3">tgi_circle</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>The function draws a circle in the current color.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_circle (int x, int y, unsigned char radius);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The function draws a circle in the current color.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_arc">tgi_arc</A>,
+<A HREF="#tgi_bar">tgi_bar</A>,
+<A HREF="#tgi_ellipse">tgi_ellipse</A>,
+<A HREF="#tgi_pieslice">tgi_pieslice</A>,
+<A HREF="#tgi_setcolor">tgi_setcolor</A></P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+tgi_setcolor(TGI_COLOR_BLACK);
+tgi_circle(50, 40, 40);
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_clear"></A> <A NAME="s4">4.</A> <A HREF="#toc4">tgi_clear</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Clear the drawpage</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void tgi_clear (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Clear the drawpage</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_done"></A> <A NAME="s5">5.</A> <A HREF="#toc5">tgi_done</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>End graphics mode, switch back to text mode.
+Will NOT uninstall or unload the driver!</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void tgi_done (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>End graphics mode, switch back to text mode.
+Will NOT uninstall or unload the driver!</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_ellipse"></A> <A NAME="s6">6.</A> <A HREF="#toc6">tgi_ellipse</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>The function draws an ellipse in the current color.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_ellipse (int x, int y, unsigned char rx, unsigned char ry);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The function draws an ellipse at position x/y with radii
+rx and ry, using the current drawing color.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_arc">tgi_arc</A>,
+<A HREF="#tgi_bar">tgi_bar</A>,
+<A HREF="#tgi_circle">tgi_circle</A>,
+<A HREF="#tgi_pieslice">tgi_pieslice</A>,
+<A HREF="#tgi_setcolor">tgi_setcolor</A></P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+tgi_setcolor(TGI_COLOR_RED);
+tgi_ellipse (50, 40, 40, 20);
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_free_vectorfont"></A> <A NAME="s7">7.</A> <A HREF="#toc7">tgi_free_vectorfont</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Free a vector font that was previously loaded into memory.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_free_vectorfont (const tgi_vectorfont* font);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Free a vector font that was previously loaded into memory.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_load_vectorfont">tgi_load_vectorfont</A>,
+<A HREF="#tgi_install_vectorfont">tgi_install_vectorfont</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getaspectratio"></A> <A NAME="s8">8.</A> <A HREF="#toc8">tgi_getaspectratio</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+ 
+<DL>
+<DT><B>Function</B><DD>
+<P>Return the pixel aspect ratio.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned tgi_getaspectratio (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The function returns the pixel aspect ratio for the current
+driver and display as an 8.8 fixed point value. It may be used to correct
+geometric shapes so they look correct on the display. As an example, a circle
+with a radius of 100 pixels may look elliptic on some driver/display
+combinations if the aspect ratio is not 1.00.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The aspect ratio is encoded in the TGI driver which assumes a "standard"
+monitor for the given platform. The aspect ratio may be wrong if another
+monitor is used.</LI>
+<LI>No TGI function will use the aspect ratio. It is up to the programmer to
+make use of it.</LI>
+<LI>The 
+<A HREF="#tgi_setaspectratio">tgi_setaspectratio</A> function can
+be used to change the aspect ratio for a loaded driver. The value is not reset
+by 
+<A HREF="#tgi_init">tgi_init</A>, so if a driver is linked statically to
+an application, switching into and out of graphics mode will not restore the
+original aspect ratio.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_setaspectratio">tgi_setaspectratio</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getcolor"></A> <A NAME="s9">9.</A> <A HREF="#toc9">tgi_getcolor</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Return the current drawing color.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned char tgi_getcolor (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The actual color is an index to a palette. During tgi_init
+you will get a default palette. The number of colors depend on the platform.
+All platforms recognize at least TGI_COLOR_BLACK and TGI_COLOR_WHITE. But some
+platforms have many more predefined colors. If you paint using TGI_COLOR_GREEN
+and then you change the green of the palette to blue using tgi_setpalette then
+after this painting in TGI_COLOR_GREEN will actually be blue.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+color = tgi_getcolor();
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getcolorcount"></A> <A NAME="s10">10.</A> <A HREF="#toc10">tgi_getcolorcount</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get the number of available colors.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned char tgi_getcolorcount (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Tgi platforms use indexed color palettes. This function
+returns the number of entries we can use in the palette.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+if (tgi_getcolorcount() == 2) {
+  printf("Only monochrome graphics is supported\n");
+}
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getdefpalette"></A> <A NAME="s11">11.</A> <A HREF="#toc11">tgi_getdefpalette</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get the palette installed by default.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>const unsigned char* tgi_getdefpalette (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The tgi driver has a default palette that is active at startup.
+The named colors TGI_COLOR_BLACK, TGI_COLOR_WHITE, TGI_COLOR_RED... need this
+palette to work correctly.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_geterror"></A> <A NAME="s12">12.</A> <A HREF="#toc12">tgi_geterror</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Return the error code for the last operation.
+This will also clear the error.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned char tgi_geterror (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Return the error code for the last operation.
+This will also clear the error.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_geterrormsg"></A> <A NAME="s13">13.</A> <A HREF="#toc13">tgi_geterrormsg</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get an error message describing the error.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>const char* __fastcall__ tgi_geterrormsg (unsigned char code);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Get an error message describing the error.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getmaxcolor"></A> <A NAME="s14">14.</A> <A HREF="#toc14">tgi_getmaxcolor</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get the highest index of the palette.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned char tgi_getmaxcolor (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Get the highest index of the palette.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getmaxx"></A> <A NAME="s15">15.</A> <A HREF="#toc15">tgi_getmaxx</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get the maximum x coordinate that can be used on this screen.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned tgi_getmaxx (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Get the maximum x coordinate that can be used on this screen.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getmaxy"></A> <A NAME="s16">16.</A> <A HREF="#toc16">tgi_getmaxy</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get the maximum y coordinate that can be used on this screen.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned tgi_getmaxy (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Get the maximum y coordinate that can be used on this screen.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getpagecount"></A> <A NAME="s17">17.</A> <A HREF="#toc17">tgi_getpagecount</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Return the number of screen pages available.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned tgi_getpagecount (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Return the number of screen pages available.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_setdrawpage">tgi_setdrawpage</A>,
+<A HREF="#tgi_setviewpage">tgi_setviewpage</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getpalette"></A> <A NAME="s18">18.</A> <A HREF="#toc18">tgi_getpalette</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get the palette installed.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>const unsigned char* tgi_getpalette (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Get the palette installed.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getpixel"></A> <A NAME="s19">19.</A> <A HREF="#toc19">tgi_getpixel</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get the color of a pixel from the viewpage.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned char __fastcall__ tgi_getpixel (int x, int y);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Get the color of a pixel from the viewpage.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getxres"></A> <A NAME="s20">20.</A> <A HREF="#toc20">tgi_getxres</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get number of horisontal pixels on the screen.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned tgi_getxres (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Get number of horisontal pixels on the screen.
+This is same as tgi_maxx()+1.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getyres"></A> <A NAME="s21">21.</A> <A HREF="#toc21">tgi_getyres</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Get number of vertical pixels on the screen.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned tgi_getyres (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Get number of vertical pixels on the screen.
+This is same as tgi_maxy()+1.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_gotoxy"></A> <A NAME="s22">22.</A> <A HREF="#toc22">tgi_gotoxy</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set graphics cursor at x, y.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_gotoxy (int x, int y);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Set graphics cursor at x, y.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_init"></A> <A NAME="s23">23.</A> <A HREF="#toc23">tgi_init</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Initialize the already loaded graphics driver.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void tgi_init (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The tgi_init function will set the default palette to the
+hardware.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI><CODE>tgi_init</CODE> will not clear the screen. This allows switching between
+text and graphics mode on platforms that have separate memory areas for the
+screens. If you want the screen cleared, call <CODE>
+<A HREF="#tgi_clear">tgi_clear</A></CODE> after <CODE>tgi_init</CODE>.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+tgi_install(tgi_static_stddrv); //Include the driver statically instead of loading it.
+tgi_init(); //Set up the default palette and clear the screen.
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_install"></A> <A NAME="s24">24.</A> <A HREF="#toc24">tgi_install</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Install an already loaded driver and return an error code.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned char __fastcall__ tgi_install (void* driver);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The function installs a driver that was already loaded into
+memory (or linked statically to the program). It returns an error code
+(<CODE>TGI_ERR_OK</CODE> in case of success).</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only be
+used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_load_driver">tgi_load_driver</A>,
+<A HREF="#tgi_uninstall">tgi_uninstall</A>,
+<A HREF="#tgi_unload">tgi_unload</A></P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+tgi_install(tgi_static_stddrv); //Include the driver statically instead of loading it.
+tgi_init(); //Set up the default palette and clear the screen.
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_install_vectorfont"></A> <A NAME="s25">25.</A> <A HREF="#toc25">tgi_install_vectorfont</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Install an already loaded driver and return an error code.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_install_vectorfont (const tgi_vectorfont* font);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Install a vector font for use. More than one vector font can be loaded,
+but only one can be active. This function is used to tell which one. Call
+with a NULL pointer to uninstall the currently installed font.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only be
+used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_load_vectorfont">tgi_load_vectorfont</A>,
+<A HREF="#tgi_free_vectorfont">tgi_free_vectorfont</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_ioctl"></A> <A NAME="s26">26.</A> <A HREF="#toc26">tgi_ioctl</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Platform dependent code extensions.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned __fastcall__ tgi_ioctl (unsigned char code, void* data);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Some platforms have extra display hardware that is not
+supported by standard tgi functions. You can extend the driver to support
+this extra hardware using tgi_ioctl functions.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+<LI>These functions are not easily portable to other cc65 platforms.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+#define tgi_sprite(spr) tgi_ioctl(0, (void*)(spr))
+#define tgi_flip() tgi_ioctl(1, (void*)0)
+#define tgi_setbgcolor(bgcol) tgi_ioctl(2, (void*)(bgcol))
+#define tgi_setframerate(rate) tgi_ioctl(3, (void*)(rate))
+#define tgi_busy() tgi_ioctl(4, (void*)0)
+#define tgi_updatedisplay() tgi_ioctl(4, (void*)1)
+if (!tgi_busy()) {
+  tgi_sprite(&amp;background);
+  tgi_setcolor(TGI_COLOR_BLUE);
+  tgi_outttextxy(20,40,"Hello World");
+  tgi_updatedisplay();
+}
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_line"></A> <A NAME="s27">27.</A> <A HREF="#toc27">tgi_line</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Draw a line in the current drawing color.
+The graphics cursor will be set to x2/y2 by this call.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_line (int x1, int y1, int x2, int y2);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Draw a line in the current drawing color.
+The graphics cursor will be set to x2/y2 by this call.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_lineto"></A> <A NAME="s28">28.</A> <A HREF="#toc28">tgi_lineto</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Draw a line in the current drawing color from the graphics
+cursor to the new end point. The graphics cursor will be updated to x2/y2.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_lineto (int x2, int y2);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Draw a line in the current drawing color from the graphics
+cursor to the new end point. The graphics cursor will be updated to x2/y2.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_load_driver"></A> <A NAME="s29">29.</A> <A HREF="#toc29">tgi_load_driver</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Load and install the given driver.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_load_driver (const char *name);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Load and install the driver by name.
+Will just load the driver and check if loading was successful.
+Will not switch to graphics mode.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_load_vectorfont"></A> <A NAME="s30">30.</A> <A HREF="#toc30">tgi_load_vectorfont</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Load the given vector font.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>const tgi_vectorfont* __fastcall__ tgi_load_vectorfont (const char* name);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Load a vector font into memory and return it. In case of errors, NULL is
+returned and an error is set, which can be retrieved using tgi_geterror.
+To use the font, it has to be installed using tgi_install_vectorfont.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_install_vectorfont">tgi_install_vectorfont</A>,
+<A HREF="#tgi_free_vectorfont">tgi_free_vectorfont</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_outtext"></A> <A NAME="s31">31.</A> <A HREF="#toc31">tgi_outtext</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Output text at the current graphics cursor position.
+The graphics cursor is moved to the end of the text.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_outtext (const char* s);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Output text at the current graphics cursor position.
+The graphics cursor is moved to the end of the text.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_outtextxy"></A> <A NAME="s32">32.</A> <A HREF="#toc32">tgi_outtextxy</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Output text at the given cursor position.
+The graphics cursor is moved to the end of the text.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_outtextxy (int x, int y, const char* s);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Output text at the given cursor position.
+The graphics cursor is moved to the end of the text.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_pieslice"></A> <A NAME="s33">33.</A> <A HREF="#toc33">tgi_pieslice</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Draw an elliptic pie slice in the current color.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_pie slice (int x, int y,
+unsigned char rx, unsigned char ry, unsigned sa, unsigned ea);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The function draws an elliptic pie slice with center at x/y
+and radii rx/ry using the current drawing color. The pie slice covers the angle
+between sa and ea (startangle and endangle), which must be in the range
+0..360.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+<LI>The function behaves unexpectedly or may crash if the angles are out
+of range.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_bar">tgi_arc</A>,
+<A HREF="#tgi_bar">tgi_bar</A>,
+<A HREF="#tgi_circle">tgi_circle</A>,
+<A HREF="#tgi_ellipse">tgi_ellipse</A>,
+<A HREF="#tgi_setcolor">tgi_setcolor</A></P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+/* Draw the closed upper half of an ellipse */
+tgi_setcolor(TGI_COLOR_BLUE);
+tgi_pieslice (50, 50, 40, 20, 0, 180);
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_setaspectratio"></A> <A NAME="s34">34.</A> <A HREF="#toc34">tgi_setaspectratio</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+ 
+<DL>
+<DT><B>Function</B><DD>
+<P>Set the pixel aspect ratio.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_setaspectratio (unsigned ratio);</CODE></P>
+<DT><B>Description</B><DD>
+<P>The function sets the pixel aspect ratio for the current
+driver and display. The argument is an 8.8 fixed point value. The aspect ratio
+may be used to correct geometric shapes so they look correct on a given
+display. As an example, a circle with a radius of 100 pixels may look elliptic
+on some driver/display combinations if the aspect ratio is not 1.00.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The aspect ratio is encoded in the TGI driver which assumes a "standard"
+monitor for the given platform. The aspect ratio may be wrong if another
+monitor is used.</LI>
+<LI>No TGI function will use the aspect ratio. It is up to the programmer to
+make use of it.</LI>
+<LI>The <CODE>tgi_setaspectratio</CODE> function can be used to change the aspect
+ratio for a loaded driver. The value is not reset by 
+<A HREF="#tgi_init">tgi_init</A>, so if a driver is linked statically to an application,
+switching into and out of graphics mode will not restore the original aspect
+ratio.</LI>
+<LI>The function is available only as a fastcall function; so, it may be used
+only in the presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_getaspectratio">tgi_getaspectratio</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_setcolor"></A> <A NAME="s35">35.</A> <A HREF="#toc35">tgi_setcolor</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set color to be used in future draw operations.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_setcolor (unsigned char color);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Set color to be used in future draw operations.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+tgi_setcolor(TGI_COLOR_BLACK);
+tgi_bar(0,0,30,30);
+tgi_setcolor(TGI_COLOR_WHITE);
+tgi_bar(10,10,20,20);
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_setdrawpage"></A> <A NAME="s36">36.</A> <A HREF="#toc36">tgi_setdrawpage</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set the page for drawing.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_setdrawpage (unsigned char page);</CODE></P>
+<DT><B>Description</B><DD>
+<P>If the drawpage and the viewpage are the same then all drawing
+is seen immediately as it is drawn. For double buffered games you can set the
+drawpage to a different page than the viewpage. This lets you draw the next
+screen in the background and when the screen is ready you display it.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+tgi_setdrawpage(1);
+tgi_outtextxy(10, 10, "Hello World");
+tgi_setviewpage(1); // Show page 1
+tgi_setdrawpage(0);
+tgi_outtextxy(10, 10, "Creating next frame");
+...
+tgi_setviewpage(0); // Show page 0
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_setpalette"></A> <A NAME="s37">37.</A> <A HREF="#toc37">tgi_setpalette</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set the palette (not available with all drivers/hardware).
+Palette is a pointer to as many entries as there are colors.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_setpalette (const unsigned char* palette);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Set the palette (not available with all drivers/hardware).
+Palette is a pointer to as many entries as there are colors.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_setpixel"></A> <A NAME="s38">38.</A> <A HREF="#toc38">tgi_setpixel</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Plot a pixel on the drawpage with the current color.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_setpixel (int x, int y);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Plot a pixel on the drawpage with the current color.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_setviewpage"></A> <A NAME="s39">39.</A> <A HREF="#toc39">tgi_setviewpage</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set page to be visible on screen.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_setviewpage (unsigned char page);</CODE></P>
+<DT><B>Description</B><DD>
+<P>If the drawpage and the viewpage are the same then all drawing
+is seen immediately as it is drawn. For double buffered games you can set the
+drawpage to a different page than the viewpage. This lets you draw the next
+screen in the background and when the screen is ready you display it.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>
+<PRE>
+tgi_setdrawpage(1);
+tgi_outtextxy(10, 10, "Hello World");
+tgi_setviewpage(1); // Show page 1
+tgi_setdrawpage(0);
+tgi_outtextxy(10, 10, "Creating next frame");
+...
+tgi_setviewpage(0); // Show page 0
+</PRE>
+</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_gettextheight"></A> <A NAME="s40">40.</A> <A HREF="#toc40">tgi_gettextheight</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Calculate the height of the text in pixels according to
+the current text style.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned __fastcall__ tgi_gettextheight (const char* s);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Calculate the height of the text in pixels according to
+the current text style.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_settextscale"></A> <A NAME="s41">41.</A> <A HREF="#toc41">tgi_settextscale</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set the scaling for text output.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_settextscale (unsigned width, unsigned height);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Set the scaling for text output. The scaling factors for width and height
+are 8.8 fixed point values. This means that $100 = 1 $200 = 2 etc.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_settextstyle">tgi_settextstyle</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_settextstyle"></A> <A NAME="s42">42.</A> <A HREF="#toc42">tgi_settextstyle</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set the style for text output.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_settextstyle (unsigned char magx, unsigned char magy, unsigned char dir, unsigned char font);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Set the style for text output.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_settextscale">tgi_settextscale</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_gettextwidth"></A> <A NAME="s43">43.</A> <A HREF="#toc43">tgi_gettextwidth</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Calculate the width of the text in pixels according to the current text style.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned __fastcall__ tgi_gettextwidth (const char* s);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Calculate the width of the text in pixels according to the current text style.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_uninstall"></A> <A NAME="s44">44.</A> <A HREF="#toc44">tgi_uninstall</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Uninstall the currently loaded driver but do not unload it.
+Will call tgi_done if necessary.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void tgi_uninstall (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Uninstall the currently loaded driver but do not unload it.
+Will call tgi_done if necessary.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+<H2><A NAME="tgi_unload"></A> <A NAME="s45">45.</A> <A HREF="#toc45">tgi_unload</A></H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Uninstall, then unload the currently loaded driver.
+Will call tgi_done if necessary.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void tgi_unload (void);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Uninstall, then unload the currently loaded driver.
+Will call tgi_done if necessary.</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+</BODY>
+</HTML>
