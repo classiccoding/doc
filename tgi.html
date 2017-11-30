@@ -9,154 +9,69 @@
 <H1>Tiny Graphics Interface</H1>
 
 <H2>
-<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A></H2>2017-11-23
+<A HREF="mailto:uz@cc65.org">Ullrich von Bassewitz</A>,<BR>
+<A HREF="mailto:polluks@sdf.lonestar.org">Stefan A. Haubenthal</A>,<BR>
+<A HREF="mailto:greg.king5@verizon.net">Greg King</A></H2>2017-11-30
 <HR>
 <EM>The cc65 library provides functions for platform independent graphics.
 Include the tgi.h header file to get the necessary definitions.</EM>
 <HR>
-<P><CODE>tgi.h</CODE>
-<A NAME="tgi.h"></A> </P>
-
-
-
 <P>
-<H2><A NAME="toc1">1.</A> <A HREF="tgi.html#s1">tgi_arc</A></H2>
+<H2><A NAME="toc1">1.</A> <A HREF="tgi.html#s1">tgi.h</A></H2>
 
-<P>
-<H2><A NAME="toc2">2.</A> <A HREF="tgi.html#s2">tgi_bar</A></H2>
-
-<P>
-<H2><A NAME="toc3">3.</A> <A HREF="tgi.html#s3">tgi_circle</A></H2>
-
-<P>
-<H2><A NAME="toc4">4.</A> <A HREF="tgi.html#s4">tgi_clear</A></H2>
-
-<P>
-<H2><A NAME="toc5">5.</A> <A HREF="tgi.html#s5">tgi_done</A></H2>
-
-<P>
-<H2><A NAME="toc6">6.</A> <A HREF="tgi.html#s6">tgi_ellipse</A></H2>
-
-<P>
-<H2><A NAME="toc7">7.</A> <A HREF="tgi.html#s7">tgi_free_vectorfont</A></H2>
-
-<P>
-<H2><A NAME="toc8">8.</A> <A HREF="tgi.html#s8">tgi_getaspectratio</A></H2>
-
-<P>
-<H2><A NAME="toc9">9.</A> <A HREF="tgi.html#s9">tgi_getcolor</A></H2>
-
-<P>
-<H2><A NAME="toc10">10.</A> <A HREF="tgi.html#s10">tgi_getcolorcount</A></H2>
-
-<P>
-<H2><A NAME="toc11">11.</A> <A HREF="tgi.html#s11">tgi_getdefpalette</A></H2>
-
-<P>
-<H2><A NAME="toc12">12.</A> <A HREF="tgi.html#s12">tgi_geterror</A></H2>
-
-<P>
-<H2><A NAME="toc13">13.</A> <A HREF="tgi.html#s13">tgi_geterrormsg</A></H2>
-
-<P>
-<H2><A NAME="toc14">14.</A> <A HREF="tgi.html#s14">tgi_getmaxcolor</A></H2>
-
-<P>
-<H2><A NAME="toc15">15.</A> <A HREF="tgi.html#s15">tgi_getmaxx</A></H2>
-
-<P>
-<H2><A NAME="toc16">16.</A> <A HREF="tgi.html#s16">tgi_getmaxy</A></H2>
-
-<P>
-<H2><A NAME="toc17">17.</A> <A HREF="tgi.html#s17">tgi_getpagecount</A></H2>
-
-<P>
-<H2><A NAME="toc18">18.</A> <A HREF="tgi.html#s18">tgi_getpalette</A></H2>
-
-<P>
-<H2><A NAME="toc19">19.</A> <A HREF="tgi.html#s19">tgi_getpixel</A></H2>
-
-<P>
-<H2><A NAME="toc20">20.</A> <A HREF="tgi.html#s20">tgi_getxres</A></H2>
-
-<P>
-<H2><A NAME="toc21">21.</A> <A HREF="tgi.html#s21">tgi_getyres</A></H2>
-
-<P>
-<H2><A NAME="toc22">22.</A> <A HREF="tgi.html#s22">tgi_gotoxy</A></H2>
-
-<P>
-<H2><A NAME="toc23">23.</A> <A HREF="tgi.html#s23">tgi_init</A></H2>
-
-<P>
-<H2><A NAME="toc24">24.</A> <A HREF="tgi.html#s24">tgi_install</A></H2>
-
-<P>
-<H2><A NAME="toc25">25.</A> <A HREF="tgi.html#s25">tgi_install_vectorfont</A></H2>
-
-<P>
-<H2><A NAME="toc26">26.</A> <A HREF="tgi.html#s26">tgi_ioctl</A></H2>
-
-<P>
-<H2><A NAME="toc27">27.</A> <A HREF="tgi.html#s27">tgi_line</A></H2>
-
-<P>
-<H2><A NAME="toc28">28.</A> <A HREF="tgi.html#s28">tgi_lineto</A></H2>
-
-<P>
-<H2><A NAME="toc29">29.</A> <A HREF="tgi.html#s29">tgi_load_driver</A></H2>
-
-<P>
-<H2><A NAME="toc30">30.</A> <A HREF="tgi.html#s30">tgi_load_vectorfont</A></H2>
-
-<P>
-<H2><A NAME="toc31">31.</A> <A HREF="tgi.html#s31">tgi_outtext</A></H2>
-
-<P>
-<H2><A NAME="toc32">32.</A> <A HREF="tgi.html#s32">tgi_outtextxy</A></H2>
-
-<P>
-<H2><A NAME="toc33">33.</A> <A HREF="tgi.html#s33">tgi_pieslice</A></H2>
-
-<P>
-<H2><A NAME="toc34">34.</A> <A HREF="tgi.html#s34">tgi_setaspectratio</A></H2>
-
-<P>
-<H2><A NAME="toc35">35.</A> <A HREF="tgi.html#s35">tgi_setcolor</A></H2>
-
-<P>
-<H2><A NAME="toc36">36.</A> <A HREF="tgi.html#s36">tgi_setdrawpage</A></H2>
-
-<P>
-<H2><A NAME="toc37">37.</A> <A HREF="tgi.html#s37">tgi_setpalette</A></H2>
-
-<P>
-<H2><A NAME="toc38">38.</A> <A HREF="tgi.html#s38">tgi_setpixel</A></H2>
-
-<P>
-<H2><A NAME="toc39">39.</A> <A HREF="tgi.html#s39">tgi_setviewpage</A></H2>
-
-<P>
-<H2><A NAME="toc40">40.</A> <A HREF="tgi.html#s40">tgi_gettextheight</A></H2>
-
-<P>
-<H2><A NAME="toc41">41.</A> <A HREF="tgi.html#s41">tgi_settextscale</A></H2>
-
-<P>
-<H2><A NAME="toc42">42.</A> <A HREF="tgi.html#s42">tgi_settextstyle</A></H2>
-
-<P>
-<H2><A NAME="toc43">43.</A> <A HREF="tgi.html#s43">tgi_gettextwidth</A></H2>
-
-<P>
-<H2><A NAME="toc44">44.</A> <A HREF="tgi.html#s44">tgi_uninstall</A></H2>
-
-<P>
-<H2><A NAME="toc45">45.</A> <A HREF="tgi.html#s45">tgi_unload</A></H2>
-
+<UL>
+<LI><A NAME="toc1.1">1.1</A> <A HREF="tgi.html#ss1.1">tgi_arc</A>
+<LI><A NAME="toc1.2">1.2</A> <A HREF="tgi.html#ss1.2">tgi_bar</A>
+<LI><A NAME="toc1.3">1.3</A> <A HREF="tgi.html#ss1.3">tgi_circle</A>
+<LI><A NAME="toc1.4">1.4</A> <A HREF="tgi.html#ss1.4">tgi_clear</A>
+<LI><A NAME="toc1.5">1.5</A> <A HREF="tgi.html#ss1.5">tgi_done</A>
+<LI><A NAME="toc1.6">1.6</A> <A HREF="tgi.html#ss1.6">tgi_ellipse</A>
+<LI><A NAME="toc1.7">1.7</A> <A HREF="tgi.html#ss1.7">tgi_free_vectorfont</A>
+<LI><A NAME="toc1.8">1.8</A> <A HREF="tgi.html#ss1.8">tgi_getaspectratio</A>
+<LI><A NAME="toc1.9">1.9</A> <A HREF="tgi.html#ss1.9">tgi_getcolor</A>
+<LI><A NAME="toc1.10">1.10</A> <A HREF="tgi.html#ss1.10">tgi_getcolorcount</A>
+<LI><A NAME="toc1.11">1.11</A> <A HREF="tgi.html#ss1.11">tgi_getdefpalette</A>
+<LI><A NAME="toc1.12">1.12</A> <A HREF="tgi.html#ss1.12">tgi_geterror</A>
+<LI><A NAME="toc1.13">1.13</A> <A HREF="tgi.html#ss1.13">tgi_geterrormsg</A>
+<LI><A NAME="toc1.14">1.14</A> <A HREF="tgi.html#ss1.14">tgi_getmaxcolor</A>
+<LI><A NAME="toc1.15">1.15</A> <A HREF="tgi.html#ss1.15">tgi_getmaxx</A>
+<LI><A NAME="toc1.16">1.16</A> <A HREF="tgi.html#ss1.16">tgi_getmaxy</A>
+<LI><A NAME="toc1.17">1.17</A> <A HREF="tgi.html#ss1.17">tgi_getpagecount</A>
+<LI><A NAME="toc1.18">1.18</A> <A HREF="tgi.html#ss1.18">tgi_getpalette</A>
+<LI><A NAME="toc1.19">1.19</A> <A HREF="tgi.html#ss1.19">tgi_getpixel</A>
+<LI><A NAME="toc1.20">1.20</A> <A HREF="tgi.html#ss1.20">tgi_gettextheight</A>
+<LI><A NAME="toc1.21">1.21</A> <A HREF="tgi.html#ss1.21">tgi_gettextwidth</A>
+<LI><A NAME="toc1.22">1.22</A> <A HREF="tgi.html#ss1.22">tgi_getxres</A>
+<LI><A NAME="toc1.23">1.23</A> <A HREF="tgi.html#ss1.23">tgi_getyres</A>
+<LI><A NAME="toc1.24">1.24</A> <A HREF="tgi.html#ss1.24">tgi_gotoxy</A>
+<LI><A NAME="toc1.25">1.25</A> <A HREF="tgi.html#ss1.25">tgi_init</A>
+<LI><A NAME="toc1.26">1.26</A> <A HREF="tgi.html#ss1.26">tgi_install</A>
+<LI><A NAME="toc1.27">1.27</A> <A HREF="tgi.html#ss1.27">tgi_install_vectorfont</A>
+<LI><A NAME="toc1.28">1.28</A> <A HREF="tgi.html#ss1.28">tgi_ioctl</A>
+<LI><A NAME="toc1.29">1.29</A> <A HREF="tgi.html#ss1.29">tgi_line</A>
+<LI><A NAME="toc1.30">1.30</A> <A HREF="tgi.html#ss1.30">tgi_lineto</A>
+<LI><A NAME="toc1.31">1.31</A> <A HREF="tgi.html#ss1.31">tgi_load_driver</A>
+<LI><A NAME="toc1.32">1.32</A> <A HREF="tgi.html#ss1.32">tgi_load_vectorfont</A>
+<LI><A NAME="toc1.33">1.33</A> <A HREF="tgi.html#ss1.33">tgi_outtext</A>
+<LI><A NAME="toc1.34">1.34</A> <A HREF="tgi.html#ss1.34">tgi_outtextxy</A>
+<LI><A NAME="toc1.35">1.35</A> <A HREF="tgi.html#ss1.35">tgi_pieslice</A>
+<LI><A NAME="toc1.36">1.36</A> <A HREF="tgi.html#ss1.36">tgi_setaspectratio</A>
+<LI><A NAME="toc1.37">1.37</A> <A HREF="tgi.html#ss1.37">tgi_setcolor</A>
+<LI><A NAME="toc1.38">1.38</A> <A HREF="tgi.html#ss1.38">tgi_setdrawpage</A>
+<LI><A NAME="toc1.39">1.39</A> <A HREF="tgi.html#ss1.39">tgi_setpalette</A>
+<LI><A NAME="toc1.40">1.40</A> <A HREF="tgi.html#ss1.40">tgi_setpixel</A>
+<LI><A NAME="toc1.41">1.41</A> <A HREF="tgi.html#ss1.41">tgi_settextscale</A>
+<LI><A NAME="toc1.42">1.42</A> <A HREF="tgi.html#ss1.42">tgi_settextstyle</A>
+<LI><A NAME="toc1.43">1.43</A> <A HREF="tgi.html#ss1.43">tgi_setviewpage</A>
+<LI><A NAME="toc1.44">1.44</A> <A HREF="tgi.html#ss1.44">tgi_uninstall</A>
+<LI><A NAME="toc1.45">1.45</A> <A HREF="tgi.html#ss1.45">tgi_unload</A>
+</UL>
 
 <HR>
-<H2><A NAME="tgi_arc"></A> <A NAME="s1">1.</A> <A HREF="#toc1">tgi_arc</A></H2>
+<H2><A NAME="tgi.h"></A> <A NAME="s1">1.</A> <A HREF="#toc1">tgi.h</A></H2>
+
+<H2><A NAME="tgi_arc"></A> <A NAME="ss1.1">1.1</A> <A HREF="#toc1.1">tgi_arc</A>
+</H2>
 
 
 <P>
@@ -206,7 +121,8 @@ tgi_arc (50, 50, 40, 20, 0, 180);
 </P>
 
 
-<H2><A NAME="tgi_bar"></A> <A NAME="s2">2.</A> <A HREF="#toc2">tgi_bar</A></H2>
+<H2><A NAME="tgi_bar"></A> <A NAME="ss1.2">1.2</A> <A HREF="#toc1.2">tgi_bar</A>
+</H2>
 
 
 <P>
@@ -246,7 +162,8 @@ tgi_bar(10, 10, 100, 60);
 </P>
 
 
-<H2><A NAME="tgi_circle"></A> <A NAME="s3">3.</A> <A HREF="#toc3">tgi_circle</A></H2>
+<H2><A NAME="tgi_circle"></A> <A NAME="ss1.3">1.3</A> <A HREF="#toc1.3">tgi_circle</A>
+</H2>
 
 
 <P>
@@ -289,7 +206,8 @@ tgi_circle(50, 40, 40);
 </P>
 
 
-<H2><A NAME="tgi_clear"></A> <A NAME="s4">4.</A> <A HREF="#toc4">tgi_clear</A></H2>
+<H2><A NAME="tgi_clear"></A> <A NAME="ss1.4">1.4</A> <A HREF="#toc1.4">tgi_clear</A>
+</H2>
 
 
 <P>
@@ -315,7 +233,8 @@ tgi_circle(50, 40, 40);
 </P>
 
 
-<H2><A NAME="tgi_done"></A> <A NAME="s5">5.</A> <A HREF="#toc5">tgi_done</A></H2>
+<H2><A NAME="tgi_done"></A> <A NAME="ss1.5">1.5</A> <A HREF="#toc1.5">tgi_done</A>
+</H2>
 
 
 <P>
@@ -343,7 +262,8 @@ Will NOT uninstall or unload the driver!</P>
 </P>
 
 
-<H2><A NAME="tgi_ellipse"></A> <A NAME="s6">6.</A> <A HREF="#toc6">tgi_ellipse</A></H2>
+<H2><A NAME="tgi_ellipse"></A> <A NAME="ss1.6">1.6</A> <A HREF="#toc1.6">tgi_ellipse</A>
+</H2>
 
 
 <P>
@@ -387,7 +307,8 @@ tgi_ellipse (50, 40, 40, 20);
 </P>
 
 
-<H2><A NAME="tgi_free_vectorfont"></A> <A NAME="s7">7.</A> <A HREF="#toc7">tgi_free_vectorfont</A></H2>
+<H2><A NAME="tgi_free_vectorfont"></A> <A NAME="ss1.7">1.7</A> <A HREF="#toc1.7">tgi_free_vectorfont</A>
+</H2>
 
 
 <P>
@@ -422,7 +343,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getaspectratio"></A> <A NAME="s8">8.</A> <A HREF="#toc8">tgi_getaspectratio</A></H2>
+<H2><A NAME="tgi_getaspectratio"></A> <A NAME="ss1.8">1.8</A> <A HREF="#toc1.8">tgi_getaspectratio</A>
+</H2>
 
 
 <P>
@@ -471,7 +393,8 @@ original aspect ratio.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getcolor"></A> <A NAME="s9">9.</A> <A HREF="#toc9">tgi_getcolor</A></H2>
+<H2><A NAME="tgi_getcolor"></A> <A NAME="ss1.9">1.9</A> <A HREF="#toc1.9">tgi_getcolor</A>
+</H2>
 
 
 <P>
@@ -506,7 +429,8 @@ color = tgi_getcolor();
 </P>
 
 
-<H2><A NAME="tgi_getcolorcount"></A> <A NAME="s10">10.</A> <A HREF="#toc10">tgi_getcolorcount</A></H2>
+<H2><A NAME="tgi_getcolorcount"></A> <A NAME="ss1.10">1.10</A> <A HREF="#toc1.10">tgi_getcolorcount</A>
+</H2>
 
 
 <P>
@@ -539,7 +463,8 @@ if (tgi_getcolorcount() == 2) {
 </P>
 
 
-<H2><A NAME="tgi_getdefpalette"></A> <A NAME="s11">11.</A> <A HREF="#toc11">tgi_getdefpalette</A></H2>
+<H2><A NAME="tgi_getdefpalette"></A> <A NAME="ss1.11">1.11</A> <A HREF="#toc1.11">tgi_getdefpalette</A>
+</H2>
 
 
 <P>
@@ -567,7 +492,8 @@ palette to work correctly.</P>
 </P>
 
 
-<H2><A NAME="tgi_geterror"></A> <A NAME="s12">12.</A> <A HREF="#toc12">tgi_geterror</A></H2>
+<H2><A NAME="tgi_geterror"></A> <A NAME="ss1.12">1.12</A> <A HREF="#toc1.12">tgi_geterror</A>
+</H2>
 
 
 <P>
@@ -595,7 +521,8 @@ This will also clear the error.</P>
 </P>
 
 
-<H2><A NAME="tgi_geterrormsg"></A> <A NAME="s13">13.</A> <A HREF="#toc13">tgi_geterrormsg</A></H2>
+<H2><A NAME="tgi_geterrormsg"></A> <A NAME="ss1.13">1.13</A> <A HREF="#toc1.13">tgi_geterrormsg</A>
+</H2>
 
 
 <P>
@@ -628,7 +555,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getmaxcolor"></A> <A NAME="s14">14.</A> <A HREF="#toc14">tgi_getmaxcolor</A></H2>
+<H2><A NAME="tgi_getmaxcolor"></A> <A NAME="ss1.14">1.14</A> <A HREF="#toc1.14">tgi_getmaxcolor</A>
+</H2>
 
 
 <P>
@@ -654,7 +582,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getmaxx"></A> <A NAME="s15">15.</A> <A HREF="#toc15">tgi_getmaxx</A></H2>
+<H2><A NAME="tgi_getmaxx"></A> <A NAME="ss1.15">1.15</A> <A HREF="#toc1.15">tgi_getmaxx</A>
+</H2>
 
 
 <P>
@@ -680,7 +609,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getmaxy"></A> <A NAME="s16">16.</A> <A HREF="#toc16">tgi_getmaxy</A></H2>
+<H2><A NAME="tgi_getmaxy"></A> <A NAME="ss1.16">1.16</A> <A HREF="#toc1.16">tgi_getmaxy</A>
+</H2>
 
 
 <P>
@@ -706,7 +636,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getpagecount"></A> <A NAME="s17">17.</A> <A HREF="#toc17">tgi_getpagecount</A></H2>
+<H2><A NAME="tgi_getpagecount"></A> <A NAME="ss1.17">1.17</A> <A HREF="#toc1.17">tgi_getpagecount</A>
+</H2>
 
 
 <P>
@@ -734,7 +665,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getpalette"></A> <A NAME="s18">18.</A> <A HREF="#toc18">tgi_getpalette</A></H2>
+<H2><A NAME="tgi_getpalette"></A> <A NAME="ss1.18">1.18</A> <A HREF="#toc1.18">tgi_getpalette</A>
+</H2>
 
 
 <P>
@@ -760,7 +692,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getpixel"></A> <A NAME="s19">19.</A> <A HREF="#toc19">tgi_getpixel</A></H2>
+<H2><A NAME="tgi_getpixel"></A> <A NAME="ss1.19">1.19</A> <A HREF="#toc1.19">tgi_getpixel</A>
+</H2>
 
 
 <P>
@@ -793,7 +726,78 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_getxres"></A> <A NAME="s20">20.</A> <A HREF="#toc20">tgi_getxres</A></H2>
+<H2><A NAME="tgi_gettextheight"></A> <A NAME="ss1.20">1.20</A> <A HREF="#toc1.20">tgi_gettextheight</A>
+</H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Calculate the height of the text in pixels according to
+the current text style.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned __fastcall__ tgi_gettextheight (const char* s);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Calculate the height of the text in pixels according to
+the current text style.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_gettextwidth"></A> <A NAME="ss1.21">1.21</A> <A HREF="#toc1.21">tgi_gettextwidth</A>
+</H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Calculate the width of the text in pixels according to the current text style.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>unsigned __fastcall__ tgi_gettextwidth (const char* s);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Calculate the width of the text in pixels according to the current text style.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>Other tgi functions.</P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_getxres"></A> <A NAME="ss1.22">1.22</A> <A HREF="#toc1.22">tgi_getxres</A>
+</H2>
 
 
 <P>
@@ -820,7 +824,8 @@ This is same as tgi_maxx()+1.</P>
 </P>
 
 
-<H2><A NAME="tgi_getyres"></A> <A NAME="s21">21.</A> <A HREF="#toc21">tgi_getyres</A></H2>
+<H2><A NAME="tgi_getyres"></A> <A NAME="ss1.23">1.23</A> <A HREF="#toc1.23">tgi_getyres</A>
+</H2>
 
 
 <P>
@@ -847,7 +852,8 @@ This is same as tgi_maxy()+1.</P>
 </P>
 
 
-<H2><A NAME="tgi_gotoxy"></A> <A NAME="s22">22.</A> <A HREF="#toc22">tgi_gotoxy</A></H2>
+<H2><A NAME="tgi_gotoxy"></A> <A NAME="ss1.24">1.24</A> <A HREF="#toc1.24">tgi_gotoxy</A>
+</H2>
 
 
 <P>
@@ -880,7 +886,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_init"></A> <A NAME="s23">23.</A> <A HREF="#toc23">tgi_init</A></H2>
+<H2><A NAME="tgi_init"></A> <A NAME="ss1.25">1.25</A> <A HREF="#toc1.25">tgi_init</A>
+</H2>
 
 
 <P>
@@ -921,7 +928,8 @@ tgi_init(); //Set up the default palette and clear the screen.
 </P>
 
 
-<H2><A NAME="tgi_install"></A> <A NAME="s24">24.</A> <A HREF="#toc24">tgi_install</A></H2>
+<H2><A NAME="tgi_install"></A> <A NAME="ss1.26">1.26</A> <A HREF="#toc1.26">tgi_install</A>
+</H2>
 
 
 <P>
@@ -964,7 +972,8 @@ tgi_init(); //Set up the default palette and clear the screen.
 </P>
 
 
-<H2><A NAME="tgi_install_vectorfont"></A> <A NAME="s25">25.</A> <A HREF="#toc25">tgi_install_vectorfont</A></H2>
+<H2><A NAME="tgi_install_vectorfont"></A> <A NAME="ss1.27">1.27</A> <A HREF="#toc1.27">tgi_install_vectorfont</A>
+</H2>
 
 
 <P>
@@ -1001,7 +1010,8 @@ used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_ioctl"></A> <A NAME="s26">26.</A> <A HREF="#toc26">tgi_ioctl</A></H2>
+<H2><A NAME="tgi_ioctl"></A> <A NAME="ss1.28">1.28</A> <A HREF="#toc1.28">tgi_ioctl</A>
+</H2>
 
 
 <P>
@@ -1052,7 +1062,8 @@ if (!tgi_busy()) {
 </P>
 
 
-<H2><A NAME="tgi_line"></A> <A NAME="s27">27.</A> <A HREF="#toc27">tgi_line</A></H2>
+<H2><A NAME="tgi_line"></A> <A NAME="ss1.29">1.29</A> <A HREF="#toc1.29">tgi_line</A>
+</H2>
 
 
 <P>
@@ -1087,7 +1098,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_lineto"></A> <A NAME="s28">28.</A> <A HREF="#toc28">tgi_lineto</A></H2>
+<H2><A NAME="tgi_lineto"></A> <A NAME="ss1.30">1.30</A> <A HREF="#toc1.30">tgi_lineto</A>
+</H2>
 
 
 <P>
@@ -1122,7 +1134,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_load_driver"></A> <A NAME="s29">29.</A> <A HREF="#toc29">tgi_load_driver</A></H2>
+<H2><A NAME="tgi_load_driver"></A> <A NAME="ss1.31">1.31</A> <A HREF="#toc1.31">tgi_load_driver</A>
+</H2>
 
 
 <P>
@@ -1157,7 +1170,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_load_vectorfont"></A> <A NAME="s30">30.</A> <A HREF="#toc30">tgi_load_vectorfont</A></H2>
+<H2><A NAME="tgi_load_vectorfont"></A> <A NAME="ss1.32">1.32</A> <A HREF="#toc1.32">tgi_load_vectorfont</A>
+</H2>
 
 
 <P>
@@ -1194,7 +1208,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_outtext"></A> <A NAME="s31">31.</A> <A HREF="#toc31">tgi_outtext</A></H2>
+<H2><A NAME="tgi_outtext"></A> <A NAME="ss1.33">1.33</A> <A HREF="#toc1.33">tgi_outtext</A>
+</H2>
 
 
 <P>
@@ -1229,7 +1244,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_outtextxy"></A> <A NAME="s32">32.</A> <A HREF="#toc32">tgi_outtextxy</A></H2>
+<H2><A NAME="tgi_outtextxy"></A> <A NAME="ss1.34">1.34</A> <A HREF="#toc1.34">tgi_outtextxy</A>
+</H2>
 
 
 <P>
@@ -1264,7 +1280,8 @@ be used in presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_pieslice"></A> <A NAME="s33">33.</A> <A HREF="#toc33">tgi_pieslice</A></H2>
+<H2><A NAME="tgi_pieslice"></A> <A NAME="ss1.35">1.35</A> <A HREF="#toc1.35">tgi_pieslice</A>
+</H2>
 
 
 <P>
@@ -1314,7 +1331,8 @@ tgi_pieslice (50, 50, 40, 20, 0, 180);
 </P>
 
 
-<H2><A NAME="tgi_setaspectratio"></A> <A NAME="s34">34.</A> <A HREF="#toc34">tgi_setaspectratio</A></H2>
+<H2><A NAME="tgi_setaspectratio"></A> <A NAME="ss1.36">1.36</A> <A HREF="#toc1.36">tgi_setaspectratio</A>
+</H2>
 
 
 <P>
@@ -1363,7 +1381,8 @@ only in the presence of a prototype.</LI>
 </P>
 
 
-<H2><A NAME="tgi_setcolor"></A> <A NAME="s35">35.</A> <A HREF="#toc35">tgi_setcolor</A></H2>
+<H2><A NAME="tgi_setcolor"></A> <A NAME="ss1.37">1.37</A> <A HREF="#toc1.37">tgi_setcolor</A>
+</H2>
 
 
 <P>
@@ -1402,7 +1421,9 @@ tgi_bar(10,10,20,20);
 </BLOCKQUOTE>
 </P>
 
-<H2><A NAME="tgi_setdrawpage"></A> <A NAME="s36">36.</A> <A HREF="#toc36">tgi_setdrawpage</A></H2>
+
+<H2><A NAME="tgi_setdrawpage"></A> <A NAME="ss1.38">1.38</A> <A HREF="#toc1.38">tgi_setdrawpage</A>
+</H2>
 
 
 <P>
@@ -1447,7 +1468,9 @@ tgi_setviewpage(0); // Show page 0
 </BLOCKQUOTE>
 </P>
 
-<H2><A NAME="tgi_setpalette"></A> <A NAME="s37">37.</A> <A HREF="#toc37">tgi_setpalette</A></H2>
+
+<H2><A NAME="tgi_setpalette"></A> <A NAME="ss1.39">1.39</A> <A HREF="#toc1.39">tgi_setpalette</A>
+</H2>
 
 
 <P>
@@ -1481,7 +1504,9 @@ be used in presence of a prototype.</LI>
 </BLOCKQUOTE>
 </P>
 
-<H2><A NAME="tgi_setpixel"></A> <A NAME="s38">38.</A> <A HREF="#toc38">tgi_setpixel</A></H2>
+
+<H2><A NAME="tgi_setpixel"></A> <A NAME="ss1.40">1.40</A> <A HREF="#toc1.40">tgi_setpixel</A>
+</H2>
 
 
 <P>
@@ -1513,7 +1538,80 @@ be used in presence of a prototype.</LI>
 </BLOCKQUOTE>
 </P>
 
-<H2><A NAME="tgi_setviewpage"></A> <A NAME="s39">39.</A> <A HREF="#toc39">tgi_setviewpage</A></H2>
+
+<H2><A NAME="tgi_settextscale"></A> <A NAME="ss1.41">1.41</A> <A HREF="#toc1.41">tgi_settextscale</A>
+</H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set the scaling for text output.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_settextscale (unsigned width, unsigned height);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Set the scaling for text output. The scaling factors for width and height
+are 8.8 fixed point values. This means that $100 = 1 $200 = 2 etc.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_settextstyle">tgi_settextstyle</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_settextstyle"></A> <A NAME="ss1.42">1.42</A> <A HREF="#toc1.42">tgi_settextstyle</A>
+</H2>
+
+
+<P>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Function</B><DD>
+<P>Set the style for text output.</P>
+<DT><B>Header</B><DD>
+<P><CODE>
+<A HREF="#tgi.h">tgi.h</A></CODE></P>
+<DT><B>Declaration</B><DD>
+<P><CODE>void __fastcall__ tgi_settextstyle (unsigned char magx, unsigned char magy, unsigned char dir, unsigned char font);</CODE></P>
+<DT><B>Description</B><DD>
+<P>Set the style for text output.</P>
+<DT><B>Notes</B><DD>
+<P>
+<UL>
+<LI>The function is only available as fastcall function, so it may only
+be used in presence of a prototype.</LI>
+</UL>
+</P>
+<DT><B>Availability</B><DD>
+<P>cc65</P>
+<DT><B>See also</B><DD>
+<P>
+<A HREF="#tgi_settextscale">tgi_settextscale</A></P>
+<DT><B>Example</B><DD>
+<P>None.</P>
+</DL>
+</BLOCKQUOTE>
+</P>
+
+
+<H2><A NAME="tgi_setviewpage"></A> <A NAME="ss1.43">1.43</A> <A HREF="#toc1.43">tgi_setviewpage</A>
+</H2>
 
 
 <P>
@@ -1558,140 +1656,9 @@ tgi_setviewpage(0); // Show page 0
 </BLOCKQUOTE>
 </P>
 
-<H2><A NAME="tgi_gettextheight"></A> <A NAME="s40">40.</A> <A HREF="#toc40">tgi_gettextheight</A></H2>
 
-
-<P>
-<BLOCKQUOTE>
-<DL>
-<DT><B>Function</B><DD>
-<P>Calculate the height of the text in pixels according to
-the current text style.</P>
-<DT><B>Header</B><DD>
-<P><CODE>
-<A HREF="#tgi.h">tgi.h</A></CODE></P>
-<DT><B>Declaration</B><DD>
-<P><CODE>unsigned __fastcall__ tgi_gettextheight (const char* s);</CODE></P>
-<DT><B>Description</B><DD>
-<P>Calculate the height of the text in pixels according to
-the current text style.</P>
-<DT><B>Notes</B><DD>
-<P>
-<UL>
-<LI>The function is only available as fastcall function, so it may only
-be used in presence of a prototype.</LI>
-</UL>
-</P>
-<DT><B>Availability</B><DD>
-<P>cc65</P>
-<DT><B>See also</B><DD>
-<P>Other tgi functions.</P>
-<DT><B>Example</B><DD>
-<P>None.</P>
-</DL>
-</BLOCKQUOTE>
-</P>
-
-<H2><A NAME="tgi_settextscale"></A> <A NAME="s41">41.</A> <A HREF="#toc41">tgi_settextscale</A></H2>
-
-
-<P>
-<BLOCKQUOTE>
-<DL>
-<DT><B>Function</B><DD>
-<P>Set the scaling for text output.</P>
-<DT><B>Header</B><DD>
-<P><CODE>
-<A HREF="#tgi.h">tgi.h</A></CODE></P>
-<DT><B>Declaration</B><DD>
-<P><CODE>void __fastcall__ tgi_settextscale (unsigned width, unsigned height);</CODE></P>
-<DT><B>Description</B><DD>
-<P>Set the scaling for text output. The scaling factors for width and height
-are 8.8 fixed point values. This means that $100 = 1 $200 = 2 etc.</P>
-<DT><B>Notes</B><DD>
-<P>
-<UL>
-<LI>The function is only available as fastcall function, so it may only
-be used in presence of a prototype.</LI>
-</UL>
-</P>
-<DT><B>Availability</B><DD>
-<P>cc65</P>
-<DT><B>See also</B><DD>
-<P>
-<A HREF="#tgi_settextstyle">tgi_settextstyle</A></P>
-<DT><B>Example</B><DD>
-<P>None.</P>
-</DL>
-</BLOCKQUOTE>
-</P>
-
-<H2><A NAME="tgi_settextstyle"></A> <A NAME="s42">42.</A> <A HREF="#toc42">tgi_settextstyle</A></H2>
-
-
-<P>
-<BLOCKQUOTE>
-<DL>
-<DT><B>Function</B><DD>
-<P>Set the style for text output.</P>
-<DT><B>Header</B><DD>
-<P><CODE>
-<A HREF="#tgi.h">tgi.h</A></CODE></P>
-<DT><B>Declaration</B><DD>
-<P><CODE>void __fastcall__ tgi_settextstyle (unsigned char magx, unsigned char magy, unsigned char dir, unsigned char font);</CODE></P>
-<DT><B>Description</B><DD>
-<P>Set the style for text output.</P>
-<DT><B>Notes</B><DD>
-<P>
-<UL>
-<LI>The function is only available as fastcall function, so it may only
-be used in presence of a prototype.</LI>
-</UL>
-</P>
-<DT><B>Availability</B><DD>
-<P>cc65</P>
-<DT><B>See also</B><DD>
-<P>
-<A HREF="#tgi_settextscale">tgi_settextscale</A></P>
-<DT><B>Example</B><DD>
-<P>None.</P>
-</DL>
-</BLOCKQUOTE>
-</P>
-
-<H2><A NAME="tgi_gettextwidth"></A> <A NAME="s43">43.</A> <A HREF="#toc43">tgi_gettextwidth</A></H2>
-
-
-<P>
-<BLOCKQUOTE>
-<DL>
-<DT><B>Function</B><DD>
-<P>Calculate the width of the text in pixels according to the current text style.</P>
-<DT><B>Header</B><DD>
-<P><CODE>
-<A HREF="#tgi.h">tgi.h</A></CODE></P>
-<DT><B>Declaration</B><DD>
-<P><CODE>unsigned __fastcall__ tgi_gettextwidth (const char* s);</CODE></P>
-<DT><B>Description</B><DD>
-<P>Calculate the width of the text in pixels according to the current text style.</P>
-<DT><B>Notes</B><DD>
-<P>
-<UL>
-<LI>The function is only available as fastcall function, so it may only
-be used in presence of a prototype.</LI>
-</UL>
-</P>
-<DT><B>Availability</B><DD>
-<P>cc65</P>
-<DT><B>See also</B><DD>
-<P>Other tgi functions.</P>
-<DT><B>Example</B><DD>
-<P>None.</P>
-</DL>
-</BLOCKQUOTE>
-</P>
-
-<H2><A NAME="tgi_uninstall"></A> <A NAME="s44">44.</A> <A HREF="#toc44">tgi_uninstall</A></H2>
+<H2><A NAME="tgi_uninstall"></A> <A NAME="ss1.44">1.44</A> <A HREF="#toc1.44">tgi_uninstall</A>
+</H2>
 
 
 <P>
@@ -1718,7 +1685,9 @@ Will call tgi_done if necessary.</P>
 </BLOCKQUOTE>
 </P>
 
-<H2><A NAME="tgi_unload"></A> <A NAME="s45">45.</A> <A HREF="#toc45">tgi_unload</A></H2>
+
+<H2><A NAME="tgi_unload"></A> <A NAME="ss1.45">1.45</A> <A HREF="#toc1.45">tgi_unload</A>
+</H2>
 
 
 <P>
